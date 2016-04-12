@@ -1,0 +1,16 @@
+[
+{
+  "modid": "OhrmsMagic",
+  "name": "Ohrm's Magic",
+  "description": "Magic.",
+  "version": "0.0.1",
+  "mcversion": "1.8.9",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Ohrm"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
