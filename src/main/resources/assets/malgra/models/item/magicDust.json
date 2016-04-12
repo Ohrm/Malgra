@@ -1,6 +1,6 @@
 {
     "parent":"item/generated",
     "textures": {
-        "layer0":"ohrmsmagic:items/magicDust"
+        "layer0":"malgra:items/magicDust"
     }
 }

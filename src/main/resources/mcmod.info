@@ -1,13 +1,13 @@
 [
 {
-  "modid": "OhrmsMagic",
-  "name": "Ohrm's Magic",
+  "modid": "Malgra",
+  "name": "Malgra",
   "description": "Magic.",
   "version": "0.0.1",
-  "mcversion": "1.8.9",
+  "mcversion": "1.9",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Ohrm"],
+  "authorList": ["Ohrm", "WeHaveCookies56"],
   "credits": "",
   "logoFile": "",
   "screenshots": [],

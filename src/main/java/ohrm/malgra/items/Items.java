@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import ohrm.malgra.OhrmsMagicMain;
+import ohrm.malgra.MalgraMain;
 import ohrm.malgra.Reference;
 
 public class Items {
@@ -15,8 +15,8 @@ public class Items {
 	
 	public static void InitItems(){
 		
-		magicDust = new Item().setUnlocalizedName("magicDust").setCreativeTab(OhrmsMagicMain.magicTab);
-		manaInjector = new ManaInjector().setUnlocalizedName("manaInjector").setCreativeTab(OhrmsMagicMain.magicTab);
+		magicDust = new Item().setUnlocalizedName("magicDust").setCreativeTab(MalgraMain.magicTab);
+		manaInjector = new ManaInjector().setUnlocalizedName("manaInjector").setCreativeTab(MalgraMain.magicTab);
 		RegisterItems();
 				
 	}

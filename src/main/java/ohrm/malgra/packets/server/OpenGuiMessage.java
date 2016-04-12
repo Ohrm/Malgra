@@ -3,7 +3,7 @@ package ohrm.malgra.packets.server;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
-import ohrm.malgra.OhrmsMagicMain;
+import ohrm.malgra.MalgraMain;
 import ohrm.malgra.packets.AbstractMessage.AbstractServerMessage;
 
 /**
@@ -40,7 +40,7 @@ public class OpenGuiMessage extends AbstractServerMessage<OpenGuiMessage>
 	@Override
 	public void process(EntityPlayer player, Side side) {
 		// using the message instance gives access to 'this.id'
-		player.openGui(OhrmsMagicMain.instance, this.id, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+		player.openGui(MalgraMain.instance, this.id, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
 	}
 
 	/**

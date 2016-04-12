@@ -1,5 +1,5 @@
 {
-	"parent": "ohrmsmagic:block/magicOre",
+	"parent": "malgra:block/magicOre",
 	"display": {
 		"thirdperson": {
 			"rotation": [ 10, -45, 170 ],

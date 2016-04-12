@@ -14,7 +14,7 @@ import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
 
-public class OhrmsMagicEventHandler {
+public class MalgraEventHandler {
 
 	@SubscribeEvent
 	public void onEntityConstructing(AttachCapabilitiesEvent.Entity event){

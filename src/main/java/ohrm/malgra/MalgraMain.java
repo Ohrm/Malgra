@@ -14,13 +14,13 @@ import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.proxies.CommonProxy;
-import ohrm.malgra.tab.OhrmsMagicTab;
+import ohrm.malgra.tab.MalgraTab;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
-public class OhrmsMagicMain {
+public class MalgraMain {
 
 	@Instance
-	public static OhrmsMagicMain instance = new OhrmsMagicMain();
+	public static MalgraMain instance = new MalgraMain();
 	
 	@SidedProxy(clientSide = "ohrm.malgra.proxies.ClientProxy", serverSide = "ohrm.malgra.proxies.CommonProxy")
 	public static CommonProxy proxy;
@@ -30,7 +30,7 @@ public class OhrmsMagicMain {
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent e){
 		
-		magicTab = new OhrmsMagicTab(CreativeTabs.getNextID(), "ohrmsMagicTab");
+		magicTab = new MalgraTab(CreativeTabs.getNextID(), "malgraTab");
 		Items.InitItems();
 		Blocks.InitBlocks();
 		CapabilityMana.register();
@@ -41,7 +41,7 @@ public class OhrmsMagicMain {
 	
 	@EventHandler
 	public void Init(FMLInitializationEvent e){
-		MinecraftForge.EVENT_BUS.register(new OhrmsMagicEventHandler());
+		MinecraftForge.EVENT_BUS.register(new MalgraEventHandler());
 
 		proxy.Init(e);
 		

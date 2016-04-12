@@ -6,9 +6,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ohrm.malgra.items.Items;
 
-public class OhrmsMagicTab extends CreativeTabs{
+public class MalgraTab extends CreativeTabs{
 
-	public OhrmsMagicTab(int index, String label) {
+	public MalgraTab(int index, String label) {
 		
 		super(index, label);
 		

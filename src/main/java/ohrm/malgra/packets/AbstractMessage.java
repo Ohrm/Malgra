@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import ohrm.malgra.OhrmsMagicMain;
+import ohrm.malgra.MalgraMain;
 
 import com.google.common.base.Throwables;
 
@@ -110,7 +110,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 		} else if (msg.requiresMainThread()) {
 			checkThreadAndEnqueue(msg, ctx);
 		} else {
-			msg.process(OhrmsMagicMain.proxy.getPlayerEntity(ctx), ctx.side);
+			msg.process(MalgraMain.proxy.getPlayerEntity(ctx), ctx.side);
 		}
 		return null;
 	}
@@ -119,11 +119,11 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	 * 1.8 ONLY: Ensures that the message is being handled on the main thread
 	 */
 	private static final <T extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
-		IThreadListener thread = OhrmsMagicMain.proxy.getThreadFromContext(ctx);
+		IThreadListener thread = MalgraMain.proxy.getThreadFromContext(ctx);
 		// pretty much copied straight from vanilla code, see {@link PacketThreadUtil#checkThreadAndEnqueue}
 		thread.addScheduledTask(new Runnable() {
 			public void run() {
-				msg.process(OhrmsMagicMain.proxy.getPlayerEntity(ctx), ctx.side);
+				msg.process(MalgraMain.proxy.getPlayerEntity(ctx), ctx.side);
 			}
 		});
 	}

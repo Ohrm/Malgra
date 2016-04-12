@@ -18,7 +18,7 @@ public class GuiManaBar extends Gui
 {
 	private Minecraft mc;
 
-	private static final ResourceLocation texture = new ResourceLocation("ohrmsmagic", "textures/gui/mana_bar.png");
+	private static final ResourceLocation texture = new ResourceLocation("malgra", "textures/gui/mana_bar.png");
 
 	public GuiManaBar(Minecraft mc) {
 		super();

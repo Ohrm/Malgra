@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import ohrm.malgra.OhrmsMagicMain;
+import ohrm.malgra.MalgraMain;
 import ohrm.malgra.Reference;
 
 public class Blocks {
@@ -16,7 +16,7 @@ public class Blocks {
 	
 	public static void InitBlocks(){
 		
-		magicOre = new BlockMagicOre(1, 3, 15).setUnlocalizedName("magicOre").setCreativeTab(OhrmsMagicMain.magicTab).setLightLevel(0.5f);
+		magicOre = new BlockMagicOre(1, 3, 15).setUnlocalizedName("magicOre").setCreativeTab(MalgraMain.magicTab).setLightLevel(0.5f);
 		
 		RegisterBlocks();
 		
