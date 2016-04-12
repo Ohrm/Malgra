@@ -2,8 +2,9 @@ package ohrm.malgra.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import ohrm.malgra.OhrmsMagicMain;
 import ohrm.malgra.Reference;
@@ -22,7 +23,7 @@ public class Blocks {
 	
 	public static void RegisterBlocks(){
 		
-		GameRegistry.registerBlock(magicOre, "magicOre");
+		GameRegistry.register(magicOre, new ResourceLocation(Reference.MODID, "magicOre"));
 		
 	}
 	

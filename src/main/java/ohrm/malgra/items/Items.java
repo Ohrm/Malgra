@@ -1,9 +1,9 @@
 package ohrm.malgra.items;
 
-import org.omg.PortableServer.ServantActivator;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import ohrm.malgra.OhrmsMagicMain;
@@ -23,8 +23,8 @@ public class Items {
 	
 	public static void RegisterItems(){
 		
-		GameRegistry.registerItem(magicDust, "magicDust");	
-		GameRegistry.registerItem(manaInjector, "manaInjector");	
+		GameRegistry.register(magicDust, new ResourceLocation(Reference.MODID, "magicDust"));
+		GameRegistry.register(manaInjector, new ResourceLocation(Reference.MODID, "manaInjector"));
 		
 	}
 	

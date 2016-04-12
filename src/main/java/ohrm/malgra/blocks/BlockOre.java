@@ -7,7 +7,7 @@ public class BlockOre extends Block{
 
 	public BlockOre(int toolLevel, int hardness, int resistance) {
 		
-		super(Material.rock);
+		super(Material.ROCK);
 		setHarvestLevel("pickaxe", toolLevel);
 		setHardness(hardness);
 		setResistance(resistance);
