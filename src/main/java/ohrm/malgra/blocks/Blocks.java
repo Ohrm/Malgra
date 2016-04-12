@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import ohrm.malgra.OhrmsMagicMain;
@@ -24,6 +25,7 @@ public class Blocks {
 	public static void RegisterBlocks(){
 		
 		GameRegistry.register(magicOre, new ResourceLocation(Reference.MODID, "magicOre"));
+		GameRegistry.register(new ItemBlock(magicOre), new ResourceLocation(Reference.MODID, "magicOre"));
 		
 	}
 	

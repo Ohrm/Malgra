@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import ohrm.malgra.Reference;
-import ohrm.malgra.packets.client.SyncPlayerPropsMessage;
+import ohrm.malgra.packets.client.SyncManaData;
 import ohrm.malgra.packets.server.OpenGuiMessage;
 
 /**
@@ -46,7 +46,7 @@ public class PacketDispatcher
 	 */
 	public static final void registerPackets() {
 		// Packets handled on CLIENT
-		registerMessage(SyncPlayerPropsMessage.class);
+		registerMessage(SyncManaData.class);
 
 		// Packets handled on SERVER
 		registerMessage(OpenGuiMessage.class);
@@ -115,7 +115,7 @@ public class PacketDispatcher
 	 * Shortcut to {@link SimpleNetworkWrapper#sendToAllAround(IMessage, NetworkRegistry.TargetPoint)}
 	 */
 	public static final void sendToAllAround(IMessage message, EntityPlayer player, double range) {
-		PacketDispatcher.sendToAllAround(message, player.worldObj.provider.getDimensionId(), player.posX, player.posY, player.posZ, range);
+		PacketDispatcher.sendToAllAround(message, player.worldObj.provider.getDimension(), player.posX, player.posY, player.posZ, range);
 	}
 
 	/**

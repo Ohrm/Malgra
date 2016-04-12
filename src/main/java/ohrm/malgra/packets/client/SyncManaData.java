@@ -3,11 +3,9 @@ package ohrm.malgra.packets.client;
 import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
-import ohrm.malgra.ExtendedEntities.ExtendedPlayer;
-import ohrm.malgra.packets.AbstractMessage;
+import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.packets.AbstractMessage.AbstractClientMessage;
 
 /**
@@ -28,7 +26,7 @@ import ohrm.malgra.packets.AbstractMessage.AbstractClientMessage;
  * those times when you need to send everything.
  *
  */
-public class SyncPlayerPropsMessage extends AbstractClientMessage<SyncPlayerPropsMessage>
+public class SyncManaData extends AbstractClientMessage<SyncManaData>
 {
 	// Previously, we've been writing each field in our properties one at a time,
 	// but that is really annoying, and we've already done it in the save and load
@@ -37,32 +35,33 @@ public class SyncPlayerPropsMessage extends AbstractClientMessage<SyncPlayerProp
 	// to change the packet / synchronization of your data.
 
 	// this will store our ExtendedPlayer data, allowing us to easily read and write
-	private NBTTagCompound data;
+	private int mana, maxMana;
 
 	// The basic, no-argument constructor MUST be included to use the new automated handling
-	public SyncPlayerPropsMessage() {}
+	public SyncManaData() {}
 
 	// We need to initialize our data, so provide a suitable constructor:
-	public SyncPlayerPropsMessage(EntityPlayer player) {
-		// create a new tag compound
-		data = new NBTTagCompound();
-		// and save our player's data into it
-		ExtendedPlayer.Get(player).saveNBTData(data);
+	public SyncManaData(CapabilityMana.IMana mana) {
+		this.mana = mana.getMana();
+		this.maxMana = mana.getMaxMana();
 	}
 
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
-		data = buffer.readNBTTagCompoundFromBuffer();
+		this.mana = buffer.readInt();
+		this.maxMana = buffer.readInt();
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
-		buffer.writeNBTTagCompoundToBuffer(data);
+		buffer.writeInt(this.mana);
+		buffer.writeInt(this.maxMana);
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		// now we can just load the NBTTagCompound data directly; one and done, folks
-		ExtendedPlayer.Get(player).loadNBTData(data);
+		final CapabilityMana.IMana mana = player.getCapability(CapabilityMana.MANA, null);
+		mana.setMana(this.mana);
+		mana.setMaxMana(this.maxMana);
 	}
 }

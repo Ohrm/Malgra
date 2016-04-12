@@ -32,7 +32,7 @@ public class CommonProxy {
 	}
 	
 	public IThreadListener getThreadFromContext(MessageContext ctx) {
-		return ctx.getServerHandler().playerEntity.getServerForPlayer();
+		return ctx.getServerHandler().playerEntity.getServer();
 	}
 	
 }

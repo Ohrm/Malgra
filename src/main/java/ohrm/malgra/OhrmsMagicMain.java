@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import ohrm.malgra.blocks.Blocks;
+import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.proxies.CommonProxy;
@@ -21,7 +22,7 @@ public class OhrmsMagicMain {
 	@Instance
 	public static OhrmsMagicMain instance = new OhrmsMagicMain();
 	
-	@SidedProxy(clientSide = "ohrm.magic.proxies.ClientProxy", serverSide = "ohrm.magic.proxies.ServerProxy")
+	@SidedProxy(clientSide = "ohrm.malgra.proxies.ClientProxy", serverSide = "ohrm.malgra.proxies.CommonProxy")
 	public static CommonProxy proxy;
 	
 	public static CreativeTabs magicTab;
@@ -32,6 +33,7 @@ public class OhrmsMagicMain {
 		magicTab = new OhrmsMagicTab(CreativeTabs.getNextID(), "ohrmsMagicTab");
 		Items.InitItems();
 		Blocks.InitBlocks();
+		CapabilityMana.register();
 		proxy.PreInit(e);
 		PacketDispatcher.registerPackets();
 		
