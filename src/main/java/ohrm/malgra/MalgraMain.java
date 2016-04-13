@@ -9,8 +9,10 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.capabilities.CapabilityMana;
+import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.proxies.CommonProxy;
@@ -42,7 +44,7 @@ public class MalgraMain {
 	@EventHandler
 	public void Init(FMLInitializationEvent e){
 		MinecraftForge.EVENT_BUS.register(new MalgraEventHandler());
-
+		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
 		proxy.Init(e);
 		
 	}

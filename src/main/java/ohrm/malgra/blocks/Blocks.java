@@ -12,21 +12,26 @@ import ohrm.malgra.Reference;
 
 public class Blocks {
 	
+	public static Block manaCraftingTable;
+	
 	public static void InitBlocks(){
 		
+		manaCraftingTable = new ManaCraftingTable().setUnlocalizedName("manaCraftingTable").setCreativeTab(MalgraMain.magicTab);
+	
 		RegisterBlocks();
 		
 	}
 	
 	public static void RegisterBlocks(){
 
-		
+		GameRegistry.register(manaCraftingTable, new ResourceLocation(Reference.MODID, "manaCraftingTable"));
+		GameRegistry.register(new ItemBlock(manaCraftingTable), new ResourceLocation(Reference.MODID, "manaCraftingTable"));
 		
 	}
 	
 	public static void RegisterRenders(){
 		
-		
+		RegisterRender(manaCraftingTable);
 		
 	}
 	
