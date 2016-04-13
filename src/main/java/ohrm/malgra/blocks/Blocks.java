@@ -11,27 +11,22 @@ import ohrm.malgra.MalgraMain;
 import ohrm.malgra.Reference;
 
 public class Blocks {
-
-	public static Block magicOre;
 	
 	public static void InitBlocks(){
-		
-		magicOre = new BlockMagicOre(1, 3, 15).setUnlocalizedName("magicOre").setCreativeTab(MalgraMain.magicTab).setLightLevel(0.5f);
 		
 		RegisterBlocks();
 		
 	}
 	
 	public static void RegisterBlocks(){
+
 		
-		GameRegistry.register(magicOre, new ResourceLocation(Reference.MODID, "magicOre"));
-		GameRegistry.register(new ItemBlock(magicOre), new ResourceLocation(Reference.MODID, "magicOre"));
 		
 	}
 	
 	public static void RegisterRenders(){
 		
-		RegisterRender(magicOre);
+		
 		
 	}
 	
