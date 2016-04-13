@@ -3,5 +3,7 @@ itemGroup.malgraTab=Malgra
 item.magicDust.name=Malgrum Dust
 item.manaInjector.name=Malgra Injector
 item.manaInjectorEmpty.name=Malgra Injector
+item.manaExtractor.name=Malgra Extractor
+item.manaExtractor.malgraStored=Malgra Stored
 
 gui.manaBar.mana=Malgra
