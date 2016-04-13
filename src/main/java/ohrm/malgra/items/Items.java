@@ -11,12 +11,13 @@ import ohrm.malgra.Reference;
 
 public class Items {
 
-	public static Item magicDust, manaInjector;
+	public static Item magicDust, manaInjector, manaInjectorEmpty;
 	
 	public static void InitItems(){
 		
 		magicDust = new Item().setUnlocalizedName("magicDust").setCreativeTab(MalgraMain.magicTab);
 		manaInjector = new ManaInjector().setUnlocalizedName("manaInjector").setCreativeTab(MalgraMain.magicTab);
+		manaInjectorEmpty = new Item().setUnlocalizedName("manaInjectorEmpty").setCreativeTab(MalgraMain.magicTab);
 		RegisterItems();
 				
 	}
@@ -25,13 +26,14 @@ public class Items {
 		
 		GameRegistry.register(magicDust, new ResourceLocation(Reference.MODID, "magicDust"));
 		GameRegistry.register(manaInjector, new ResourceLocation(Reference.MODID, "manaInjector"));
-		
+		GameRegistry.register(manaInjectorEmpty, new ResourceLocation(Reference.MODID, "manaInjectorEmpty"));
 	}
 	
 	public static void RegisterRenders(){
 		
 		RegisterRender(magicDust);
 		RegisterRender(manaInjector);
+		RegisterRender(manaInjectorEmpty);
 		
 	}
 	

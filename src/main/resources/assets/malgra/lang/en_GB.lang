@@ -2,6 +2,7 @@ itemGroup.malgraTab=Malgra
 
 item.magicDust.name=Magic Dust
 item.manaInjector.name=Mana Injector
+item.manaInjectorEmpty.name=Mana Injector
 
 tile.magicOre.name=Magic Ore
 

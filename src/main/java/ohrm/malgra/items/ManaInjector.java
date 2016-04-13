@@ -15,7 +15,7 @@ import ohrm.malgra.packets.client.SyncManaData;
 public class ManaInjector extends Item {
 
 	public ManaInjector() {
-		
+		setMaxStackSize(1);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class ManaInjector extends Item {
 			if(playerIn.getCapability(CapabilityMana.MANA, null).getMaxMana() == 0){
 
 				playerIn.getCapability(CapabilityMana.MANA, null).setMaxMana(3);
-				itemStackIn.stackSize--;
+				itemStackIn.setItem(Items.manaInjectorEmpty);
 				PacketDispatcher.sendTo(new SyncManaData(playerIn.getCapability(CapabilityMana.MANA, null)), (EntityPlayerMP) playerIn);
 				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 			}else{
