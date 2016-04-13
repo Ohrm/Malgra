@@ -21,12 +21,6 @@ public class ManaCraftingTable extends Block implements ITileEntityProvider {
 	}
 	
 	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
-		
-		return new TileEntityManaCraftingTable(world);
-	}
-	
-	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
 		
 		if(!worldIn.isRemote || worldIn.getTileEntity(pos) == null){
@@ -34,11 +28,11 @@ public class ManaCraftingTable extends Block implements ITileEntityProvider {
 			if(!playerIn.isSneaking()){
 				
 				playerIn.openGui(MalgraMain.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
-				
+				return true;
 			}
-			return false;
+			
 		}
-		return false;
+		return true;
 	}
 
 	@Override

@@ -12,6 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
 import ohrm.malgra.blocks.Blocks;
+import ohrm.malgra.gui.slot.SlotExtractor;
+import ohrm.malgra.gui.slot.SlotResult;
 
 public class ContainerManaCraftingTable extends Container{
 
@@ -31,14 +33,17 @@ public class ContainerManaCraftingTable extends Container{
 	
 	public ContainerManaCraftingTable(InventoryPlayer player, TileEntityManaCraftingTable tileEntity) {
 		this.tileEntity = tileEntity;
+		this.world = tileEntity.getWorld();
+		this.pos = tileEntity.getPos();
 		
-		this.addSlotToContainer(new Slot(tileEntity, 0, 124, 35));
+		this.addSlotToContainer(new SlotResult(tileEntity, 0, 124, 35));
+		this.addSlotToContainer(new SlotExtractor(tileEntity, 1, 124, 64));
 
         for (int i = 0; i < 3; ++i)
         {
             for (int j = 0; j < 3; ++j)
             {
-                this.addSlotToContainer(new Slot(tileEntity, j + i * 3, 30 + j * 18, 17 + i * 18));
+                this.addSlotToContainer(new Slot(tileEntity, (j + i * 3) + 2, 30 + j * 18, 17 + i * 18));
             }
         }
 

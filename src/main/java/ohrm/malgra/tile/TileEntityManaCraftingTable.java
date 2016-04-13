@@ -5,7 +5,10 @@ import java.util.Arrays;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
@@ -15,14 +18,55 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	final int NUM_SLOT = 11;
 	private ItemStack[] itemStacks = new ItemStack[NUM_SLOT];
 	
+	public TileEntityManaCraftingTable() {
+		
+	}
+	
 	public TileEntityManaCraftingTable(World world) {
 		
-		setWorldObj(world);
-		
-		
+		setWorldObj(world);		
 		
 	}
 
+	@Override
+	public void readFromNBT(NBTTagCompound tag) {
+		// TODO Auto-generated method stub
+		super.readFromNBT(tag);
+		
+		if(tag.hasKey("Items")) {
+			NBTTagList tagList = tag.getTagList("Items", 10);
+			for(int i = 0; i < tagList.tagCount(); i++) {
+				NBTTagCompound itemTag = (NBTTagCompound)tagList.getCompoundTagAt(i);
+				int slot = itemTag.getByte("Slot") & 0xff;
+				if(slot >= 0 && slot <= itemStacks.length) {
+					ItemStack itemStack = new ItemStack((Item)null);
+					itemStack.readFromNBT(itemTag);
+					itemStacks[slot] = itemStack;
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
+		// TODO Auto-generated method stub
+		super.writeToNBT(tag);
+		// Inventories
+		NBTTagList tagList = new NBTTagList();		
+		for(int i = 0; i < itemStacks.length; i++) {
+			if((itemStacks[i]) != null) {
+				NBTTagCompound itemTag = new NBTTagCompound();
+				itemTag.setByte("Slot", (byte)i);
+				itemStacks[i].writeToNBT(itemTag);
+				tagList.appendTag(itemTag);
+			}
+		}
+				
+		if(tagList.tagCount() > 0) {
+			tag.setTag("Items", tagList);
+		}
+	}
+	
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub

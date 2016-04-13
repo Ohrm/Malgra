@@ -7,3 +7,5 @@ item.manaExtractor.name=Malgra Extractor
 item.manaExtractor.malgraStored=Malgra Stored
 
 gui.manaBar.mana=Malgra
+
+container.malgra.manaCraftingTable=Malgra Crafting Table

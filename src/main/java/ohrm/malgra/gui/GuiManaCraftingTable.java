@@ -20,7 +20,7 @@ public class GuiManaCraftingTable extends GuiContainer{
 
 	/** ResourceLocation takes 2 parameters: ModId, path to texture at the location:
 	 *  "src/minecraft/assets/modid/" */
-	private static final ResourceLocation iconLocation = new ResourceLocation("tutorial:textures/gui/magic_bag.png");
+	private static final ResourceLocation iconLocation = new ResourceLocation("malgra", "textures/gui/manaCraftingTable.png");
 
 	/** The inventory to render on screen */
 	private TileEntityManaCraftingTable tileEntity;
@@ -41,8 +41,8 @@ public class GuiManaCraftingTable extends GuiContainer{
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String s = tileEntity.getName();
-		fontRendererObj.drawString(s, xSize / 2 - fontRendererObj.getStringWidth(s) / 2, 0, 4210752);
-		fontRendererObj.drawString(I18n.format("container.inventory"), 26, ySize - 96 + 4, 4210752);
+		fontRendererObj.drawString(I18n.format(s), xSize / 2 - (xSize / 4 + 13), 0, 4210752);
+		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 4, 4210752);
 	}
 
 	@Override
@@ -52,7 +52,6 @@ public class GuiManaCraftingTable extends GuiContainer{
 		int k = (width - xSize) / 2;
 		int l = (height - ySize) / 2;
 		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
-		GuiInventory.drawEntityOnScreen(k + 51, l + 75, 30, (k + 51) - xSize_lo, (l + 75 - 50) - ySize_lo, mc.thePlayer);
 	}
 
 }

@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.capabilities.CapabilityMana;
@@ -20,6 +21,8 @@ import ohrm.malgra.items.ManaExtractor;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.proxies.CommonProxy;
 import ohrm.malgra.tab.MalgraTab;
+import ohrm.malgra.tile.TileEntityManaCraftingTable;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,6 +60,7 @@ public class MalgraMain {
 	public void Init(FMLInitializationEvent e){
 		MinecraftForge.EVENT_BUS.register(new MalgraEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
+		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, "Mana Crafting Table");
 		proxy.Init(e);
 		
 	}
