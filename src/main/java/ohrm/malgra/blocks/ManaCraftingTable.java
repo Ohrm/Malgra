@@ -1,6 +1,7 @@
 package ohrm.malgra.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 import ohrm.malgra.MalgraMain;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
 
-public class ManaCraftingTable extends Block {
+public class ManaCraftingTable extends Block implements ITileEntityProvider {
 
 	public ManaCraftingTable() {
 		super(Material.WOOD);
@@ -39,5 +40,9 @@ public class ManaCraftingTable extends Block {
 		}
 		return false;
 	}
-	
+
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta) {
+		return new TileEntityManaCraftingTable(worldIn);
+	}
 }
