@@ -14,6 +14,7 @@ public class GuiHandler implements IGuiHandler {
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		if (ID == 0){
 			TileEntityManaCraftingTable te = (TileEntityManaCraftingTable)world.getTileEntity(new BlockPos(x, y, z));
+			te.guiOpen = true;
 			return new ContainerManaCraftingTable(player.inventory, te);
 		
 		}else{

@@ -37,7 +37,7 @@ public class ContainerManaCraftingTable extends Container{
 		this.pos = tileEntity.getPos();
 		
 		this.addSlotToContainer(new SlotResult(tileEntity, 0, 124, 35));
-		this.addSlotToContainer(new SlotExtractor(tileEntity, 1, 124, 64));
+		this.addSlotToContainer(new SlotExtractor(tileEntity, 1, 8, 35));
 
         for (int i = 0; i < 3; ++i)
         {
@@ -62,6 +62,13 @@ public class ContainerManaCraftingTable extends Container{
             this.addSlotToContainer(new Slot(player, l, 8 + l * 18, 142));
         }
 
+	}
+	
+	@Override
+	public void onContainerClosed(EntityPlayer playerIn) {
+		// TODO Auto-generated method stub
+		
+		tileEntity.guiOpen = false;
 	}
 	
 	@Override
