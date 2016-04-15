@@ -10,6 +10,8 @@ item.basicExtractorTip.name=Basic Malgra Extractor Tip
 item.tiny.name=Tiny
 item.basic.name=Basic
 
+tile.manaCraftingTable.name=Malgra Crafting Table
+
 gui.manaBar.mana=Malgra
 
 container.malgra.manaCraftingTable=Malgra Crafting Table

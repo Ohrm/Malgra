@@ -10,13 +10,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import ohrm.malgra.crafting.ManaCraftingRecipe;
+import ohrm.malgra.crafting.ManaRecipes;
+import ohrm.malgra.items.ManaExtractor;
 
-public class TileEntityManaCraftingTable extends TileEntity implements IInventory{
+public class TileEntityManaCraftingTable extends TileEntity implements IInventory, ITickable{
 
 	final int NUM_SLOT = 11;
 	private ItemStack[] itemStacks = new ItemStack[NUM_SLOT];
+	public boolean guiOpen = false;
+	ManaCraftingRecipe recipe;
 	
 	public TileEntityManaCraftingTable() {
 		
@@ -185,5 +191,48 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 		Arrays.fill(itemStacks, null);
 		
 	}	
+	
+	@Override
+	public void update() {
+		
+		if(guiOpen && !worldObj.isRemote){
+			
+			ItemStack[] temp = new ItemStack[9];
+			
+			for(int i = 0; i < temp.length; i++){
+				
+				temp[i] = itemStacks[i+2];
+				
+			}
+			
+			if(itemStacks[1] != null && itemStacks[1].hasTagCompound()){
+				
+				recipe = ManaRecipes.GetResult(itemStacks[1].getTagCompound().getInteger("malgra"), temp);
+				Item item = ManaRecipes.recipes.get(recipe);
+				if(item == null){
+					
+					this.itemStacks[0] = null;
+					
+				}else{
+					
+					this.itemStacks[0] = new ItemStack(item);
+					//markDirty();
+				}
+				return;
+			}
+			
+			recipe = ManaRecipes.GetResult(0, temp);
+			Item item = ManaRecipes.recipes.get(recipe);
+			if(item == null){
+				
+				this.itemStacks[0] = null;
+				
+			}else{
+				this.itemStacks[0] = new ItemStack(item);
+				//markDirty();
+			}
+		}
+		
+	}
 	
 }

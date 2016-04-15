@@ -6,6 +6,8 @@ item.manaInjectorEmpty.name=Malgra Injector
 item.manaExtractor.name=Malgra Extractor
 item.manaExtractor.malgraStored=Malgra Stored
 
+tile.manaCraftingTable.name=Malgra Crafting Table
+
 gui.manaBar.mana=Malgra
 
 container.malgra.manaCraftingTable=Malgra Crafting Table

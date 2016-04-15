@@ -41,7 +41,7 @@ public class GuiManaCraftingTable extends GuiContainer{
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2) {
 		String s = tileEntity.getName();
-		fontRendererObj.drawString(I18n.format(s), xSize / 2 - (xSize / 4 + 13), 0, 4210752);
+		fontRendererObj.drawString(I18n.format(s), xSize / 2 - (xSize / 4 + 13), 5, 4210752);
 		fontRendererObj.drawString(I18n.format("container.inventory"), 8, ySize - 96 + 4, 4210752);
 	}
 

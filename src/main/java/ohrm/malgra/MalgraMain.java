@@ -1,6 +1,7 @@
 package ohrm.malgra;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.capabilities.CapabilityMana;
+import ohrm.malgra.crafting.ManaRecipes;
 import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.packets.PacketDispatcher;
@@ -57,6 +59,8 @@ public class MalgraMain {
 		MinecraftForge.EVENT_BUS.register(new MalgraEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
 		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, "Mana Crafting Table");
+		ManaRecipes.AddRecipe(Items.magicDust, 0, new ItemStack(net.minecraft.init.Blocks.DIRT));
+		ManaRecipes.AddRecipe(Items.manaInjector, 1, new ItemStack(net.minecraft.init.Blocks.WOODEN_BUTTON));
 		proxy.Init(e);
 		
 	}
