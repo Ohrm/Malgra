@@ -63,8 +63,6 @@ public class MalgraMain {
 		MinecraftForge.EVENT_BUS.register(new MalgraEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
 		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, "Mana Crafting Table");
-		ManaRecipes.AddRecipe(Items.magicDust, 0, new ItemStack(net.minecraft.init.Blocks.DIRT));
-		ManaRecipes.AddRecipe(Items.manaInjector, 1, new ItemStack(net.minecraft.init.Blocks.WOODEN_BUTTON));
 		proxy.Init(e);
 		
 	}
