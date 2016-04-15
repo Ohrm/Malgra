@@ -16,7 +16,7 @@ public class SlotExtractor extends Slot {
 	@Override
 	public boolean isItemValid(ItemStack stack) {
 
-		if(stack.getItem() == Items.manaExtractor){
+		if(stack.getItem() == Items.extractor){
 			
 			return true;
 			

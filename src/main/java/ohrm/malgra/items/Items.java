@@ -12,24 +12,30 @@ import ohrm.malgra.Reference;
 
 public class Items {
 
-	public static Item magicDust, manaInjector, manaInjectorEmpty, manaExtractor;
+	public static Item magicDust, manaInjector, manaInjectorEmpty, extractor, tinyContainer, basicExtractorTip;
+
+	public static final Item.ToolMaterial BASICEXTRACTOR = EnumHelper.addToolMaterial("BASICEXTRACTOR", 0, 40, 1.0F, -2.0F, 0);
 	
 	public static void InitItems(){
 		
 		magicDust = new Item().setUnlocalizedName("magicDust").setCreativeTab(MalgraMain.magicTab);
 		manaInjector = new ManaInjector().setUnlocalizedName("manaInjector").setCreativeTab(MalgraMain.magicTab);
 		manaInjectorEmpty = new Item().setUnlocalizedName("manaInjectorEmpty").setCreativeTab(MalgraMain.magicTab);
-		manaExtractor = new ManaExtractor(EnumHelper.addToolMaterial("EXTRACTOR", 0, 40, 1.0F, -2.0F, 0), 100).setUnlocalizedName("manaExtractor").setCreativeTab(MalgraMain.magicTab);
+		tinyContainer = new BasicContainer(100, "tiny").setUnlocalizedName("tinyContainer");
+		basicExtractorTip = new BasicExtractorTip(BASICEXTRACTOR, "basic").setUnlocalizedName("basicExtractorTip");
+		extractor = new Extractor((ExtractorContainer) tinyContainer, (ExtractorTip) basicExtractorTip).setUnlocalizedName("manaExtractor");
 		RegisterItems();
 				
 	}
 	
 	public static void RegisterItems(){
-		
+
 		GameRegistry.register(magicDust, new ResourceLocation(Reference.MODID, "magicDust"));
 		GameRegistry.register(manaInjector, new ResourceLocation(Reference.MODID, "manaInjector"));
 		GameRegistry.register(manaInjectorEmpty, new ResourceLocation(Reference.MODID, "manaInjectorEmpty"));
-		GameRegistry.register(manaExtractor, new ResourceLocation(Reference.MODID, "manaExtractor"));
+		GameRegistry.register(extractor, new ResourceLocation(Reference.MODID, "manaExtractor"));
+		GameRegistry.register(tinyContainer, new ResourceLocation(Reference.MODID, "tinyContainer"));
+		GameRegistry.register(basicExtractorTip, new ResourceLocation(Reference.MODID, "basicExtractorTip"));
 	}
 	
 	public static void RegisterRenders(){
@@ -37,7 +43,9 @@ public class Items {
 		RegisterRender(magicDust);
 		RegisterRender(manaInjector);
 		RegisterRender(manaInjectorEmpty);
-		RegisterRender(manaExtractor);
+		RegisterRender(extractor);
+		RegisterRender(tinyContainer);
+		RegisterRender(basicExtractorTip);
 	}
 	
 	private static void RegisterRender(Item item){

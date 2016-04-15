@@ -5,6 +5,10 @@ item.manaInjector.name=Malgra Injector
 item.manaInjectorEmpty.name=Malgra Injector
 item.manaExtractor.name=Malgra Extractor
 item.manaExtractor.malgraStored=Malgra Stored
+item.tinyContainer.name=Tiny Malgra Container
+item.basicExtractorTip.name=Basic Malgra Extractor Tip
+item.tiny.name=Tiny
+item.basic.name=Basic
 
 gui.manaBar.mana=Malgra
 
