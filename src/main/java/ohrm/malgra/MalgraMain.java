@@ -3,7 +3,6 @@ package ohrm.malgra;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -19,7 +18,6 @@ import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.crafting.ManaRecipes;
 import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
-import ohrm.malgra.items.ManaExtractor;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.proxies.CommonProxy;
 import ohrm.malgra.tab.MalgraTab;
@@ -28,8 +26,6 @@ import ohrm.malgra.tile.TileEntityManaCraftingTable;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.sql.Ref;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class MalgraMain {
@@ -52,7 +48,7 @@ public class MalgraMain {
 		Items.InitItems();
 		Blocks.InitBlocks();
 		CapabilityMana.register();
-		MinecraftForge.EVENT_BUS.register(Items.manaExtractor);
+		MinecraftForge.EVENT_BUS.register(Items.extractor);
 		proxy.PreInit(e);
 		PacketDispatcher.registerPackets();
 		
