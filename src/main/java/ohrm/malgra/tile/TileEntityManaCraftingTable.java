@@ -15,14 +15,13 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import ohrm.malgra.crafting.ManaCraftingRecipe;
 import ohrm.malgra.crafting.ManaRecipes;
-import ohrm.malgra.items.ManaExtractor;
 
 public class TileEntityManaCraftingTable extends TileEntity implements IInventory, ITickable{
 
 	final int NUM_SLOT = 11;
-	private ItemStack[] itemStacks = new ItemStack[NUM_SLOT];
+	public ItemStack[] itemStacks = new ItemStack[NUM_SLOT];
 	public boolean guiOpen = false;
-	ManaCraftingRecipe recipe;
+	public ManaCraftingRecipe recipe;
 	
 	public TileEntityManaCraftingTable() {
 		
@@ -36,7 +35,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
-		// TODO Auto-generated method stub
+		
 		super.readFromNBT(tag);
 		
 		if(tag.hasKey("Items")) {
@@ -55,7 +54,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
-		// TODO Auto-generated method stub
+		
 		super.writeToNBT(tag);
 		// Inventories
 		NBTTagList tagList = new NBTTagList();		
@@ -75,31 +74,31 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
+	
 		return "container.malgra.manaCraftingTable";
 	}
 
 	@Override
 	public boolean hasCustomName() {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public ITextComponent getDisplayName() {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
 	@Override
 	public int getSizeInventory() {
-		// TODO Auto-generated method stub
+		
 		return itemStacks.length;
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		// TODO Auto-generated method stub
+		
 		return itemStacks[index];
 	}
 
@@ -136,7 +135,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 
 	@Override
 	public int getInventoryStackLimit() {
-		// TODO Auto-generated method stub
+	
 		return 64;
 	}
 
@@ -152,37 +151,37 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 
 	@Override
 	public void openInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void closeInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		// TODO Auto-generated method stub
+		
 		return true;
 	}
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
@@ -196,41 +195,75 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	public void update() {
 		
 		if(guiOpen && !worldObj.isRemote){
+		
+			checkForResult();
 			
-			ItemStack[] temp = new ItemStack[9];
+		}
+		
+	}
+	
+	public int GetRecipeMalgraCost(){
+		
+		ItemStack[] temp = new ItemStack[9];
+		
+		for(int i = 0; i < temp.length; i++){
 			
-			for(int i = 0; i < temp.length; i++){
+			temp[i] = itemStacks[i+2];
+			
+		}
 				
-				temp[i] = itemStacks[i+2];
-				
-			}
+		recipe = ManaRecipes.GetResult(itemStacks[1].getTagCompound().getInteger("malgra"), temp);
+		return recipe.malgra;
+		
+		
+	}
+	
+	public void checkForResult(){
+		
+		ItemStack[] temp = new ItemStack[9];
+		
+		for(int i = 0; i < temp.length; i++){
 			
-			if(itemStacks[1] != null && itemStacks[1].hasTagCompound()){
-				
-				recipe = ManaRecipes.GetResult(itemStacks[1].getTagCompound().getInteger("malgra"), temp);
-				Item item = ManaRecipes.recipes.get(recipe);
-				if(item == null){
-					
-					this.itemStacks[0] = null;
-					
-				}else{
-					
-					this.itemStacks[0] = new ItemStack(item);
-					//markDirty();
-				}
-				return;
-			}
+			temp[i] = itemStacks[i+2];
 			
-			recipe = ManaRecipes.GetResult(0, temp);
+		}
+		
+		int empty = 0;
+		for(int i = 0; i < temp.length; i++){
+			
+			if(temp[i] == null)
+				empty++;
+			
+		}
+		
+		if(empty == temp.length)
+			return;
+		
+		if(itemStacks[1] != null && itemStacks[1].hasTagCompound()){
+			
+			recipe = ManaRecipes.GetResult(itemStacks[1].getTagCompound().getInteger("malgra"), temp);
 			Item item = ManaRecipes.recipes.get(recipe);
 			if(item == null){
 				
 				this.itemStacks[0] = null;
 				
 			}else{
+				
 				this.itemStacks[0] = new ItemStack(item);
 				//markDirty();
 			}
+			return;
+		}
+		
+		recipe = ManaRecipes.GetResult(0, temp);
+		Item item = ManaRecipes.recipes.get(recipe);
+		if(item == null){
+			
+			this.itemStacks[0] = null;
+			
+		}else{
+			this.itemStacks[0] = new ItemStack(item);
+			//markDirty();
 		}
 		
 	}

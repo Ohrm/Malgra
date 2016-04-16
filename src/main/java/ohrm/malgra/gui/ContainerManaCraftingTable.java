@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.gui.slot.SlotExtractor;
-import ohrm.malgra.gui.slot.SlotResult;
+import ohrm.malgra.gui.slot.SlotResultManaCrafting;
 
 public class ContainerManaCraftingTable extends Container{
 
@@ -36,7 +36,7 @@ public class ContainerManaCraftingTable extends Container{
 		this.world = tileEntity.getWorld();
 		this.pos = tileEntity.getPos();
 		
-		this.addSlotToContainer(new SlotResult(tileEntity, 0, 124, 35));
+		this.addSlotToContainer(new SlotResultManaCrafting(tileEntity, 0, 124, 35));
 		this.addSlotToContainer(new SlotExtractor(tileEntity, 1, 8, 35));
 
         for (int i = 0; i < 3; ++i)
@@ -66,7 +66,6 @@ public class ContainerManaCraftingTable extends Container{
 	
 	@Override
 	public void onContainerClosed(EntityPlayer playerIn) {
-		// TODO Auto-generated method stub
 		
 		tileEntity.guiOpen = false;
 	}
