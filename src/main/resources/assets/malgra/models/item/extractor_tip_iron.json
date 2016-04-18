@@ -1,0 +1,6 @@
+{
+    "parent":"item/handheld",
+    "textures": {
+        "layer0":"malgra:items/extractor_tip_iron"
+    }
+}

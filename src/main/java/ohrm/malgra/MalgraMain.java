@@ -2,6 +2,8 @@ package ohrm.malgra;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -12,9 +14,11 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.capabilities.CapabilityMana;
+import ohrm.malgra.crafting.CraftingRecipes;
 import ohrm.malgra.crafting.ManaRecipes;
 import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
@@ -58,6 +62,7 @@ public class MalgraMain {
 	public void Init(FMLInitializationEvent e){
 		MinecraftForge.EVENT_BUS.register(new MalgraEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
+		CraftingRecipes.init();
 		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, "Mana Crafting Table");
 		proxy.Init(e);
 		

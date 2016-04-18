@@ -6,12 +6,31 @@ item.manaInjectorEmpty.name=Malgra Injector
 item.manaExtractor.name=Malgra Extractor
 item.manaExtractor.malgraStored=Malgra Stored
 item.tinyContainer.name=Tiny Malgra Container
-item.basicExtractorTip.name=Basic Malgra Extractor Tip
-item.tiny.name=Tiny
-item.basic.name=Basic
+item.smallContainer.name=Small Malgra Container
+item.mediumContainer.name=Medium Malgra Container
+item.largeContainer.name=Large Malgra Container
+item.hugeContainer.name=Huge Malgra Container
+item.flintExtractorTip.name=Flint Malgra Extractor Tip
+item.ironExtractorTip.name=Iron Malgra Extractor Tip
+item.quartzExtractorTip.name=Quartz Malgra Extractor Tip
+item.diamondExtractorTip.name=Diamond Malgra Extractor Tip
+item.malgrumExtractorTip.name=Malgrum Malgra Extractor Tip
+
+extractor.prefix.tiny=Tiny
+extractor.prefix.small=Small
+extractor.prefix.medium=Medium
+extractor.prefix.large=Large
+extractor.prefix.huge=Huge
+extractor.prefix.flint=Flint
+extractor.prefix.iron=Iron
+extractor.prefix.quartz=Quartz
+extractor.prefix.diamond=Diamond
+extractor.prefix.malgrum=Malgrum
 
 tile.manaCraftingTable.name=Malgra Crafting Table
 
 gui.manaBar.mana=Malgra
+
+tooltip.malgraProvider=Provides %1$s Malgra
 
 container.malgra.manaCraftingTable=Malgra Crafting Table

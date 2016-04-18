@@ -12,18 +12,30 @@ import ohrm.malgra.Reference;
 
 public class Items {
 
-	public static Item magicDust, manaInjector, manaInjectorEmpty, extractor, tinyContainer, basicExtractorTip;
+	public static Item magicDust, manaInjector, manaInjectorEmpty, extractor, tinyContainer, smallContainer, mediumContainer, largeContainer, hugeContainer, flintExtractorTip, ironExtractorTip, quartzExtractorTip, diamondExtractorTip, malgrumExtractorTip;
 
-	public static final Item.ToolMaterial BASICEXTRACTOR = EnumHelper.addToolMaterial("BASICEXTRACTOR", 0, 40, 1.0F, -2.0F, 0);
-	
+	public static final Item.ToolMaterial TIP_FLINT = EnumHelper.addToolMaterial("TIP_FLINT", 0, 40, 1.0F, -2.0F, 0);
+	public static final Item.ToolMaterial TIP_IRON = EnumHelper.addToolMaterial("TIP_IRON", 0, 500, 3.0F, 0.0F, 0);
+	public static final Item.ToolMaterial TIP_QUARTZ = EnumHelper.addToolMaterial("TIP_QUARTZ", 0, 200, 7.0F, 1.0F, 0);
+	public static final Item.ToolMaterial TIP_DIAMOND = EnumHelper.addToolMaterial("TIP_DIAMOND", 0, 2000, 5.5F, 1.0F, 0);
+	public static final Item.ToolMaterial TIP_MALGRUM = EnumHelper.addToolMaterial("TIP_MALGRUM", 0, -1, 8.0F, 2.0F, 0);
+
 	public static void InitItems(){
 		
 		magicDust = new Item().setUnlocalizedName("magicDust").setCreativeTab(MalgraMain.magicTab);
 		manaInjector = new ManaInjector().setUnlocalizedName("manaInjector").setCreativeTab(MalgraMain.magicTab);
 		manaInjectorEmpty = new Item().setUnlocalizedName("manaInjectorEmpty").setCreativeTab(MalgraMain.magicTab);
-		tinyContainer = new BasicContainer(100, "tiny").setUnlocalizedName("tinyContainer");
-		basicExtractorTip = new BasicExtractorTip(BASICEXTRACTOR, "basic").setUnlocalizedName("basicExtractorTip");
-		extractor = new Extractor((ExtractorContainer) tinyContainer, (ExtractorTip) basicExtractorTip).setUnlocalizedName("manaExtractor");
+		tinyContainer = new ExtractorContainer(100, "tiny").setUnlocalizedName("tinyContainer");
+		smallContainer = new ExtractorContainer(500, "small").setUnlocalizedName("smallContainer");
+		mediumContainer = new ExtractorContainer(2000, "medium").setUnlocalizedName("mediumContainer");
+		largeContainer = new ExtractorContainer(10000, "large").setUnlocalizedName("largeContainer");
+		hugeContainer = new ExtractorContainer(50000, "huge").setUnlocalizedName("hugeContainer");
+		flintExtractorTip = new ExtractorTip(TIP_FLINT, "flint").setUnlocalizedName("flintExtractorTip");
+		ironExtractorTip = new ExtractorTip(TIP_IRON, "iron").setUnlocalizedName("ironExtractorTip");
+		quartzExtractorTip = new ExtractorTip(TIP_QUARTZ, "quartz").setUnlocalizedName("quartzExtractorTip");
+		diamondExtractorTip = new ExtractorTip(TIP_DIAMOND, "diamond").setUnlocalizedName("diamondExtractorTip");
+		malgrumExtractorTip = new ExtractorTip(TIP_MALGRUM, "malgrum").setUnlocalizedName("malgrumExtractorTip");
+		extractor = new Extractor().setUnlocalizedName("manaExtractor");
 		RegisterItems();
 				
 	}
@@ -35,7 +47,15 @@ public class Items {
 		GameRegistry.register(manaInjectorEmpty, new ResourceLocation(Reference.MODID, "manaInjectorEmpty"));
 		GameRegistry.register(extractor, new ResourceLocation(Reference.MODID, "manaExtractor"));
 		GameRegistry.register(tinyContainer, new ResourceLocation(Reference.MODID, "tinyContainer"));
-		GameRegistry.register(basicExtractorTip, new ResourceLocation(Reference.MODID, "basicExtractorTip"));
+		GameRegistry.register(smallContainer, new ResourceLocation(Reference.MODID, "smallContainer"));
+		GameRegistry.register(mediumContainer, new ResourceLocation(Reference.MODID, "mediumContainer"));
+		GameRegistry.register(largeContainer, new ResourceLocation(Reference.MODID, "largeContainer"));
+		GameRegistry.register(hugeContainer, new ResourceLocation(Reference.MODID, "hugeContainer"));
+		GameRegistry.register(flintExtractorTip, new ResourceLocation(Reference.MODID, "flintExtractorTip"));
+		GameRegistry.register(ironExtractorTip, new ResourceLocation(Reference.MODID, "ironExtractorTip"));
+		GameRegistry.register(quartzExtractorTip, new ResourceLocation(Reference.MODID, "quartzExtractorTip"));
+		GameRegistry.register(diamondExtractorTip, new ResourceLocation(Reference.MODID, "diamondExtractorTip"));
+		GameRegistry.register(malgrumExtractorTip, new ResourceLocation(Reference.MODID, "malgrumExtractorTip"));
 	}
 	
 	public static void RegisterRenders(){
@@ -43,15 +63,40 @@ public class Items {
 		RegisterRender(magicDust);
 		RegisterRender(manaInjector);
 		RegisterRender(manaInjectorEmpty);
-		RegisterRender(extractor);
+		//RegisterRender(extractor);
+		RegisterRender(extractor, 0, "extractor_base");
+		RegisterRender(extractor, 1, "extractor_container_tiny");
+		RegisterRender(extractor, 2, "extractor_container_small");
+		RegisterRender(extractor, 3, "extractor_container_medium");
+		RegisterRender(extractor, 4, "extractor_container_large");
+		RegisterRender(extractor, 5, "extractor_container_huge");
+		RegisterRender(extractor, 6, "extractor_tip_flint");
+		RegisterRender(extractor, 7, "extractor_tip_iron");
+		RegisterRender(extractor, 8, "extractor_tip_quartz");
+		RegisterRender(extractor, 9, "extractor_tip_diamond");
+		RegisterRender(extractor, 10, "extractor_tip_malgrum");
 		RegisterRender(tinyContainer);
-		RegisterRender(basicExtractorTip);
+		RegisterRender(smallContainer);
+		RegisterRender(mediumContainer);
+		RegisterRender(largeContainer);
+		RegisterRender(hugeContainer);
+		RegisterRender(flintExtractorTip);
+		RegisterRender(ironExtractorTip);
+		RegisterRender(quartzExtractorTip);
+		RegisterRender(diamondExtractorTip);
+		RegisterRender(malgrumExtractorTip);
 	}
 	
 	private static void RegisterRender(Item item){
 		
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(Reference.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
 				
+	}
+
+	private static void RegisterRender(Item item, int meta, String file){
+
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Reference.MODID + ":" + file, "inventory"));
+
 	}
 	
 }

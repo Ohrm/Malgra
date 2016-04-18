@@ -7,7 +7,7 @@ import ohrm.malgra.MalgraMain;
 /**
  * Created by Toby on 14/04/2016.
  */
-public abstract class ExtractorContainer extends Item {
+public class ExtractorContainer extends Item {
 
     int storage;
     String prefix;

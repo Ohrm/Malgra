@@ -6,7 +6,7 @@ import ohrm.malgra.MalgraMain;
 /**
  * Created by Toby on 14/04/2016.
  */
-public abstract class ExtractorTip extends Item {
+public class ExtractorTip extends Item {
 
     ToolMaterial material;
     String prefix;

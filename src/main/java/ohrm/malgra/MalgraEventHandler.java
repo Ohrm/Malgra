@@ -1,18 +1,26 @@
 package ohrm.malgra;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
+
+import java.util.Iterator;
+import java.util.Map;
 
 public class MalgraEventHandler {
 
@@ -62,5 +70,4 @@ public class MalgraEventHandler {
 			manaNew.setMaxMana(manaOriginal.getMaxMana());
 		}
 	}
-	
 }
