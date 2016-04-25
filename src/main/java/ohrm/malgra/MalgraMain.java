@@ -20,6 +20,7 @@ import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.crafting.CraftingRecipes;
 import ohrm.malgra.crafting.ManaRecipes;
+import ohrm.malgra.fluid.Fluids;
 import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.packets.PacketDispatcher;
@@ -49,8 +50,9 @@ public class MalgraMain {
 	public void PreInit(FMLPreInitializationEvent e){
 		
 		magicTab = new MalgraTab(CreativeTabs.getNextID(), "malgraTab");
-		Items.InitItems();
+		Fluids.init();
 		Blocks.InitBlocks();
+		Items.InitItems();
 		CapabilityMana.register();
 		MinecraftForge.EVENT_BUS.register(Items.extractor);
 		proxy.PreInit(e);

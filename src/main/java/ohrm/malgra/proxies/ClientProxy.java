@@ -1,11 +1,19 @@
 package ohrm.malgra.proxies;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -23,7 +31,9 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void PreInit(FMLPreInitializationEvent e) {
-		
+
+		registerFluidModel(Blocks.liquidMalgraBlock);
+
 		super.PreInit(e);
 		
 	}
@@ -48,8 +58,31 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(ModelBakeHandler.instance);
 
 		Blocks.RegisterRenders();
+
 		super.Init(e);
 		
+	}
+
+	public void registerFluidModel(Block  block) {
+		Item item = Item.getItemFromBlock(block);
+
+		ModelBakery.registerItemVariants(item);
+
+		final ModelResourceLocation loc = new ModelResourceLocation(Reference.MODID + ":fluid", "liquidmalgra");
+
+		ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
+			@Override
+			public ModelResourceLocation getModelLocation(ItemStack stack) {
+				return loc;
+			}
+		});
+
+		ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return loc;
+			}
+		});
 	}
 	
 	@Override

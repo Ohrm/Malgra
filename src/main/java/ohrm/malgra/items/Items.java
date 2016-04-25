@@ -1,18 +1,26 @@
 package ohrm.malgra.items;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.util.ResourceLocation;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import ohrm.malgra.MalgraMain;
 import ohrm.malgra.Reference;
+import ohrm.malgra.blocks.Blocks;
 
 public class Items {
 
-	public static Item magicDust, manaInjector, manaInjectorEmpty, extractor, tinyContainer, smallContainer, mediumContainer, largeContainer, hugeContainer, flintExtractorTip, ironExtractorTip, quartzExtractorTip, diamondExtractorTip, malgrumExtractorTip;
+	public static Item
+			magicDust, manaInjector, manaInjectorEmpty, extractor, tinyContainer, smallContainer,
+			mediumContainer, largeContainer, hugeContainer, flintExtractorTip, ironExtractorTip, quartzExtractorTip,
+			diamondExtractorTip, malgrumExtractorTip, liquidMalgraBucket
+			;
 
 	public static final Item.ToolMaterial TIP_FLINT = EnumHelper.addToolMaterial("TIP_FLINT", 0, 40, 1.0F, -2.0F, 0);
 	public static final Item.ToolMaterial TIP_IRON = EnumHelper.addToolMaterial("TIP_IRON", 0, 500, 3.0F, 0.0F, 0);
@@ -36,6 +44,7 @@ public class Items {
 		diamondExtractorTip = new ExtractorTip(TIP_DIAMOND, "diamond").setUnlocalizedName("diamondExtractorTip");
 		malgrumExtractorTip = new ExtractorTip(TIP_MALGRUM, "malgrum").setUnlocalizedName("malgrumExtractorTip");
 		extractor = new Extractor().setUnlocalizedName("manaExtractor");
+		liquidMalgraBucket = new ItemBucket(Blocks.liquidMalgraBlock).setUnlocalizedName("liquidMalgraBucket");
 		RegisterItems();
 				
 	}
@@ -56,6 +65,7 @@ public class Items {
 		GameRegistry.register(quartzExtractorTip, new ResourceLocation(Reference.MODID, "quartzExtractorTip"));
 		GameRegistry.register(diamondExtractorTip, new ResourceLocation(Reference.MODID, "diamondExtractorTip"));
 		GameRegistry.register(malgrumExtractorTip, new ResourceLocation(Reference.MODID, "malgrumExtractorTip"));
+		GameRegistry.register(liquidMalgraBucket, new ResourceLocation(Reference.MODID, "liquidMalgraBucket"));
 	}
 	
 	public static void RegisterRenders(){
@@ -85,6 +95,7 @@ public class Items {
 		RegisterRender(quartzExtractorTip);
 		RegisterRender(diamondExtractorTip);
 		RegisterRender(malgrumExtractorTip);
+		RegisterRender(liquidMalgraBucket);
 	}
 	
 	private static void RegisterRender(Item item){

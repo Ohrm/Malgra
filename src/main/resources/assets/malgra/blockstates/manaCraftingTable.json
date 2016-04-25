@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "malgra:manaCraftingTable" },
+        "facing=north": { "model": "malgra:manaCraftingTable" },
+        "facing=south": { "model": "malgra:manaCraftingTable", "y": 180 },
+        "facing=west":  { "model": "malgra:manaCraftingTable", "y": 270 },
+        "facing=east":  { "model": "malgra:manaCraftingTable", "y": 90 }
+    }
+}
