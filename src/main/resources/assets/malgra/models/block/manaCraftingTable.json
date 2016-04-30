@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "malgra:blocks/manaCraftingTable_side",
+        "down":  "malgra:blocks/manaCraftingTable_bottom",
+        "up":    "malgra:blocks/manaCraftingTable_top",
+        "north": "malgra:blocks/manaCraftingTable_side",
+        "south": "malgra:blocks/manaCraftingTable_side",
+        "west":  "malgra:blocks/manaCraftingTable_side",
+        "east":  "malgra:blocks/manaCraftingTable_side"
+    }
+}

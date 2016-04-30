@@ -85,6 +85,17 @@ public class Extractor extends Item {
     }
 
     @Override
+    public boolean isDamageable() {
+        return true;
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+        stack.damageItem(1, attacker);
+        return super.hitEntity(stack, target, attacker);
+    }
+
+    @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         if (getMalgraProviders().containsKey(state.getBlock())) {
             if (stack.hasTagCompound()) {
@@ -113,6 +124,7 @@ public class Extractor extends Item {
             	}
             }
         }
+        stack.damageItem(1, entityLiving);
         return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
     }
 

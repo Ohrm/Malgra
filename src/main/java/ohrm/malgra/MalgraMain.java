@@ -23,6 +23,7 @@ import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.client.sounds.Sounds;
 import ohrm.malgra.crafting.CraftingRecipes;
 import ohrm.malgra.crafting.ManaRecipes;
+import ohrm.malgra.fluid.Fluids;
 import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.packets.PacketDispatcher;
@@ -52,8 +53,9 @@ public class MalgraMain {
 	public void PreInit(FMLPreInitializationEvent e){
 		
 		magicTab = new MalgraTab(CreativeTabs.getNextID(), "malgraTab");
-		Items.InitItems();
+		Fluids.init();
 		Blocks.InitBlocks();
+		Items.InitItems();
 		CapabilityMana.register();
 		CapabilityResearchPoints.register();
 		CapabilityResearchActivites.register();
