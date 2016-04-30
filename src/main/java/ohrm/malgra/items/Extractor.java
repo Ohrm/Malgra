@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
@@ -29,6 +30,11 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import ohrm.malgra.MalgraMain;
 import ohrm.malgra.Reference;
 import ohrm.malgra.api.MalgraAPI;
+import ohrm.malgra.capabilities.CapabilityResearchActivites;
+import ohrm.malgra.capabilities.CapabilityResearchPoints;
+import ohrm.malgra.packets.PacketDispatcher;
+import ohrm.malgra.packets.client.SyncResearchActivites;
+import ohrm.malgra.packets.client.SyncResearchPoints;
 
 import java.util.List;
 import java.util.Map;
@@ -93,6 +99,18 @@ public class Extractor extends Item {
                 stack.setTagCompound(new NBTTagCompound());
                 stack.getTagCompound().setInteger("malgra", getMalgraProviders().get(state.getBlock()));
                 stack.getTagCompound().setString("container", Items.tinyContainer.getUnlocalizedName().substring(5));
+            }
+            if(!worldIn.isRemote){
+            	
+            	EntityPlayerMP playerMP = (EntityPlayerMP)entityLiving;
+            	
+            	if(!playerMP.getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null).hasMinedBlock(state.getBlock().getRegistryName().toString())){
+            		System.out.println(state.getBlock().getRegistryName().toString());
+            		playerMP.getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null).addMinedBlock(state.getBlock().getRegistryName().toString());
+            		playerMP.getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null).addResearchPoints(1);
+            		PacketDispatcher.sendTo(new SyncResearchActivites(playerMP.getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null)), (EntityPlayerMP) playerMP);
+            		PacketDispatcher.sendTo(new SyncResearchPoints(playerMP.getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null)), (EntityPlayerMP) playerMP);
+            	}
             }
         }
         return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);

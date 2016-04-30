@@ -9,6 +9,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import ohrm.malgra.Reference;
 import ohrm.malgra.packets.client.SyncManaData;
+import ohrm.malgra.packets.client.SyncResearchActivites;
+import ohrm.malgra.packets.client.SyncResearchPoints;
 import ohrm.malgra.packets.server.OpenGuiMessage;
 
 /**
@@ -47,7 +49,8 @@ public class PacketDispatcher
 	public static final void registerPackets() {
 		// Packets handled on CLIENT
 		registerMessage(SyncManaData.class);
-
+		registerMessage(SyncResearchPoints.class);
+		registerMessage(SyncResearchActivites.class);
 		// Packets handled on SERVER
 		registerMessage(OpenGuiMessage.class);
 	}

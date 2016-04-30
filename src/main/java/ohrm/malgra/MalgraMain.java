@@ -18,6 +18,9 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.capabilities.CapabilityMana;
+import ohrm.malgra.capabilities.CapabilityResearchActivites;
+import ohrm.malgra.capabilities.CapabilityResearchPoints;
+import ohrm.malgra.client.sounds.Sounds;
 import ohrm.malgra.crafting.CraftingRecipes;
 import ohrm.malgra.crafting.ManaRecipes;
 import ohrm.malgra.gui.GuiHandler;
@@ -52,6 +55,8 @@ public class MalgraMain {
 		Items.InitItems();
 		Blocks.InitBlocks();
 		CapabilityMana.register();
+		CapabilityResearchPoints.register();
+		CapabilityResearchActivites.register();
 		MinecraftForge.EVENT_BUS.register(Items.extractor);
 		proxy.PreInit(e);
 		PacketDispatcher.registerPackets();
@@ -64,6 +69,7 @@ public class MalgraMain {
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
 		CraftingRecipes.init();
 		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, "Mana Crafting Table");
+		Sounds.registerSounds();
 		proxy.Init(e);
 		
 	}

@@ -1,0 +1,11 @@
+{
+	"specialSound": {
+		"category": "master",
+		"sounds": [
+			{
+				"name": "malgra:specialSound",
+				"stream": true
+			}
+		]
+	}
+}

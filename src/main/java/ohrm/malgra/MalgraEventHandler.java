@@ -16,8 +16,12 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.capabilities.CapabilityMana;
+import ohrm.malgra.capabilities.CapabilityResearchActivites;
+import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
+import ohrm.malgra.packets.client.SyncResearchActivites;
+import ohrm.malgra.packets.client.SyncResearchPoints;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -49,6 +53,53 @@ public class MalgraEventHandler {
 				CapabilityMana.MANA.getStorage().readNBT(CapabilityMana.MANA, inst, null, nbt);
 			}
 		});
+		event.addCapability(new ResourceLocation(Reference.MODID, "IResearchPoints"), new ICapabilitySerializable<NBTTagCompound>() {
+			CapabilityResearchPoints.IResearchPoints inst = CapabilityResearchPoints.RESEARCHPOINTS.getDefaultInstance();
+
+			@Override
+			public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+				return capability == CapabilityResearchPoints.RESEARCHPOINTS;
+			}
+
+			@Override
+			public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+				return capability == CapabilityResearchPoints.RESEARCHPOINTS ? (T)inst : null;
+			}
+
+			@Override
+			public NBTTagCompound serializeNBT() {
+				return (NBTTagCompound) CapabilityResearchPoints.RESEARCHPOINTS.getStorage().writeNBT(CapabilityResearchPoints.RESEARCHPOINTS, inst, null);
+			}
+
+			@Override
+			public void deserializeNBT(NBTTagCompound nbt) {
+				CapabilityResearchPoints.RESEARCHPOINTS.getStorage().readNBT(CapabilityResearchPoints.RESEARCHPOINTS, inst, null, nbt);
+			}
+		});
+		
+		event.addCapability(new ResourceLocation(Reference.MODID, "IResearchActivities"), new ICapabilitySerializable<NBTTagCompound>() {
+			CapabilityResearchActivites.IResearchActivities inst = CapabilityResearchActivites.RESEARCHACTIVITIES.getDefaultInstance();
+
+			@Override
+			public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+				return capability == CapabilityResearchActivites.RESEARCHACTIVITIES;
+			}
+
+			@Override
+			public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+				return capability == CapabilityResearchActivites.RESEARCHACTIVITIES ? (T)inst : null;
+			}
+
+			@Override
+			public NBTTagCompound serializeNBT() {
+				return (NBTTagCompound) CapabilityResearchActivites.RESEARCHACTIVITIES.getStorage().writeNBT(CapabilityResearchActivites.RESEARCHACTIVITIES, inst, null);
+			}
+
+			@Override
+			public void deserializeNBT(NBTTagCompound nbt) {
+				CapabilityResearchActivites.RESEARCHACTIVITIES.getStorage().readNBT(CapabilityResearchActivites.RESEARCHACTIVITIES, inst, null, nbt);
+			}
+		});
 	}
 	
 	@SubscribeEvent
@@ -58,6 +109,8 @@ public class MalgraEventHandler {
 		// player joins the world; this takes care of dying, changing dimensions, etc.
 		if (event.getEntity() instanceof EntityPlayerMP) {
 			PacketDispatcher.sendTo(new SyncManaData(event.getEntity().getCapability(CapabilityMana.MANA, null)), (EntityPlayerMP) event.getEntity());
+			PacketDispatcher.sendTo(new SyncResearchPoints(event.getEntity().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null)), (EntityPlayerMP) event.getEntity());
+			PacketDispatcher.sendTo(new SyncResearchActivites(event.getEntity().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES,  null)), (EntityPlayerMP) event.getEntity());
 		}
 	}
 	
@@ -68,6 +121,15 @@ public class MalgraEventHandler {
 			final CapabilityMana.IMana manaNew = event.getEntityPlayer().getCapability(CapabilityMana.MANA, null);
 			manaNew.setMana(manaOriginal.getMana());
 			manaNew.setMaxMana(manaOriginal.getMaxMana());
+			
+			final CapabilityResearchPoints.IResearchPoints researchPointsOriginal = event.getOriginal().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null);
+			final CapabilityResearchPoints.IResearchPoints researchPointsNew = event.getEntityPlayer().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null);
+			researchPointsNew.setResearchPoints(researchPointsOriginal.getResearchPoints());
+			
+			final CapabilityResearchActivites.IResearchActivities researchActivitesOriginal = event.getOriginal().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null);
+			final CapabilityResearchActivites.IResearchActivities researchActivitesNew = event.getEntityPlayer().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null);
+			researchActivitesNew.setMinedBlocks(researchActivitesOriginal.getMinedBlocks());
+		
 		}
 	}
 }
