@@ -4,9 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,49 +21,82 @@ public class MalgraAPI {
 
     public static Map<Block, Integer> malgraProviders = new HashMap<Block, Integer>();
 
+    public static Logger apiLogger = LogManager.getFormatterLogger("malgraAPI");
 
     static {
         addMalgraProvider(Blocks.GRASS, 1);
         addMalgraProvider(Blocks.DIRT, 1);
-        addMalgraProvider(Blocks.STONE, 1);
-        addMalgraProvider(Blocks.COBBLESTONE, 1);
+        addMalgraProviderFromOreDict("stone", 1);
+        addMalgraProviderFromOreDict("cobblestone", 1);
         addMalgraProvider(Blocks.GRAVEL, 2);
-        addMalgraProvider(Blocks.SAND, 1);
-        addMalgraProvider(Blocks.SANDSTONE, 1);
+        addMalgraProviderFromOreDict("sand", 1);
+        addMalgraProviderFromOreDict("sandstone", 1);
+        addMalgraProvider(Blocks.RED_SANDSTONE, 1);
         addMalgraProvider(Blocks.TALLGRASS, 1);
         addMalgraProvider(Blocks.GRASS_PATH, 1);
         addMalgraProvider(Blocks.NETHERRACK, 2);
         addMalgraProvider(Blocks.NETHER_BRICK, 5);
-        addMalgraProvider(Blocks.COAL_ORE, 10);
-        addMalgraProvider(Blocks.COAL_BLOCK, 90);
-        addMalgraProvider(Blocks.IRON_ORE, 25);
-        addMalgraProvider(Blocks.IRON_BLOCK, 225);
-        addMalgraProvider(Blocks.DIAMOND_ORE, 300);
-        addMalgraProvider(Blocks.DIAMOND_BLOCK, 2700);
-        addMalgraProvider(Blocks.EMERALD_ORE, 500);
-        addMalgraProvider(Blocks.EMERALD_BLOCK, 4500);
-        addMalgraProvider(Blocks.LAPIS_ORE, 30);
-        addMalgraProvider(Blocks.LAPIS_BLOCK, 270);
-        addMalgraProvider(Blocks.GOLD_ORE, 50);
-        addMalgraProvider(Blocks.GOLD_BLOCK, 450);
-        addMalgraProvider(Blocks.REDSTONE_ORE, 20);
-        addMalgraProvider(Blocks.REDSTONE_BLOCK, 180);
-        addMalgraProvider(Blocks.QUARTZ_ORE, 75);
-        addMalgraProvider(Blocks.QUARTZ_BLOCK, 300);
+        addMalgraProviderFromOreDict("oreCoal", 10);
+        addMalgraProviderFromOreDict("blockCoal", 90);
+        addMalgraProviderFromOreDict("oreIron", 25);
+        addMalgraProviderFromOreDict("blockIron", 225);
+        addMalgraProviderFromOreDict("oreDiamond", 300);
+        addMalgraProviderFromOreDict("blockDiamond", 2700);
+        addMalgraProviderFromOreDict("oreEmerald", 500);
+        addMalgraProviderFromOreDict("blockEmerald", 4500);
+        addMalgraProviderFromOreDict("oreLapis", 30);
+        addMalgraProviderFromOreDict("blockLapis", 270);
+        addMalgraProviderFromOreDict("oreGold", 50);
+        addMalgraProviderFromOreDict("blockGold", 450);
+        addMalgraProviderFromOreDict("oreRedstone", 20);
+        addMalgraProviderFromOreDict("blockRedstone", 180);
+        addMalgraProviderFromOreDict("oreQuartz", 75);
+        addMalgraProviderFromOreDict("blockQuartz", 300);
         addMalgraProvider(Blocks.OBSIDIAN, 150);
         addMalgraProvider(Blocks.CHORUS_FLOWER, 10);
         addMalgraProvider(Blocks.RED_FLOWER, 2);
         addMalgraProvider(Blocks.YELLOW_FLOWER, 2);
         addMalgraProvider(Blocks.END_STONE, 5);
+        addMalgraProvider(Blocks.GLOWSTONE, 15);
+        addMalgraProviderFromOreDict("plankWood", 3);
+        addMalgraProviderFromOreDict("logWood", 12);
+        addMalgraProviderFromOreDict("slabWood", 1);
+        addMalgraProviderFromOreDict("stairWood", 2);
+        addMalgraProviderFromOreDict("blockGlass", 4);
+        addMalgraProviderFromOreDict("paneGlass", 4);
     }
 
     public static boolean addMalgraProvider(Block block, int amount){
         if (!malgraProviders.containsKey(block)) {
             malgraProviders.put(block, amount);
+            apiLogger.log(Level.DEBUG, "Registered %s as a malgra provider", new ItemStack(block).getDisplayName());
             return true;
         } else {
-            FMLLog.log(Level.WARN, "Block %s, already registered as malgra provider", new ItemStack(block).getDisplayName());
+            apiLogger.log(Level.WARN, "Block %s, already registered as malgra provider", new ItemStack(block).getDisplayName());
             return false;
+        }
+    }
+
+    public static boolean addMalgraProviderFromOreDict(String block, int amount) {
+        List<ItemStack> oreStacks = OreDictionary.getOres(block);
+        if (oreStacks.isEmpty()) {
+            apiLogger.log(Level.WARN, "Ore %s, is not registered in the ore dictionary", block);
+            return false;
+        } else {
+            List<Block> blocks = new ArrayList<Block>();
+            for (int i = 0; i < oreStacks.size(); i++) {
+                blocks.add(Block.getBlockFromItem(oreStacks.get(i).getItem()));
+            }
+            for (int i = 0; i < blocks.size(); i++) {
+                if (!malgraProviders.containsKey(blocks.get(i))) {
+                    malgraProviders.put(blocks.get(i), amount);
+                    apiLogger.log(Level.DEBUG, "Registered %s as a malgra provider", new ItemStack(blocks.get(i)).getDisplayName());
+                } else {
+                    apiLogger.log(Level.WARN, "Block %s, already registered as malgra provider", new ItemStack(blocks.get(i)).getDisplayName());
+                    return false;
+                }
+            }
+            return true;
         }
     }
 
