@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
+import ohrm.malgra.world.Dimensions;
 
 public class ManaInjector extends Item {
 
@@ -40,7 +41,7 @@ public class ManaInjector extends Item {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
-		entityLiving.changeDimension(2);
+		entityLiving.changeDimension(Dimensions.malgraDimID);
 		return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
 	}
 }
