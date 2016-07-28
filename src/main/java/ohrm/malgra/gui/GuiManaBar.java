@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -12,6 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ohrm.malgra.capabilities.CapabilityMana;
+import ohrm.malgra.util.Utils;
 
 @SideOnly(Side.CLIENT)
 public class GuiManaBar extends Gui
@@ -52,7 +52,7 @@ public class GuiManaBar extends Gui
 		// You can keep drawing without changing anything
 		int manabarwidth = (int)(((float) props.getMana() / props.getMaxMana()) * 49);
 		drawTexturedModalRect(xPos + 3, yPos + 3, 0, 9, manabarwidth, 3);
-		String s = I18n.translateToLocal("gui.manaBar.mana") + " " + props.getMana() + "/" + props.getMaxMana();
+		String s = Utils.translateToLocal("gui.manaBar.mana") + " " + props.getMana() + "/" + props.getMaxMana();
 		yPos += 10;
 		this.mc.fontRendererObj.drawString(s, xPos + 1, yPos, 0);
 		this.mc.fontRendererObj.drawString(s, xPos - 1, yPos, 0);

@@ -19,7 +19,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -35,6 +34,7 @@ import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncResearchActivites;
 import ohrm.malgra.packets.client.SyncResearchPoints;
+import ohrm.malgra.util.Utils;
 
 import java.util.List;
 import java.util.Map;
@@ -286,7 +286,7 @@ public class Extractor extends Item {
                 String containerName = "extractor.prefix." + container.getPrefix();
                 String tipName = "extractor.prefix." + tip.getPrefix();
                 String extractorName = this.getUnlocalizedName() + ".name";
-                return I18n.translateToLocal(containerName) + " " + I18n.translateToLocal(tipName) + " " + I18n.translateToLocal(extractorName);
+                return Utils.translateToLocal(containerName) + " " + Utils.translateToLocal(tipName) + " " + Utils.translateToLocal(extractorName);
             }
         }
         return super.getItemStackDisplayName(stack);
@@ -321,11 +321,11 @@ public class Extractor extends Item {
                 stack.getTagCompound().setInteger("malgra", malgra);
                 stack.getTagCompound().setString("container", Items.tinyContainer.getUnlocalizedName().substring(5));
             }
-            event.getToolTip().add(I18n.translateToLocal("item.manaExtractor.malgraStored") + ": " + malgra + "/" + maxMalgra);
+            event.getToolTip().add(Utils.translateToLocal("item.manaExtractor.malgraStored") + ": " + malgra + "/" + maxMalgra);
             if (stack.hasTagCompound()) {
                 ExtractorTip tip = (ExtractorTip) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip"))));
                 if (tip != null)
-                    event.getToolTip().add((tip.getMaterial().getDamageVsEntity() + 4) + " " + I18n.translateToLocal("attribute.name.generic.attackDamage"));
+                    event.getToolTip().add((tip.getMaterial().getDamageVsEntity() + 4) + " " + Utils.translateToLocal("attribute.name.generic.attackDamage"));
             }
         }
     }

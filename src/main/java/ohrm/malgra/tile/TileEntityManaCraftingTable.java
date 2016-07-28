@@ -53,7 +53,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	}
 	
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
+	public NBTTagCompound writeToNBT(NBTTagCompound tag) {
 		
 		super.writeToNBT(tag);
 		// Inventories
@@ -70,6 +70,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 		if(tagList.tagCount() > 0) {
 			tag.setTag("Items", tagList);
 		}
+		return tag;
 	}
 	
 	@Override
