@@ -1,5 +1,7 @@
 package ohrm.malgra.items;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -7,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.packets.PacketDispatcher;
@@ -33,5 +36,11 @@ public class ManaInjector extends Item {
 			}
 		}
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+		entityLiving.changeDimension(2);
+		return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
 	}
 }
