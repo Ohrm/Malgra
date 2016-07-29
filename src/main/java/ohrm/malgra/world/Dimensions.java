@@ -9,11 +9,12 @@ import net.minecraftforge.common.DimensionManager;
  */
 public class Dimensions {
 
-    public static final int malgraDimID = DimensionManager.getNextFreeDimId();
+    public static final int researchDimID = DimensionManager.getNextFreeDimId();
+    public static DimensionType researchDim;
 
     public static void init() {
-        DimensionType malgraDim = DimensionType.register("malgra", "", 27, WorldProviderEnd.class, false);
-        DimensionManager.registerDimension(malgraDimID, malgraDim);
+        researchDim = DimensionType.register("research", "", 27, WorldProviderResearch.class, false);
+        DimensionManager.registerDimension(researchDimID, researchDim);
     }
 
 }
