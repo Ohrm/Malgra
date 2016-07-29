@@ -1,6 +1,7 @@
 package ohrm.malgra.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -20,7 +21,7 @@ import ohrm.malgra.tile.TileEntityManaCraftingTable;
 
 public class ManaCraftingTable extends Block implements ITileEntityProvider {
 
-	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	public ManaCraftingTable() {
 		super(Material.WOOD);
@@ -34,9 +35,23 @@ public class ManaCraftingTable extends Block implements ITileEntityProvider {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getIndex();
+		return ((EnumFacing)state.getValue(FACING)).getIndex();
 	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
 
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+        {
+            enumfacing = EnumFacing.NORTH;
+        }
+
+        return this.getDefaultState().withProperty(FACING, enumfacing);
+   
+	}	
+	
 	@Override
 	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());

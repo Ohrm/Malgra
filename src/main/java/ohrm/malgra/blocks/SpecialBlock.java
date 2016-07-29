@@ -1,6 +1,7 @@
 package ohrm.malgra.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -20,7 +21,7 @@ import ohrm.malgra.client.sounds.Sounds;
 
 public class SpecialBlock extends Block{
 
-	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	public SpecialBlock() {
 		super(Material.DRAGON_EGG);
@@ -34,7 +35,21 @@ public class SpecialBlock extends Block{
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getIndex();
+		return ((EnumFacing)state.getValue(FACING)).getIndex();
+	}
+	
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+        {
+            enumfacing = EnumFacing.NORTH;
+        }
+
+        return this.getDefaultState().withProperty(FACING, enumfacing);
+   
 	}
 
 	@Override
