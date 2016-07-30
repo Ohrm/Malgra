@@ -94,10 +94,26 @@ public class Extractor extends Item {
         stack.damageItem(1, attacker);
         return super.hitEntity(stack, target, attacker);
     }
-
+    
+    public boolean shouldGiveMalgra(IBlockState state, ItemStack stack){
+    	
+    	int blockLevel = state.getBlock().getHarvestLevel(state);
+        
+    	int extractorLevel = -1;
+    	
+    	if (stack.hasTagCompound()) {
+            ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip")));
+            extractorLevel = tip.material.getHarvestLevel();
+        }
+    	
+        return extractorLevel >= blockLevel;
+        
+    }
+    
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
-        if (getMalgraProviders().containsKey(state.getBlock())) {
+        
+    	if (shouldGiveMalgra(state, stack) && getMalgraProviders().containsKey(state.getBlock())) {
             if (stack.hasTagCompound()) {
                 ExtractorContainer container = (ExtractorContainer) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("container"))));
                 if (stack.getTagCompound().getInteger("malgra") + getMalgraProviders().get(state.getBlock()) > container.getStorage()) {
@@ -116,7 +132,6 @@ public class Extractor extends Item {
             	EntityPlayerMP playerMP = (EntityPlayerMP)entityLiving;
             	
             	if(!playerMP.getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null).hasMinedBlock(state.getBlock().getRegistryName().toString())){
-            		System.out.println(state.getBlock().getRegistryName().toString());
             		playerMP.getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null).addMinedBlock(state.getBlock().getRegistryName().toString());
             		playerMP.getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null).addResearchPoints(1);
             		PacketDispatcher.sendTo(new SyncResearchActivites(playerMP.getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null)), (EntityPlayerMP) playerMP);
