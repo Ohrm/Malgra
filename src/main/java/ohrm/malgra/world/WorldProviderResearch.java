@@ -22,8 +22,6 @@ import javax.annotation.Nullable;
  */
 public class WorldProviderResearch extends WorldProvider {
 
-    private DragonFightManager dragonFightManager;
-
     /**
      * creates a new world chunk manager for WorldProvider
      */
@@ -31,7 +29,6 @@ public class WorldProviderResearch extends WorldProvider {
         this.biomeProvider = new BiomeProviderSingle(Biomes.SKY);
         this.hasNoSky = true;
         NBTTagCompound nbttagcompound = this.worldObj.getWorldInfo().getDimensionData(Dimensions.researchDim);
-        this.dragonFightManager = this.worldObj instanceof WorldServer ? new DragonFightManager((WorldServer)this.worldObj, nbttagcompound.getCompoundTag("DragonFight")) : null;
     }
 
     public IChunkGenerator createChunkGenerator() {
@@ -117,7 +114,7 @@ public class WorldProviderResearch extends WorldProvider {
 
     public int getAverageGroundLevel()
     {
-        return 50;
+        return 64;
     }
 
     /**
@@ -141,10 +138,6 @@ public class WorldProviderResearch extends WorldProvider {
     public void onWorldSave() {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
-        if (this.dragonFightManager != null) {
-            nbttagcompound.setTag("DragonFight", this.dragonFightManager.getCompound());
-        }
-
         this.worldObj.getWorldInfo().setDimensionData(Dimensions.researchDim, nbttagcompound);
     }
 
@@ -153,14 +146,9 @@ public class WorldProviderResearch extends WorldProvider {
      * Vanilla.
      */
     public void onWorldUpdateEntities() {
-        if (this.dragonFightManager != null) {
-            this.dragonFightManager.tick();
-        }
+        
+    	
+    	
     }
 
-    @Nullable
-    public DragonFightManager getDragonFightManager()
-    {
-        return this.dragonFightManager;
-    }
 }
