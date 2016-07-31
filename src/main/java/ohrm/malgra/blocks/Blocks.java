@@ -16,13 +16,14 @@ import ohrm.malgra.fluid.Fluids;
 
 public class Blocks {
 
-	public static Block manaCraftingTable, liquidMalgraBlock, specialBlock;
+	public static Block manaCraftingTable, liquidMalgraBlock, specialBlock, researchStoneBrick;
 
 	public static void InitBlocks(){
 		
 		manaCraftingTable = new ManaCraftingTable().setUnlocalizedName("manaCraftingTable").setCreativeTab(MalgraMain.magicTab);
 		liquidMalgraBlock = new LiquidMalgra(Fluids.liquidMalgra, Material.WATER).setUnlocalizedName("liquidMalgraBlock");
 		specialBlock = new SpecialBlock().setUnlocalizedName("specialBlock").setCreativeTab(MalgraMain.magicTab);
+		researchStoneBrick = new ResearchStoneBrick().setUnlocalizedName("researchStoneBrick");
 		RegisterBlocks();
 		
 	}
@@ -35,12 +36,16 @@ public class Blocks {
 		GameRegistry.register(new ItemBlock(specialBlock), new ResourceLocation(Reference.MODID, "specialBlock"));
 		GameRegistry.register(liquidMalgraBlock, new ResourceLocation(Reference.MODID, "liquidMalgraBlock"));
 		GameRegistry.register(new ItemBlock(liquidMalgraBlock), new ResourceLocation(Reference.MODID, "liquidMalgraBlock"));
+		GameRegistry.register(researchStoneBrick, new ResourceLocation(Reference.MODID, "researchStoneBrick"));
+		GameRegistry.register(new ItemBlock(researchStoneBrick), new ResourceLocation(Reference.MODID, "researchStoneBrick"));
+	
 	}
 	
 	public static void RegisterRenders(){
 		RegisterRender(manaCraftingTable);
 		RegisterRender(specialBlock);
 		//RegisterRender(liquidMalgraBlock);
+		RegisterRender(researchStoneBrick);
 	}
 	
 	private static void RegisterRender(Block block){

@@ -109,7 +109,7 @@ public class WorldProviderResearch extends WorldProvider {
 
     public BlockPos getSpawnCoordinate()
     {
-        return new BlockPos(0, 64, 0);
+        return new BlockPos(15, 64, 15);
     }
 
     public int getAverageGroundLevel()

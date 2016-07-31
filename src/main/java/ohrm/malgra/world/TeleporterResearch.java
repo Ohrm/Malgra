@@ -39,33 +39,26 @@ public class TeleporterResearch extends Teleporter {
         System.out.print("Teleport!");
         EntityPlayerMP playerMP = (EntityPlayerMP) entity;
         double dx = 0;
-        double dy = 0;
+        double dy = 64;
         double dz = 0;
-
-        dx = 0;
-        dy = 64;
-        dz = 0;
-
-        dx = dx + 0.5d;
-        dy = dy + 1.0d;
-        dz = dz + 0.5d;
-        entity.setPosition(dx, dy, dz);
+        
+        entity.setPosition(16, 65, 16);
 
         entity.motionX = entity.motionY = entity.motionZ = 0.0D;
-        entity.setPosition(dx, dy, dz);
+        entity.setPosition(16, 65, 16);
 
         playerMP.mcServer.getPlayerList().transferPlayerToDimension(playerMP, Dimensions.researchDimID, this);
 
-        entity.setPosition(dx, dy, dz);
+        entity.setPosition(16, 65, 16);
         
-        if(playerMP.worldObj.isAirBlock(new BlockPos(dx, dy, dz))){
+        if(playerMP.worldObj.getBlockState(new BlockPos(dx, dy, dz)).getBlock() != ohrm.malgra.blocks.Blocks.researchStoneBrick.getDefaultState().getBlock()){
         
         	for(int x = 0; x < 32; x++){
         	
 	        	for(int z = 0; z < 32; z++){
 	        		
-	        		playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy, dz + z), Blocks.STONEBRICK.getDefaultState());
-	        		
+	        		playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy, dz + z), ohrm.malgra.blocks.Blocks.researchStoneBrick.getDefaultState());
+	        		playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy + 1, dz + z), Blocks.TORCH.getDefaultState());
 	        	}
 	        	
 	        }
@@ -75,21 +68,15 @@ public class TeleporterResearch extends Teleporter {
 
     @Override
     public void placeInPortal(Entity entityIn, float rotationYaw) {
-        if (worldServerInstance.provider.getDimension() == Dimensions.researchDimID) {
-            //int x = MathHelper.floor_double(entityIn.posX);
-            //int y = MathHelper.floor_double(entityIn.posY) - 1;
-            //int z = MathHelper.floor_double(entityIn.posZ);
-            for (int z = -1; z < 1; z++) {
-                for (int x = -1; x < 1; x++) {
-                    this.worldServerInstance.setBlockState(new BlockPos(x, entityIn.posY - 1, z), Blocks.BEDROCK.getDefaultState());
-
-                }
-            }
+        
+    	if (worldServerInstance.provider.getDimension() == Dimensions.researchDimID) {
+            
             entityIn.setLocationAndAngles(entityIn.posX, entityIn.posY, entityIn.posZ, entityIn.rotationYaw, 0.0F);
 
             entityIn.motionX = 0.0D;
             entityIn.motionY = 0.0D;
             entityIn.motionZ = 0.0D;
+            
         }
 
     }
