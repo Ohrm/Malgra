@@ -17,7 +17,7 @@ public class Items {
 	public static Item
 			magicDust, manaInjector, manaInjectorEmpty, extractor, tinyContainer, smallContainer,
 			mediumContainer, largeContainer, hugeContainer, flintExtractorTip, ironExtractorTip, quartzExtractorTip,
-			diamondExtractorTip, malgrumExtractorTip, liquidMalgraBucket
+			diamondExtractorTip, malgrumExtractorTip, liquidMalgraBucket, dimensionTool
 			;
 
 	public static final Item.ToolMaterial TIP_FLINT = EnumHelper.addToolMaterial("TIP_FLINT", 0, 40, 1.0F, -2.0F, 0);
@@ -43,8 +43,8 @@ public class Items {
 		malgrumExtractorTip = new ExtractorTip(TIP_MALGRUM, "malgrum").setUnlocalizedName("malgrumExtractorTip");
 		extractor = new Extractor().setUnlocalizedName("manaExtractor");
 		liquidMalgraBucket = new ItemBucket(Blocks.liquidMalgraBlock).setUnlocalizedName("liquidMalgraBucket");
+		dimensionTool = new DimensionTool().setUnlocalizedName("dimensionTool").setCreativeTab(MalgraMain.magicTab);
 		RegisterItems();
-				
 	}
 	
 	public static void RegisterItems(){
@@ -64,6 +64,7 @@ public class Items {
 		GameRegistry.register(diamondExtractorTip, new ResourceLocation(Reference.MODID, "diamondExtractorTip"));
 		GameRegistry.register(malgrumExtractorTip, new ResourceLocation(Reference.MODID, "malgrumExtractorTip"));
 		GameRegistry.register(liquidMalgraBucket, new ResourceLocation(Reference.MODID, "liquidMalgraBucket"));
+		GameRegistry.register(dimensionTool, new ResourceLocation(Reference.MODID, "dimensionTool"));
 	}
 	
 	public static void RegisterRenders(){
@@ -94,6 +95,7 @@ public class Items {
 		RegisterRender(diamondExtractorTip);
 		RegisterRender(malgrumExtractorTip);
 		RegisterRender(liquidMalgraBucket);
+		RegisterRender(dimensionTool);
 	}
 	
 	private static void RegisterRender(Item item){

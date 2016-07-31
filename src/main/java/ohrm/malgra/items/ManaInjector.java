@@ -17,6 +17,9 @@ import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
 import ohrm.malgra.world.Dimensions;
 import ohrm.malgra.world.TeleporterResearch;
+import ohrm.malgra.world.WorldGenResearchRoom;
+
+import java.util.Random;
 
 public class ManaInjector extends Item {
 
@@ -39,13 +42,5 @@ public class ManaInjector extends Item {
 			}
 		}
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
-	}
-
-	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
-		if (entityLiving.dimension != Dimensions.researchDimID)
-			if (!worldIn.isRemote)
-				new TeleporterResearch(worldIn.getMinecraftServer().getServer().worldServerForDimension(Dimensions.researchDimID)).teleport(entityLiving, worldIn);
-		return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
 	}
 }

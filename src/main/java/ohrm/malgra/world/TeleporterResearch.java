@@ -36,30 +36,40 @@ public class TeleporterResearch extends Teleporter {
     }
 
     public void teleport(Entity entity, World world) {
-        System.out.print("Teleport!");
         EntityPlayerMP playerMP = (EntityPlayerMP) entity;
+
+        int height = 3;
+        int width = 16;
+        int depth = 16;
+
         double dx = 0;
         double dy = 64;
         double dz = 0;
-        
-        entity.setPosition(16, 65, 16);
+
+        entity.setPosition(width/2, dy+1, depth/2);
 
         entity.motionX = entity.motionY = entity.motionZ = 0.0D;
-        entity.setPosition(16, 65, 16);
+        entity.setPosition(width/2, dy+1, depth/2);
 
         playerMP.mcServer.getPlayerList().transferPlayerToDimension(playerMP, Dimensions.researchDimID, this);
 
-        entity.setPosition(16, 65, 16);
+        entity.setPosition(width/2, dy+1, depth/2);
         
         if(playerMP.worldObj.getBlockState(new BlockPos(dx, dy, dz)).getBlock() != ohrm.malgra.blocks.Blocks.researchStoneBrick.getDefaultState().getBlock()){
         
-        	for(int x = 0; x < 32; x++){
+        	for(int x = 0; x < width; x++){
         	
-	        	for(int z = 0; z < 32; z++){
+	        	for(int z = 0; z < depth; z++){
 	        		
 	        		playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy, dz + z), ohrm.malgra.blocks.Blocks.researchStoneBrick.getDefaultState());
-	        		playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy + 1, dz + z), Blocks.TORCH.getDefaultState());
-	        	}
+	        		if (x == 0 || x == width-1 || ((x!=0 && x!= width-1) && (z == 0 || z == depth-1))){
+                        for (int y = 0; y < height; y++) {
+                            playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy + y, dz + z), Blocks.BARRIER.getDefaultState());
+                        }
+                    }
+                    if ((x == 1 && z == 1) || (x == 1 && z == depth-2) || (x == width-2 && z == depth-2) || (x == width-2 && z == 1) || (x == (width/2) && z == (depth/2)))
+                        playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy + 1, dz + z), Blocks.TORCH.getDefaultState());
+                }
 	        	
 	        }
         }
