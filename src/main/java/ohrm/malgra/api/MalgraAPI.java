@@ -5,9 +5,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.oredict.OreDictionary;
+import ohrm.malgra.api.research.Research;
+import scala.reflect.internal.Trees.This;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +25,9 @@ import java.util.Map;
 public class MalgraAPI {
 
     public static Map<Block, Integer> malgraProviders = new HashMap<Block, Integer>();
-
+    
+    public static Map<String, Research> researches = new HashMap<String, Research>();
+    
     public static Logger apiLogger = LogManager.getFormatterLogger("malgraAPI");
 
     static {
@@ -98,6 +105,26 @@ public class MalgraAPI {
             }
             return true;
         }
+    }
+    
+    public static void addResearch(Research research){
+    	
+    	if(research == null){
+			
+			apiLogger.log(Level.WARN, "Cannot register a null research");
+			
+		}
+    	else if (researches.get(research.getName()) != null) {
+			
+    		apiLogger.log(Level.WARN, "A research with the name %s is already registered", research.getName());
+    		
+		}
+    	else {
+			
+    		researches.put(research.getName(), research);
+			
+		}    	
+    	
     }
 
 }
