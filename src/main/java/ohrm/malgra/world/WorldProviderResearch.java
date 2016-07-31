@@ -112,7 +112,7 @@ public class WorldProviderResearch extends WorldProvider {
 
     public BlockPos getSpawnCoordinate()
     {
-        return new BlockPos(100, 50, 0);
+        return new BlockPos(0, 64, 0);
     }
 
     public int getAverageGroundLevel()
@@ -145,7 +145,7 @@ public class WorldProviderResearch extends WorldProvider {
             nbttagcompound.setTag("DragonFight", this.dragonFightManager.getCompound());
         }
 
-        this.worldObj.getWorldInfo().setDimensionData(DimensionType.THE_END, nbttagcompound);
+        this.worldObj.getWorldInfo().setDimensionData(Dimensions.researchDim, nbttagcompound);
     }
 
     /**

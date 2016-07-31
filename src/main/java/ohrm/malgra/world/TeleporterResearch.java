@@ -42,9 +42,9 @@ public class TeleporterResearch extends Teleporter {
         double dy = 0;
         double dz = 0;
 
-        dx = world.getWorldInfo().getSpawnX();
-        dy = world.getWorldInfo().getSpawnY();
-        dz = world.getWorldInfo().getSpawnZ();
+        dx = 0;
+        dy = 64;
+        dz = 0;
 
         dx = dx + 0.5d;
         dy = dy + 1.0d;
@@ -57,6 +57,20 @@ public class TeleporterResearch extends Teleporter {
         playerMP.mcServer.getPlayerList().transferPlayerToDimension(playerMP, Dimensions.researchDimID, this);
 
         entity.setPosition(dx, dy, dz);
+        
+        if(playerMP.worldObj.isAirBlock(new BlockPos(dx, dy, dz))){
+        
+        	for(int x = 0; x < 32; x++){
+        	
+	        	for(int z = 0; z < 32; z++){
+	        		
+	        		playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy, dz + z), Blocks.STONEBRICK.getDefaultState());
+	        		
+	        	}
+	        	
+	        }
+        }
+        
     }
 
     @Override
