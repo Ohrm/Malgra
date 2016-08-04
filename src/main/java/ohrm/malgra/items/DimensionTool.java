@@ -37,7 +37,7 @@ public class DimensionTool extends Item {
 	@Override
 	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
 		if (player.dimension == Dimensions.researchDimID)
-			new WorldGenResearchRoom().generate(player.worldObj, new Random(), player.getPosition().north(30));
+			new WorldGenResearchRoom().generate(player.worldObj, new Random(), player.getPosition().down().offset(player.getHorizontalFacing(), 30));
 		return super.onDroppedByPlayer(item, player);
 	}
 }
