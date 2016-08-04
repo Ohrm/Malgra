@@ -31,6 +31,12 @@ public class WorldProviderResearch extends WorldProvider {
         NBTTagCompound nbttagcompound = this.worldObj.getWorldInfo().getDimensionData(Dimensions.researchDim);
     }
 
+    @Override
+    public String getSaveFolder() {
+
+        return DimensionType.getById(getDimension()).getName();
+    }
+
     public IChunkGenerator createChunkGenerator() {
         return new ChunkProviderResearch(this.worldObj, this.worldObj.getWorldInfo().isMapFeaturesEnabled(), this.worldObj.getSeed());
     }

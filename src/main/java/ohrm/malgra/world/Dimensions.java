@@ -13,7 +13,7 @@ public class Dimensions {
     public static DimensionType researchDim;
 
     public static void init() {
-        researchDim = DimensionType.register("research", "", 27, WorldProviderResearch.class, false);
+        researchDim = DimensionType.register("researchTest", "", researchDimID, WorldProviderResearch.class, false);
         DimensionManager.registerDimension(researchDimID, researchDim);
     }
 
