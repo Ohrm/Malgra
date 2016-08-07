@@ -3,11 +3,14 @@ package ohrm.malgra;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -24,9 +27,7 @@ import ohrm.malgra.packets.client.SyncManaData;
 import ohrm.malgra.packets.client.SyncResearchActivites;
 import ohrm.malgra.packets.client.SyncResearchPoints;
 import ohrm.malgra.world.Dimensions;
-
-import java.util.Iterator;
-import java.util.Map;
+import ohrm.malgra.world.WorldProviderResearch;
 
 public class MalgraEventHandler {
 
@@ -113,7 +114,24 @@ public class MalgraEventHandler {
 			PacketDispatcher.sendTo(new SyncManaData(event.getEntity().getCapability(CapabilityMana.MANA, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchPoints(event.getEntity().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchActivites(event.getEntity().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES,  null)), (EntityPlayerMP) event.getEntity());
+
 		}
+
+		if(event.getEntity() instanceof EntityPlayer){
+
+			if(Dimensions.researchDimIDs.get(event.getEntity().getName()) == null) {
+				int researchDimID = DimensionManager.getNextFreeDimId();
+
+				DimensionType researchDim = DimensionType.register("research" + event.getEntity().getName(), "", researchDimID, WorldProviderResearch.class, false);
+				DimensionManager.registerDimension(researchDimID, researchDim);
+
+				//Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
+				Dimensions.addDim(event.getEntity().getName(), researchDimID);
+				Dimensions.researchDimTypes.put(researchDimID, researchDim);
+			}
+
+		}
+
 	}
 	
 	@SubscribeEvent

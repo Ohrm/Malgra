@@ -28,7 +28,7 @@ public class WorldProviderResearch extends WorldProvider {
     public void createBiomeProvider() {
         this.biomeProvider = new BiomeProviderSingle(Biomes.SKY);
         this.hasNoSky = true;
-        NBTTagCompound nbttagcompound = this.worldObj.getWorldInfo().getDimensionData(Dimensions.researchDim);
+        System.out.println(getDimension());
     }
 
     @Override
@@ -134,17 +134,9 @@ public class WorldProviderResearch extends WorldProvider {
 
     public DimensionType getDimensionType()
     {
-        return Dimensions.researchDim;
-    }
 
-    /**
-     * Called when the world is performing a save. Only used to save the state of the Dragon Boss fight in
-     * WorldProviderEnd in Vanilla.
-     */
-    public void onWorldSave() {
-        NBTTagCompound nbttagcompound = new NBTTagCompound();
+        return DimensionType.getById(getDimension());
 
-        this.worldObj.getWorldInfo().setDimensionData(Dimensions.researchDim, nbttagcompound);
     }
 
     /**
