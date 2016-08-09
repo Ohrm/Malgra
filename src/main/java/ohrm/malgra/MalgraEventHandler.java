@@ -24,6 +24,7 @@ import ohrm.malgra.capabilities.CapabilityResearchActivites;
 import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
+import ohrm.malgra.packets.client.SyncReasearchDimensions;
 import ohrm.malgra.packets.client.SyncResearchActivites;
 import ohrm.malgra.packets.client.SyncResearchPoints;
 import ohrm.malgra.world.Dimensions;
@@ -115,21 +116,19 @@ public class MalgraEventHandler {
 			PacketDispatcher.sendTo(new SyncResearchPoints(event.getEntity().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchActivites(event.getEntity().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES,  null)), (EntityPlayerMP) event.getEntity());
 
-		}
+            if(Dimensions.researchDimIDs.get(event.getEntity().getName()) == null) {
+                int researchDimID = DimensionManager.getNextFreeDimId();
 
-		if(event.getEntity() instanceof EntityPlayer){
+                DimensionType researchDim = DimensionType.register("research" + event.getEntity().getName(), "", researchDimID, WorldProviderResearch.class, false);
+                DimensionManager.registerDimension(researchDimID, researchDim);
 
-			if(Dimensions.researchDimIDs.get(event.getEntity().getName()) == null) {
-				int researchDimID = DimensionManager.getNextFreeDimId();
+                //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
+                Dimensions.addDim(event.getEntity().getName(), researchDimID);
+                Dimensions.researchDimTypes.put(researchDimID, researchDim);
 
-				DimensionType researchDim = DimensionType.register("research" + event.getEntity().getName(), "", researchDimID, WorldProviderResearch.class, false);
-				DimensionManager.registerDimension(researchDimID, researchDim);
+                PacketDispatcher.sendTo(new SyncReasearchDimensions(event.getEntity().getName(), researchDimID), (EntityPlayerMP) event.getEntity());
 
-				//Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
-				Dimensions.addDim(event.getEntity().getName(), researchDimID);
-				Dimensions.researchDimTypes.put(researchDimID, researchDim);
-			}
-
+            }
 		}
 
 	}
