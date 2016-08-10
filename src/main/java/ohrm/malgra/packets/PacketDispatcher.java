@@ -10,6 +10,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import ohrm.malgra.Reference;
 import ohrm.malgra.packets.client.SyncManaData;
 import ohrm.malgra.packets.client.SyncResearchActivites;
+import ohrm.malgra.packets.client.SyncResearchDimensions;
 import ohrm.malgra.packets.client.SyncResearchPoints;
 import ohrm.malgra.packets.server.OpenGuiMessage;
 
@@ -51,6 +52,7 @@ public class PacketDispatcher
 		registerMessage(SyncManaData.class);
 		registerMessage(SyncResearchPoints.class);
 		registerMessage(SyncResearchActivites.class);
+        registerMessage(SyncResearchDimensions.class);
 		// Packets handled on SERVER
 		registerMessage(OpenGuiMessage.class);
 	}

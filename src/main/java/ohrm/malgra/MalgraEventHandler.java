@@ -1,11 +1,6 @@
 package ohrm.malgra;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.MusicTicker;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -15,16 +10,14 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.capabilities.CapabilityResearchActivites;
 import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
-import ohrm.malgra.packets.client.SyncReasearchDimensions;
+import ohrm.malgra.packets.client.SyncResearchDimensions;
 import ohrm.malgra.packets.client.SyncResearchActivites;
 import ohrm.malgra.packets.client.SyncResearchPoints;
 import ohrm.malgra.world.Dimensions;
@@ -126,7 +119,7 @@ public class MalgraEventHandler {
                 Dimensions.addDim(event.getEntity().getName(), researchDimID);
                 Dimensions.researchDimTypes.put(researchDimID, researchDim);
 
-                PacketDispatcher.sendTo(new SyncReasearchDimensions(event.getEntity().getName(), researchDimID), (EntityPlayerMP) event.getEntity());
+                PacketDispatcher.sendTo(new SyncResearchDimensions(event.getEntity().getName(), researchDimID), (EntityPlayerMP) event.getEntity());
 
             }
 		}

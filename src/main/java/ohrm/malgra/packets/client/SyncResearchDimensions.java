@@ -2,24 +2,27 @@ package ohrm.malgra.packets.client;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.world.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import ohrm.malgra.packets.AbstractMessage.AbstractClientMessage;
 import ohrm.malgra.world.Dimensions;
+import ohrm.malgra.world.WorldProviderResearch;
 
 import java.io.IOException;
 
 /**
  * Created by Chris on 09/08/2016.
  */
-public class SyncReasearchDimensions extends AbstractClientMessage<SyncReasearchDimensions>{
+public class SyncResearchDimensions extends AbstractClientMessage<SyncResearchDimensions>{
 
     private String username;
     private int dimID;
 
-    public SyncReasearchDimensions(){}
+    public SyncResearchDimensions(){}
 
-    public SyncReasearchDimensions(String username, int dimID){
+    public SyncResearchDimensions(String username, int dimID){
 
         this.username = username;
         this.dimID = dimID;
@@ -42,6 +45,13 @@ public class SyncReasearchDimensions extends AbstractClientMessage<SyncReasearch
     public void process(EntityPlayer player, Side side) {
 
         Dimensions.addDim(this.username, this.dimID);
+
+        DimensionType researchDim = DimensionType.register("research" + this.username, "", this.dimID, WorldProviderResearch.class, false);
+        DimensionManager.registerDimension(this.dimID, researchDim);
+
+        //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
+        Dimensions.addDim(this.username, this.dimID);
+        Dimensions.researchDimTypes.put(this.dimID, researchDim);
 
     }
 }
