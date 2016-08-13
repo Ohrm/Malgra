@@ -72,7 +72,6 @@ public class Items {
 		RegisterRender(magicDust);
 		RegisterRender(manaInjector);
 		RegisterRender(manaInjectorEmpty);
-		//RegisterRender(extractor);
 		RegisterRender(extractor, 0, "extractor_base");
 		RegisterRender(extractor, 1, "extractor_container_tiny");
 		RegisterRender(extractor, 2, "extractor_container_small");
@@ -84,16 +83,16 @@ public class Items {
 		RegisterRender(extractor, 8, "extractor_tip_quartz");
 		RegisterRender(extractor, 9, "extractor_tip_diamond");
 		RegisterRender(extractor, 10, "extractor_tip_malgrum");
-		RegisterRender(tinyContainer);
-		RegisterRender(smallContainer);
-		RegisterRender(mediumContainer);
-		RegisterRender(largeContainer);
-		RegisterRender(hugeContainer);
-		RegisterRender(flintExtractorTip);
-		RegisterRender(ironExtractorTip);
-		RegisterRender(quartzExtractorTip);
-		RegisterRender(diamondExtractorTip);
-		RegisterRender(malgrumExtractorTip);
+		RegisterRender(tinyContainer, 0, "extractor_container_tiny");
+		RegisterRender(smallContainer, 0, "extractor_container_small");
+		RegisterRender(mediumContainer, 0, "extractor_container_medium");
+		RegisterRender(largeContainer, 0, "extractor_container_large");
+		RegisterRender(hugeContainer, 0, "extractor_container_huge");
+		RegisterRender(flintExtractorTip, 0, "extractor_tip_flint");
+		RegisterRender(ironExtractorTip, 0, "extractor_tip_iron");
+		RegisterRender(quartzExtractorTip, 0, "extractor_tip_quartz");
+		RegisterRender(diamondExtractorTip, 0, "extractor_tip_diamond");
+		RegisterRender(malgrumExtractorTip, 0, "extractor_tip_malgrum");
 		RegisterRender(liquidMalgraBucket);
 		RegisterRender(dimensionTool);
 	}
