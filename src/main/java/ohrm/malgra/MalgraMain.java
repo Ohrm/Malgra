@@ -58,6 +58,7 @@ public class MalgraMain {
 		Blocks.InitBlocks();
 		Items.InitItems();
 		Dimensions.init();
+        Dimensions.loadDims();
 		CapabilityMana.register();
 		CapabilityResearchPoints.register();
 		CapabilityResearchActivites.register();

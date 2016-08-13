@@ -23,6 +23,12 @@ import ohrm.malgra.packets.client.SyncResearchPoints;
 import ohrm.malgra.world.Dimensions;
 import ohrm.malgra.world.WorldProviderResearch;
 
+import java.util.Iterator;
+import java.util.Map;
+
+import static ohrm.malgra.world.Dimensions.addDim;
+import static ohrm.malgra.world.Dimensions.researchDimIDs;
+
 public class MalgraEventHandler {
 
 	@SubscribeEvent
@@ -109,17 +115,21 @@ public class MalgraEventHandler {
 			PacketDispatcher.sendTo(new SyncResearchPoints(event.getEntity().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchActivites(event.getEntity().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES,  null)), (EntityPlayerMP) event.getEntity());
 
-            if(Dimensions.researchDimIDs.get(event.getEntity().getName()) == null) {
+            if(researchDimIDs.get(event.getEntity().getName()) == null) {
                 int researchDimID = DimensionManager.getNextFreeDimId();
 
                 DimensionType researchDim = DimensionType.register("research" + event.getEntity().getName(), "", researchDimID, WorldProviderResearch.class, false);
                 DimensionManager.registerDimension(researchDimID, researchDim);
 
                 //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
-                Dimensions.addDim(event.getEntity().getName(), researchDimID);
+                addDim(event.getEntity().getName(), researchDimID);
                 Dimensions.researchDimTypes.put(researchDimID, researchDim);
 
-                PacketDispatcher.sendTo(new SyncResearchDimensions(event.getEntity().getName(), researchDimID), (EntityPlayerMP) event.getEntity());
+                Iterator it = Dimensions.researchDimIDs.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry)it.next();
+                    PacketDispatcher.sendTo(new SyncResearchDimensions((String)pair.getKey(), (Integer)pair.getValue()), (EntityPlayerMP) event.getEntity());
+                }
 
             }
 		}

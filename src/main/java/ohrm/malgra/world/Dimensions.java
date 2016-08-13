@@ -4,7 +4,9 @@ import net.minecraft.util.IntegerCache;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 
+import java.io.*;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -27,6 +29,55 @@ public class Dimensions {
 
         System.out.println(name + " " + id + " registered");
         researchDimIDs.put(name, id);
+        saveDims();
+
+    }
+
+    public static void loadDims(){
+
+        File file = new File("researchDims.mal");
+
+        if(file.exists() && !file.isDirectory()){
+
+            try {
+
+                FileInputStream input = new FileInputStream("researchDims.mal");
+                ObjectInputStream object = new ObjectInputStream(input);
+
+                researchDimIDs = (HashMap<String, Integer>) object.readObject();
+
+                object.close();
+
+                Iterator it = researchDimIDs.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry pair = (Map.Entry)it.next();
+                    addDim((String)pair.getKey(), (Integer)pair.getValue());
+                }
+
+            }catch(Exception e){
+
+
+
+            }
+        }
+
+    }
+
+    public static void saveDims(){
+
+        try {
+            FileOutputStream output = new FileOutputStream("researchDims.mal");
+
+            ObjectOutputStream object = new ObjectOutputStream(output);
+
+            object.writeObject(researchDimIDs);
+
+            object.close();
+        }catch(Exception e){
+
+
+
+        }
 
     }
 
