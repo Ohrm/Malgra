@@ -63,6 +63,7 @@ public class MalgraMain {
 		CapabilityResearchPoints.register();
 		CapabilityResearchActivites.register();
 		MinecraftForge.EVENT_BUS.register(Items.extractor);
+		MinecraftForge.EVENT_BUS.register(Items.malgraPickaxe);
 		proxy.PreInit(e);
 		PacketDispatcher.registerPackets();
 		
