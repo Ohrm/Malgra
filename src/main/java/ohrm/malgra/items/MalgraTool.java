@@ -101,17 +101,26 @@ public class MalgraTool extends Item {
 
     @Override
     public boolean hasEffect(ItemStack stack) {
-        return true;
+        if (stack.hasTagCompound()) {
+            if (stack.getTagCompound().getInteger("malgra") > 0) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+        return false;
     }
 
     @SubscribeEvent
     public void breakSpeed(PlayerEvent.BreakSpeed event) {
         if (event.getEntityPlayer().getHeldItemMainhand() != null) {
-            if (event.getEntityPlayer().getHeldItemMainhand().hasTagCompound()) {
-                if (event.getEntityPlayer().getHeldItemMainhand().getTagCompound().getInteger("malgra") <= 0) {
-                    event.setCanceled(true);
-                } else {
-                    event.setCanceled(false);
+            if (event.getEntityPlayer().getHeldItemMainhand().getItem() == Items.malgraPickaxe){
+                if (event.getEntityPlayer().getHeldItemMainhand().hasTagCompound()) {
+                    if (event.getEntityPlayer().getHeldItemMainhand().getTagCompound().getInteger("malgra") <= 0) {
+                        event.setCanceled(true);
+                    } else {
+                        event.setCanceled(false);
+                    }
                 }
             }
         }
