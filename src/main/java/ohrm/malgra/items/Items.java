@@ -1,7 +1,10 @@
 package ohrm.malgra.items;
 
+import com.google.common.collect.Sets;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBucket;
+import net.minecraft.item.ItemPickaxe;
 import net.minecraft.util.ResourceLocation;
 
 import net.minecraft.client.Minecraft;
@@ -11,6 +14,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import ohrm.malgra.MalgraMain;
 import ohrm.malgra.Reference;
 import ohrm.malgra.blocks.Blocks;
+
+import java.util.Set;
 
 public class Items {
 
@@ -25,10 +30,11 @@ public class Items {
 	public static final Item.ToolMaterial TIP_QUARTZ = EnumHelper.addToolMaterial("TIP_QUARTZ", 0, 200, 7.0F, 1.0F, 0);
 	public static final Item.ToolMaterial TIP_DIAMOND = EnumHelper.addToolMaterial("TIP_DIAMOND", 0, 2000, 5.5F, 1.0F, 0);
 	public static final Item.ToolMaterial TIP_MALGRUM = EnumHelper.addToolMaterial("TIP_MALGRUM", 0, -1, 8.0F, 2.0F, 0);
+	public static final Item.ToolMaterial MALGRA = EnumHelper.addToolMaterial("MALGRA", 3, -1, 12, 3, 30);
 
 	public static void InitItems(){
 		
-		magicDust = new Item().setUnlocalizedName("magicDust").setCreativeTab(MalgraMain.magicTab);
+		magicDust = new MalgraDust().setUnlocalizedName("magicDust").setCreativeTab(MalgraMain.magicTab);
 		manaInjector = new ManaInjector().setUnlocalizedName("manaInjector").setCreativeTab(MalgraMain.magicTab);
 		manaInjectorEmpty = new Item().setUnlocalizedName("manaInjectorEmpty").setCreativeTab(MalgraMain.magicTab);
 		tinyContainer = new ExtractorContainer(100, "tiny").setUnlocalizedName("tinyContainer");
@@ -44,7 +50,7 @@ public class Items {
 		extractor = new Extractor().setUnlocalizedName("manaExtractor");
 		liquidMalgraBucket = new ItemBucket(Blocks.liquidMalgraBlock).setUnlocalizedName("liquidMalgraBucket");
 		dimensionTool = new DimensionTool().setUnlocalizedName("dimensionTool").setCreativeTab(MalgraMain.magicTab);
-		malgraPickaxe = new MalgraPickaxe(100).setUnlocalizedName("malgraPickaxe").setCreativeTab(MalgraMain.magicTab);
+		malgraPickaxe = new MalgraPickaxe(1, 1.2F, MALGRA, 500).setUnlocalizedName("malgraPickaxe").setCreativeTab(MalgraMain.magicTab);
 		RegisterItems();
 	}
 	

@@ -1,5 +1,8 @@
 package ohrm.malgra.items;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockStateBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -7,26 +10,31 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.gui.MinecraftServerGui;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Toby on 13/08/2016.
  */
-public class MalgraTool extends Item {
+public class MalgraTool extends ItemTool {
 
     public int maxMalgra;
 
-    public MalgraTool(int maxMalgra) {
+    public MalgraTool(float attackDamageIn, float attackSpeedIn, ToolMaterial materialIn, Set<Block> effectiveBlocksIn, int maxMalgra) {
+        super(attackDamageIn, attackSpeedIn, materialIn, effectiveBlocksIn);
         this.maxMalgra = maxMalgra;
+        this.setMaxStackSize(1);
     }
-
 
     public int getMaxMalgra() {
         return maxMalgra;
@@ -40,6 +48,7 @@ public class MalgraTool extends Item {
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         if (stack.hasTagCompound()) {
             if (stack.getTagCompound().getInteger("malgra") > 0) {
+                if (state.getBlock().getBlockHardness(state, worldIn, pos) != 0)
                 stack.getTagCompound().setInteger("malgra", stack.getTagCompound().getInteger("malgra") - 1);
                 return true;
             } else {
@@ -94,7 +103,7 @@ public class MalgraTool extends Item {
     @Override
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         if (stack.hasTagCompound()) {
-            tooltip.add(stack.getTagCompound().getInteger("malgra") + "/" + getMaxMalgra());
+            tooltip.add("Stored Malgra: " + stack.getTagCompound().getInteger("malgra") + "/" + getMaxMalgra());
         }
         super.addInformation(stack, playerIn, tooltip, advanced);
     }
@@ -125,5 +134,4 @@ public class MalgraTool extends Item {
             }
         }
     }
-
 }

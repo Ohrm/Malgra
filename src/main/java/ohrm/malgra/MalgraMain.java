@@ -23,6 +23,7 @@ import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.client.sounds.Sounds;
 import ohrm.malgra.crafting.CraftingRecipes;
 import ohrm.malgra.crafting.ManaRecipes;
+import ohrm.malgra.fluid.BucketHandler;
 import ohrm.malgra.fluid.Fluids;
 import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
@@ -64,6 +65,8 @@ public class MalgraMain {
 		CapabilityResearchActivites.register();
 		MinecraftForge.EVENT_BUS.register(Items.extractor);
 		MinecraftForge.EVENT_BUS.register(Items.malgraPickaxe);
+		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		BucketHandler.INSTANCE.buckets.put(Blocks.liquidMalgraBlock, Items.liquidMalgraBucket);
 		proxy.PreInit(e);
 		PacketDispatcher.registerPackets();
 		
