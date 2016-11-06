@@ -38,9 +38,7 @@ public class Dimensions {
     public static void loadDims(){
 
         File file = new File(DimensionManager.getCurrentSaveRootDirectory().toPath() + "/researchDims.mal");
-        System.out.println("1");
         if(file.exists() && !file.isDirectory()){
-            System.out.println("2");
             try {
 
                 FileInputStream input = new FileInputStream(DimensionManager.getCurrentSaveRootDirectory().toPath() + "/researchDims.mal");
@@ -49,12 +47,10 @@ public class Dimensions {
                 researchDimIDs = (HashMap<String, Integer>) object.readObject();
 
                 object.close();
-                System.out.println("3");
                 Iterator it = researchDimIDs.entrySet().iterator();
                 while (it.hasNext()) {
 
                     Map.Entry pair = (Map.Entry)it.next();
-                    System.out.println(pair.getKey() + ", " + pair.getValue());
                     DimensionType researchDim = DimensionType.register("research" + (String)pair.getKey(), "", (Integer)pair.getValue(), WorldProviderResearch.class, false);
 
                     DimensionManager.registerDimension((Integer)pair.getValue(), researchDim);
