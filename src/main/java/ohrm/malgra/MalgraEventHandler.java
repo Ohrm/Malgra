@@ -1,6 +1,8 @@
 package ohrm.malgra;
 
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -10,6 +12,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -19,6 +22,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.capabilities.CapabilityResearchActivites;
 import ohrm.malgra.capabilities.CapabilityResearchPoints;
+import ohrm.malgra.entities.EntityItemMalgraTool;
+import ohrm.malgra.items.Items;
+import ohrm.malgra.items.MalgraTool;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
 import ohrm.malgra.packets.client.SyncResearchDimensions;
@@ -108,12 +114,29 @@ public class MalgraEventHandler {
 			}
 		});
 	}
+
+	@SubscribeEvent
+	public void onToss(ItemTossEvent event) {
+
+	}
 	
 	@SubscribeEvent
 	public void onJoinWorld(EntityJoinWorldEvent event) {
-		// If you have any non-DataWatcher fields in your extended properties that
-		// need to be synced to the client, you must send a packet each time the
-		// player joins the world; this takes care of dying, changing dimensions, etc.
+		if (event.getEntity() instanceof EntityItem && !(event.getEntity() instanceof EntityItemMalgraTool)) {
+			EntityItem entityItem = (EntityItem) event.getEntity();
+			if (entityItem.getEntityItem().getItem() == net.minecraft.init.Items.DIAMOND_PICKAXE) {
+				event.setCanceled(true);
+				ItemStack malgraPickaxe = new ItemStack(Items.malgraPickaxe);
+				malgraPickaxe.setTagCompound(new NBTTagCompound());
+				malgraPickaxe.getTagCompound().setInteger("malgra", ((MalgraTool)malgraPickaxe.getItem()).getMaxMalgra());
+
+				EntityItemMalgraTool newEntity = new EntityItemMalgraTool(event.getWorld(), event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, ((EntityItem) event.getEntity()).getEntityItem(), malgraPickaxe);
+				event.getWorld().spawnEntityInWorld(newEntity);
+				NBTTagCompound nbt = new NBTTagCompound();
+				event.getEntity().writeToNBTOptional(nbt);
+				newEntity.readFromNBT(nbt);
+			}
+		}
 		if (event.getEntity() instanceof EntityPlayerMP) {
 			PacketDispatcher.sendTo(new SyncManaData(event.getEntity().getCapability(CapabilityMana.MANA, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchPoints(event.getEntity().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null)), (EntityPlayerMP) event.getEntity());

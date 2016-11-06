@@ -18,7 +18,7 @@ public class ManaRecipes {
 		
 		AddRecipe(Items.magicDust, 0, new ItemStack(net.minecraft.init.Blocks.DIRT));
 		AddRecipe(Items.manaInjector, 1, new ItemStack(net.minecraft.init.Blocks.WOODEN_BUTTON));
-		
+
 	}
 	
 	public static void AddRecipe(Item output, int malgra, ItemStack...itemStacks){

@@ -32,7 +32,6 @@ public class SlotResultManaCrafting extends Slot {
 		if(tileEntityManaCraftingTable.itemStacks[1] != null && tileEntityManaCraftingTable.itemStacks[1].hasTagCompound()){
 			
 			tileEntityManaCraftingTable.itemStacks[1].getTagCompound().setInteger("malgra", tileEntityManaCraftingTable.itemStacks[1].getTagCompound().getInteger("malgra") - tileEntityManaCraftingTable.GetRecipeMalgraCost());
-				
 		}
 		
 		for(int i = 2; i < tileEntityManaCraftingTable.itemStacks.length; i++){
