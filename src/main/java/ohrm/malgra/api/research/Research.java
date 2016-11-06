@@ -1,15 +1,16 @@
 package ohrm.malgra.api.research;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.Item;
 
 public abstract class Research {
 
-	private String name;
-	private List<Research> children;
-	private List<Item> requirements;
-	private int researchPoints;
+	protected String name;
+    protected List<Research> children = new ArrayList<Research>();
+    protected List<Item> requirements = new ArrayList<Item>();
+    protected int researchPoints;
 	
 	public List<Research> getChildren(){
 		

@@ -42,16 +42,22 @@ public class SyncResearchDimensions extends AbstractClientMessage<SyncResearchDi
     }
 
     @Override
-    public void process(EntityPlayer player, Side side) {
+    public void process(EntityPlayer player, Side side)
+    {
+        if(Dimensions.researchDimIDs.get(this.username) == null) {
+            DimensionType researchDim = DimensionType.register("research" + this.username, "", this.dimID, WorldProviderResearch.class, false);
 
-        Dimensions.addDim(this.username, this.dimID);
+            DimensionManager.registerDimension(this.dimID, researchDim);
 
-        DimensionType researchDim = DimensionType.register("research" + this.username, "", this.dimID, WorldProviderResearch.class, false);
-        DimensionManager.registerDimension(this.dimID, researchDim);
+            //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
+            Dimensions.addDim(this.username, this.dimID, true);
+            Dimensions.researchDimTypes.put(this.dimID, researchDim);
+        }else{
 
-        //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
-        Dimensions.addDim(this.username, this.dimID);
-        Dimensions.researchDimTypes.put(this.dimID, researchDim);
+            Dimensions.addDim(this.username, this.dimID, true);
+            Dimensions.researchDimTypes.put(this.dimID, DimensionType.getById(this.dimID));
+
+        }
 
     }
 }

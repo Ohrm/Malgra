@@ -4,16 +4,18 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.blocks.Blocks;
@@ -49,6 +51,8 @@ public class MalgraMain {
 	public static CommonProxy proxy;
 	
 	public static CreativeTabs magicTab;
+
+    public static MalgraEventHandler eventHandler;
 	
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent e){
@@ -58,11 +62,15 @@ public class MalgraMain {
 		Blocks.InitBlocks();
 		Items.InitItems();
 		Dimensions.init();
-        Dimensions.loadDims();
+
 		CapabilityMana.register();
 		CapabilityResearchPoints.register();
 		CapabilityResearchActivites.register();
 		MinecraftForge.EVENT_BUS.register(Items.extractor);
+
+        eventHandler = new MalgraEventHandler();
+        MinecraftForge.EVENT_BUS.register(eventHandler);
+
 		proxy.PreInit(e);
 		PacketDispatcher.registerPackets();
 		
@@ -70,7 +78,7 @@ public class MalgraMain {
 	
 	@EventHandler
 	public void Init(FMLInitializationEvent e){
-		MinecraftForge.EVENT_BUS.register(new MalgraEventHandler());
+
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
 		CraftingRecipes.init();
 		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, "Mana Crafting Table");
@@ -85,5 +93,19 @@ public class MalgraMain {
 		proxy.PostInit(e);
 		
 	}
+
+    @EventHandler
+    public void onServerStarted(FMLServerStartedEvent event){
+
+            Dimensions.loadDims();
+
+    }
+
+    @EventHandler
+    public void onServerStopping(FMLServerStoppingEvent event){
+       
+            Dimensions.saveDims();
+
+    }
 	
 }

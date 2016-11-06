@@ -39,8 +39,8 @@ public class TeleporterResearch extends Teleporter {
         EntityPlayerMP playerMP = (EntityPlayerMP) entity;
 
         int height = 3;
-        int width = 16;
-        int depth = 16;
+        int width = 32;
+        int depth = 32;
 
         double dx = 0;
         double dy = 64;

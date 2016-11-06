@@ -33,8 +33,6 @@ public class ClientProxy extends CommonProxy {
 	public void PreInit(FMLPreInitializationEvent e) {
 
 		registerFluidModel(Blocks.liquidMalgraBlock);
-
-		super.PreInit(e);
 		
 	}
 	
@@ -58,8 +56,6 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(ModelBakeHandler.instance);
 
 		Blocks.RegisterRenders();
-
-		super.Init(e);
 		
 	}
 
@@ -89,7 +85,6 @@ public class ClientProxy extends CommonProxy {
 	public void PostInit(FMLPostInitializationEvent e) {
 		
 		MinecraftForge.EVENT_BUS.register(new GuiManaBar(Minecraft.getMinecraft()));
-		super.PostInit(e);
 		
 	}
 	
@@ -108,5 +103,5 @@ public class ClientProxy extends CommonProxy {
 	public IThreadListener getThreadFromContext(MessageContext ctx) {
 		return (ctx.side.isClient() ? mc : super.getThreadFromContext(ctx));
 	}
-	
+
 }

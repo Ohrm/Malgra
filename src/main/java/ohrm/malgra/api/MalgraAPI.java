@@ -3,16 +3,14 @@ package ohrm.malgra.api;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.oredict.OreDictionary;
 import ohrm.malgra.api.research.Research;
-import scala.reflect.internal.Trees.This;
+import ohrm.malgra.research.ResearchFireStarter;
 
+import ohrm.malgra.research.ResearchWaterPlacer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,6 +69,9 @@ public class MalgraAPI {
         addMalgraProviderFromOreDict("stairWood", 2);
         addMalgraProviderFromOreDict("blockGlass", 4);
         addMalgraProviderFromOreDict("paneGlass", 4);
+
+        addResearch(new ResearchFireStarter());
+        addResearch(new ResearchWaterPlacer());
     }
 
     public static boolean addMalgraProvider(Block block, int amount){

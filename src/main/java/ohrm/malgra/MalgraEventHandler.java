@@ -11,6 +11,10 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.capabilities.CapabilityResearchActivites;
@@ -122,7 +126,7 @@ public class MalgraEventHandler {
                 DimensionManager.registerDimension(researchDimID, researchDim);
 
                 //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
-                addDim(event.getEntity().getName(), researchDimID);
+                addDim(event.getEntity().getName(), researchDimID, true);
                 Dimensions.researchDimTypes.put(researchDimID, researchDim);
 
                 Iterator it = Dimensions.researchDimIDs.entrySet().iterator();
@@ -138,21 +142,21 @@ public class MalgraEventHandler {
 	
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone event) {
-		if (event.isWasDeath()) {
-			final CapabilityMana.IMana manaOriginal = event.getOriginal().getCapability(CapabilityMana.MANA, null);
-			final CapabilityMana.IMana manaNew = event.getEntityPlayer().getCapability(CapabilityMana.MANA, null);
-			manaNew.setMana(manaOriginal.getMana());
-			manaNew.setMaxMana(manaOriginal.getMaxMana());
-			
-			final CapabilityResearchPoints.IResearchPoints researchPointsOriginal = event.getOriginal().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null);
-			final CapabilityResearchPoints.IResearchPoints researchPointsNew = event.getEntityPlayer().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null);
-			researchPointsNew.setResearchPoints(researchPointsOriginal.getResearchPoints());
-			
-			final CapabilityResearchActivites.IResearchActivities researchActivitesOriginal = event.getOriginal().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null);
-			final CapabilityResearchActivites.IResearchActivities researchActivitesNew = event.getEntityPlayer().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null);
-			researchActivitesNew.setMinedBlocks(researchActivitesOriginal.getMinedBlocks());
-		
-		}
-	}
+        if (event.isWasDeath()) {
+            final CapabilityMana.IMana manaOriginal = event.getOriginal().getCapability(CapabilityMana.MANA, null);
+            final CapabilityMana.IMana manaNew = event.getEntityPlayer().getCapability(CapabilityMana.MANA, null);
+            manaNew.setMana(manaOriginal.getMana());
+            manaNew.setMaxMana(manaOriginal.getMaxMana());
+
+            final CapabilityResearchPoints.IResearchPoints researchPointsOriginal = event.getOriginal().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null);
+            final CapabilityResearchPoints.IResearchPoints researchPointsNew = event.getEntityPlayer().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null);
+            researchPointsNew.setResearchPoints(researchPointsOriginal.getResearchPoints());
+
+            final CapabilityResearchActivites.IResearchActivities researchActivitesOriginal = event.getOriginal().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null);
+            final CapabilityResearchActivites.IResearchActivities researchActivitesNew = event.getEntityPlayer().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null);
+            researchActivitesNew.setMinedBlocks(researchActivitesOriginal.getMinedBlocks());
+
+        }
+    }
 
 }
