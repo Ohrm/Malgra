@@ -28,19 +28,20 @@ public class ManaInjector extends Item {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		if(!worldIn.isRemote){
 			PacketDispatcher.sendTo(new SyncManaData(playerIn.getCapability(CapabilityMana.MANA, null)), (EntityPlayerMP) playerIn);
 			if(playerIn.getCapability(CapabilityMana.MANA, null).getMaxMana() == 0){
 
 				playerIn.getCapability(CapabilityMana.MANA, null).setMaxMana(3);
-				itemStackIn.setItem(Items.manaInjectorEmpty);
+				playerIn.setHeldItem(handIn, new ItemStack(Items.manaInjectorEmpty));
 				PacketDispatcher.sendTo(new SyncManaData(playerIn.getCapability(CapabilityMana.MANA, null)), (EntityPlayerMP) playerIn);
-				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
+				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 			}else{
-				return new ActionResult<ItemStack>(EnumActionResult.PASS, itemStackIn);
+				return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
 			}
 		}
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		return super.onItemRightClick( worldIn, playerIn, handIn);
 	}
+
 }

@@ -96,7 +96,7 @@ public class ClientProxy extends CommonProxy {
 		// Sounds absurd, but it's true.
 
 		// Solution is to double-check side before returning the player:
-		return (ctx.side.isClient() ? mc.thePlayer : super.getPlayerEntity(ctx));
+		return (ctx.side.isClient() ? mc.player : super.getPlayerEntity(ctx));
 	}
 
 	@Override

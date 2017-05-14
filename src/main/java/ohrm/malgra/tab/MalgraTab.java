@@ -2,6 +2,7 @@ package ohrm.malgra.tab;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import ohrm.malgra.items.Items;
@@ -13,11 +14,10 @@ public class MalgraTab extends CreativeTabs{
 		super(index, label);
 		
 	}
-	
+
 	@Override
-	@SideOnly(Side.CLIENT)
-	public Item getTabIconItem() {
-		return Items.magicDust;
-	}	
+	public ItemStack getTabIconItem() {
+		return new ItemStack(Items.magicDust);
+	}
 	
 }

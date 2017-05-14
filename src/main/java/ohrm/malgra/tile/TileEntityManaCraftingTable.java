@@ -29,8 +29,14 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	
 	public TileEntityManaCraftingTable(World world) {
 		
-		setWorldObj(world);		
+		setWorld(world);
 		
+	}
+
+	@Override
+	public boolean isEmpty() {
+		//TODO: this as well
+		return true;
 	}
 
 	@Override
@@ -44,8 +50,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 				NBTTagCompound itemTag = (NBTTagCompound)tagList.getCompoundTagAt(i);
 				int slot = itemTag.getByte("Slot") & 0xff;
 				if(slot >= 0 && slot <= itemStacks.length) {
-					ItemStack itemStack = new ItemStack((Item)null);
-					itemStack.readFromNBT(itemTag);
+					ItemStack itemStack = new ItemStack(itemTag);
 					itemStacks[slot] = itemStack;
 				}
 			}
@@ -109,12 +114,12 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 		if (itemStackInSlot == null) return null;
 
 		ItemStack itemStackRemoved;
-		if (itemStackInSlot.stackSize <= count) {
+		if (itemStackInSlot.getCount() <= count) {
 			itemStackRemoved = itemStackInSlot;
 			setInventorySlotContents(index, null);
 		} else {
 			itemStackRemoved = itemStackInSlot.splitStack(count);
-			if (itemStackInSlot.stackSize == 0) setInventorySlotContents(index, null);
+			if (itemStackInSlot.getCount() == 0) setInventorySlotContents(index, null);
 		}
 		markDirty();
 		return itemStackRemoved;
@@ -130,7 +135,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
 		itemStacks[index] = stack;
-		if (stack != null && stack.stackSize > getInventoryStackLimit()) stack.stackSize = getInventoryStackLimit();
+		if (stack != null && stack.getCount() > getInventoryStackLimit()) stack.setCount(getInventoryStackLimit());
 		markDirty();
 	}
 
@@ -141,8 +146,8 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	}
 
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer player) {
-		if (this.worldObj.getTileEntity(this.pos) != this) return false;
+	public boolean isUsableByPlayer(EntityPlayer player) {
+		if (this.world.getTileEntity(this.pos) != this) return false;
 		final double X_CENTRE_OFFSET = 0.5;
 		final double Y_CENTRE_OFFSET = 0.5;
 		final double Z_CENTRE_OFFSET = 0.5;
@@ -195,7 +200,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	@Override
 	public void update() {
 		
-		if(guiOpen && !worldObj.isRemote){
+		if(guiOpen && !world.isRemote){
 		
 			checkForResult();
 			

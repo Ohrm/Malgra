@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -79,7 +80,7 @@ public class Extractor extends Item {
         Multimap multimap = super.getAttributeModifiers(slot, stack);
         if (stack.hasTagCompound()) {
             ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip")));
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)tip.getMaterial().getDamageVsEntity(), 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)tip.getMaterial().getDamageVsEntity(), 0));
         }
         return multimap;
     }
@@ -146,7 +147,7 @@ public class Extractor extends Item {
 
 
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
+    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
         ItemStack
                 t_f_extractor, t_i_extractor, t_q_extractor, t_d_extractor, t_m_extractor, s_f_extractor,
                 s_i_extractor, s_q_extractor, s_d_extractor, s_m_extractor, m_f_extractor, m_i_extractor,
@@ -346,11 +347,11 @@ public class Extractor extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStack, World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         int firstEmptySlot = -1;
-        if (player.isSneaking()) {
-            for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-                if (player.inventory.getStackInSlot(i) == null) {
+        if (playerIn.isSneaking()) {
+            for (int i = 0; i < playerIn.inventory.getSizeInventory(); i++) {
+                if (playerIn.inventory.getStackInSlot(i) == null) {
                     firstEmptySlot = i;
                     break;
                 }
@@ -360,7 +361,7 @@ public class Extractor extends Item {
                 //Give tip
             }
         }
-        return super.onItemRightClick(itemStack, world, player, hand);
+        return super.onItemRightClick(worldIn, playerIn, handIn);
     }
 
     @SubscribeEvent

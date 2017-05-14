@@ -38,7 +38,7 @@ public class WorldProviderResearch extends WorldProvider {
     }
 
     public IChunkGenerator createChunkGenerator() {
-        return new ChunkProviderResearch(this.worldObj, this.worldObj.getWorldInfo().isMapFeaturesEnabled(), this.worldObj.getSeed());
+        return new ChunkProviderResearch(this.world, this.world.getWorldInfo().isMapFeaturesEnabled(), this.world.getSeed());
     }
 
     /**
@@ -65,7 +65,7 @@ public class WorldProviderResearch extends WorldProvider {
     public Vec3d getFogColor(float p_76562_1_, float p_76562_2_) {
         int i = 10518688;
         float f = MathHelper.cos(p_76562_1_ * ((float)Math.PI * 2F)) * 2.0F + 0.5F;
-        f = MathHelper.clamp_float(f, 0.0F, 1.0F);
+        f = MathHelper.clamp(f, 0.0F, 1.0F);
         float f1 = 0.627451F;
         float f2 = 0.5019608F;
         float f3 = 0.627451F;
@@ -110,7 +110,7 @@ public class WorldProviderResearch extends WorldProvider {
      * Will check if the x, z position specified is alright to be set as the map spawn point
      */
     public boolean canCoordinateBeSpawn(int x, int z) {
-        return this.worldObj.getGroundAboveSeaLevel(new BlockPos(x, 0, z)).getMaterial().blocksMovement();
+        return this.world.getGroundAboveSeaLevel(new BlockPos(x, 0, z)).getMaterial().blocksMovement();
     }
 
     public BlockPos getSpawnCoordinate()

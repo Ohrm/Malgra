@@ -33,18 +33,18 @@ public class EntityItemMalgraTool extends EntityItem {
 
     public boolean isEntityInBlock(Entity entity, Block block) {
         AxisAlignedBB bb = entity.getEntityBoundingBox().expand(-0.10000000149011612D, -0.4000000059604645D, -0.10000000149011612D);
-        int i = MathHelper.floor_double(bb.minX);
-        int j = MathHelper.ceiling_double_int(bb.maxX);
-        int k = MathHelper.floor_double(bb.minY);
-        int l = MathHelper.ceiling_double_int(bb.maxY);
-        int i1 = MathHelper.floor_double(bb.minZ);
-        int j1 = MathHelper.ceiling_double_int(bb.maxZ);
+        int i = MathHelper.floor(bb.minX);
+        int j = MathHelper.ceil(bb.maxX);
+        int k = MathHelper.floor(bb.minY);
+        int l = MathHelper.ceil(bb.maxY);
+        int i1 = MathHelper.floor(bb.minZ);
+        int j1 = MathHelper.ceil(bb.maxZ);
         BlockPos.PooledMutableBlockPos blockpos$pooledmutableblockpos = BlockPos.PooledMutableBlockPos.retain();
 
         for (int k1 = i; k1 < j; ++k1) {
             for (int l1 = k; l1 < l; ++l1) {
                 for (int i2 = i1; i2 < j1; ++i2) {
-                    if (entity.worldObj.getBlockState(blockpos$pooledmutableblockpos.setPos(k1, l1, i2)).getBlock() == block) {
+                    if (entity.world.getBlockState(blockpos$pooledmutableblockpos.setPos(k1, l1, i2)).getBlock() == block) {
                         blockpos$pooledmutableblockpos.release();
                         return true;
                     }
@@ -59,10 +59,10 @@ public class EntityItemMalgraTool extends EntityItem {
     @Override
     public void onUpdate() {
         if (isEntityInBlock(this, Blocks.liquidMalgraBlock)) {
-            this.worldObj.spawnEntityInWorld(new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, replacement));
-            this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX, this.posY, this.posZ, 0, 0, 0);
-            this.worldObj.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
-            this.worldObj.setBlockToAir(this.getPosition());
+            this.world.spawnEntity(new EntityItem(this.world, this.posX, this.posY, this.posZ, replacement));
+            this.world.spawnParticle(EnumParticleTypes.EXPLOSION_NORMAL, this.posX, this.posY, this.posZ, 0, 0, 0);
+            this.world.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1.0f, 1.0f, false);
+            this.world.setBlockToAir(this.getPosition());
             this.setDead();
         }
         super.onUpdate();

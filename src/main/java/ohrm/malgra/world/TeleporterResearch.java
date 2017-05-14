@@ -55,20 +55,20 @@ public class TeleporterResearch extends Teleporter {
 
         entity.setPosition(width/2, dy+1, depth/2);
         
-        if(playerMP.worldObj.getBlockState(new BlockPos(dx, dy, dz)).getBlock() != ohrm.malgra.blocks.Blocks.researchStoneBrick.getDefaultState().getBlock()){
+        if(playerMP.world.getBlockState(new BlockPos(dx, dy, dz)).getBlock() != ohrm.malgra.blocks.Blocks.researchStoneBrick.getDefaultState().getBlock()){
         
         	for(int x = 0; x < width; x++){
         	
 	        	for(int z = 0; z < depth; z++){
-	        		
-	        		playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy, dz + z), ohrm.malgra.blocks.Blocks.researchStoneBrick.getDefaultState());
+
+	        		playerMP.world.setBlockState(new BlockPos(dx + x, dy, dz + z), ohrm.malgra.blocks.Blocks.researchStoneBrick.getDefaultState());
 	        		if (x == 0 || x == width-1 || ((x!=0 && x!= width-1) && (z == 0 || z == depth-1))){
                         for (int y = 0; y < height; y++) {
-                            playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy + y, dz + z), Blocks.BARRIER.getDefaultState());
+                            playerMP.world.setBlockState(new BlockPos(dx + x, dy + y, dz + z), Blocks.BARRIER.getDefaultState());
                         }
                     }
                     if ((x == 1 && z == 1) || (x == 1 && z == depth-2) || (x == width-2 && z == depth-2) || (x == width-2 && z == 1) || (x == (width/2) && z == (depth/2)))
-                        playerMP.worldObj.setBlockState(new BlockPos(dx + x, dy + 1, dz + z), Blocks.TORCH.getDefaultState());
+                        playerMP.world.setBlockState(new BlockPos(dx + x, dy + 1, dz + z), Blocks.TORCH.getDefaultState());
                 }
 	        	
 	        }

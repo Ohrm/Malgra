@@ -53,8 +53,9 @@ public class SpecialBlock extends Block{
 	}
 
 	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		this.setDefaultState(this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 	}
 
 	@Override
@@ -68,17 +69,15 @@ public class SpecialBlock extends Block{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		
-		if(!worldIn.isRemote){
-			
-			playerIn.worldObj.playSound(null, pos, Sounds.soundSpecial, SoundCategory.PLAYERS, 1.0f, 1.0f);
-			
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!worldIn.isRemote) {
+
+			playerIn.world.playSound(null, pos, Sounds.soundSpecial, SoundCategory.PLAYERS, 1.0f, 1.0f);
+
 		}
 		return true;
-		
 	}
 
 }

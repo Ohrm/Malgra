@@ -27,20 +27,20 @@ public class SlotResultManaCrafting extends Slot {
 	}
 
 	@Override
-	public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack) {
-		
-		if(tileEntityManaCraftingTable.itemStacks[1] != null && tileEntityManaCraftingTable.itemStacks[1].hasTagCompound()){
-			
+	public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
+
+		if (tileEntityManaCraftingTable.itemStacks[1] != null && tileEntityManaCraftingTable.itemStacks[1].hasTagCompound()) {
+
 			tileEntityManaCraftingTable.itemStacks[1].getTagCompound().setInteger("malgra", tileEntityManaCraftingTable.itemStacks[1].getTagCompound().getInteger("malgra") - tileEntityManaCraftingTable.GetRecipeMalgraCost());
 		}
-		
-		for(int i = 2; i < tileEntityManaCraftingTable.itemStacks.length; i++){
-			
+
+		for (int i = 2; i < tileEntityManaCraftingTable.itemStacks.length; i++) {
+
 			tileEntityManaCraftingTable.decrStackSize(i, 1);
-			
+
 		}
-		
-		super.onPickupFromSlot(playerIn, stack);
+
+		return super.onTake(thePlayer, stack);
 	}
 	
 }

@@ -50,24 +50,24 @@ public class ManaCraftingTable extends Block implements ITileEntityProvider {
 
         return this.getDefaultState().withProperty(FACING, enumfacing);
    
-	}	
-	
-	@Override
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-		
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		this.setDefaultState(this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+	}
+
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote || worldIn.getTileEntity(pos) == null){
-			
+
 			if(!playerIn.isSneaking()){
-				
+
 				playerIn.openGui(MalgraMain.instance, 0, worldIn, pos.getX(), pos.getY(), pos.getZ());
 				return true;
 			}
-			
+
 		}
 		return true;
 	}

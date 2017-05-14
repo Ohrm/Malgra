@@ -31,7 +31,7 @@ public class GuiManaBar extends Gui
 			return;
 		}
 
-		CapabilityMana.IMana props = mc.thePlayer.getCapability(CapabilityMana.MANA, null);
+		CapabilityMana.IMana props = mc.player.getCapability(CapabilityMana.MANA, null);
 		if (props == null || props.getMaxMana() == 0) {
 			return;
 		}
@@ -54,11 +54,11 @@ public class GuiManaBar extends Gui
 		drawTexturedModalRect(xPos + 3, yPos + 3, 0, 9, manabarwidth, 3);
 		String s = Utils.translateToLocal("gui.manaBar.mana") + " " + props.getMana() + "/" + props.getMaxMana();
 		yPos += 10;
-		this.mc.fontRendererObj.drawString(s, xPos + 1, yPos, 0);
-		this.mc.fontRendererObj.drawString(s, xPos - 1, yPos, 0);
-		this.mc.fontRendererObj.drawString(s, xPos, yPos + 1, 0);
-		this.mc.fontRendererObj.drawString(s, xPos, yPos - 1, 0);
-		this.mc.fontRendererObj.drawString(s, xPos, yPos, 8453920);
+		this.mc.fontRenderer.drawString(s, xPos + 1, yPos, 0);
+		this.mc.fontRenderer.drawString(s, xPos - 1, yPos, 0);
+		this.mc.fontRenderer.drawString(s, xPos, yPos + 1, 0);
+		this.mc.fontRenderer.drawString(s, xPos, yPos - 1, 0);
+		this.mc.fontRenderer.drawString(s, xPos, yPos, 8453920);
 		GlStateManager.popAttrib();
 	}
 }

@@ -6,6 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 
 import java.util.List;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class MalgraPickaxe extends MalgraTool {
     }
 
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, List<ItemStack> subItems) {
+    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
         ItemStack pickaxe = new ItemStack(Items.malgraPickaxe);
         pickaxe.setTagCompound(new NBTTagCompound());
         pickaxe.getTagCompound().setInteger("malgra", ((MalgraTool)pickaxe.getItem()).getMaxMalgra());

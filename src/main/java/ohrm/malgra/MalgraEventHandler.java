@@ -131,7 +131,7 @@ public class MalgraEventHandler {
 				malgraPickaxe.getTagCompound().setInteger("malgra", ((MalgraTool)malgraPickaxe.getItem()).getMaxMalgra());
 
 				EntityItemMalgraTool newEntity = new EntityItemMalgraTool(event.getWorld(), event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, ((EntityItem) event.getEntity()).getEntityItem(), malgraPickaxe);
-				event.getWorld().spawnEntityInWorld(newEntity);
+				event.getWorld().spawnEntity(newEntity);
 				NBTTagCompound nbt = new NBTTagCompound();
 				event.getEntity().writeToNBTOptional(nbt);
 				newEntity.readFromNBT(nbt);

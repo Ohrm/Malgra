@@ -86,8 +86,8 @@ public class ChunkProviderResearch implements IChunkGenerator {
     }
 
     @Nullable
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position)
-    {
+    @Override
+    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
         return null;
     }
 
