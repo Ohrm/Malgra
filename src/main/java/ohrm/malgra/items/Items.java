@@ -35,47 +35,47 @@ public class Items {
 
 	public static void InitItems(){
 		
-		magicDust = new MalgraDust().setUnlocalizedName("magicDust").setCreativeTab(MalgraMain.magicTab);
-		manaInjector = new ManaInjector().setUnlocalizedName("manaInjector").setCreativeTab(MalgraMain.magicTab);
-		manaInjectorEmpty = new Item().setUnlocalizedName("manaInjectorEmpty").setCreativeTab(MalgraMain.magicTab);
-		tinyContainer = new ExtractorContainer(100, "tiny").setUnlocalizedName("tinyContainer");
-		smallContainer = new ExtractorContainer(500, "small").setUnlocalizedName("smallContainer");
-		mediumContainer = new ExtractorContainer(2000, "medium").setUnlocalizedName("mediumContainer");
-		largeContainer = new ExtractorContainer(10000, "large").setUnlocalizedName("largeContainer");
-		hugeContainer = new ExtractorContainer(50000, "huge").setUnlocalizedName("hugeContainer");
-		flintExtractorTip = new ExtractorTip(TIP_FLINT, "flint").setUnlocalizedName("flintExtractorTip");
-		ironExtractorTip = new ExtractorTip(TIP_IRON, "iron").setUnlocalizedName("ironExtractorTip");
-		quartzExtractorTip = new ExtractorTip(TIP_QUARTZ, "quartz").setUnlocalizedName("quartzExtractorTip");
-		diamondExtractorTip = new ExtractorTip(TIP_DIAMOND, "diamond").setUnlocalizedName("diamondExtractorTip");
-		malgrumExtractorTip = new ExtractorTip(TIP_MALGRUM, "malgrum").setUnlocalizedName("malgrumExtractorTip");
-		extractor = new Extractor().setUnlocalizedName("manaExtractor");
-		liquidMalgraBucket = new ItemBucket(Blocks.liquidMalgraBlock).setUnlocalizedName("liquidMalgraBucket");
-		dimensionTool = new DimensionTool().setUnlocalizedName("dimensionTool").setCreativeTab(MalgraMain.magicTab);
-		malgraPickaxe = new MalgraPickaxe(1, 1.2F, MALGRA, 500).setUnlocalizedName("malgraPickaxe").setCreativeTab(MalgraMain.magicTab);
-		malgraSword = new MalgraSword(5, 1.6F, MALGRA, 500).setUnlocalizedName("malgraSword").setCreativeTab(MalgraMain.magicTab);
+		magicDust = new MalgraDust().setRegistryName(Reference.MODID, "magicdust").setUnlocalizedName("magicdust").setCreativeTab(MalgraMain.magicTab);
+		manaInjector = new ManaInjector().setRegistryName(Reference.MODID, "manainjector").setUnlocalizedName("manainjector").setCreativeTab(MalgraMain.magicTab);
+		manaInjectorEmpty = new Item().setRegistryName(Reference.MODID, "manainjectorempty").setUnlocalizedName("manainjectorempty").setCreativeTab(MalgraMain.magicTab);
+		tinyContainer = new ExtractorContainer(100, "tiny").setRegistryName(Reference.MODID, "tinyContainer").setUnlocalizedName("tinyContainer");
+		smallContainer = new ExtractorContainer(500, "small").setRegistryName(Reference.MODID, "smallContainer").setUnlocalizedName("smallContainer");
+		mediumContainer = new ExtractorContainer(2000, "medium").setRegistryName(Reference.MODID, "mediumContainer").setUnlocalizedName("mediumContainer");
+		largeContainer = new ExtractorContainer(10000, "large").setRegistryName(Reference.MODID, "largeContainer").setUnlocalizedName("largeContainer");
+		hugeContainer = new ExtractorContainer(50000, "huge").setRegistryName(Reference.MODID, "hugeContainer").setUnlocalizedName("hugeContainer");
+		flintExtractorTip = new ExtractorTip(TIP_FLINT, "flint").setRegistryName(Reference.MODID, "flintExtractorTip").setUnlocalizedName("flintExtractorTip");
+		ironExtractorTip = new ExtractorTip(TIP_IRON, "iron").setRegistryName(Reference.MODID, "ironExtractorTip").setUnlocalizedName("ironExtractorTip");
+		quartzExtractorTip = new ExtractorTip(TIP_QUARTZ, "quartz").setRegistryName(Reference.MODID, "quartzExtractorTip").setUnlocalizedName("quartzExtractorTip");
+		diamondExtractorTip = new ExtractorTip(TIP_DIAMOND, "diamond").setRegistryName(Reference.MODID, "diamondExtractorTip").setUnlocalizedName("diamondExtractorTip");
+		malgrumExtractorTip = new ExtractorTip(TIP_MALGRUM, "malgrum").setRegistryName(Reference.MODID, "malgrumExtractorTip").setUnlocalizedName("malgrumExtractorTip");
+		extractor = new Extractor().setRegistryName(Reference.MODID, "manaExtractor").setUnlocalizedName("manaExtractor");
+		liquidMalgraBucket = new ItemBucket(Blocks.liquidMalgraBlock).setRegistryName(Reference.MODID, "liquidMalgraBucket").setUnlocalizedName("liquidMalgraBucket");
+		dimensionTool = new DimensionTool().setRegistryName(Reference.MODID, "dimensionTool").setUnlocalizedName("dimensionTool").setCreativeTab(MalgraMain.magicTab);
+		malgraPickaxe = new MalgraPickaxe(1, 1.2F, MALGRA, 500).setRegistryName(Reference.MODID, "malgraPickaxe").setUnlocalizedName("malgraPickaxe").setCreativeTab(MalgraMain.magicTab);
+		malgraSword = new MalgraSword(5, 1.6F, MALGRA, 500).setRegistryName(Reference.MODID, "malgraSword").setUnlocalizedName("malgraSword").setCreativeTab(MalgraMain.magicTab);
 		RegisterItems();
 	}
 	
 	public static void RegisterItems(){
 
-		GameRegistry.register(magicDust, new ResourceLocation(Reference.MODID, "magicDust"));
-		GameRegistry.register(manaInjector, new ResourceLocation(Reference.MODID, "manaInjector"));
-		GameRegistry.register(manaInjectorEmpty, new ResourceLocation(Reference.MODID, "manaInjectorEmpty"));
-		GameRegistry.register(extractor, new ResourceLocation(Reference.MODID, "manaExtractor"));
-		GameRegistry.register(tinyContainer, new ResourceLocation(Reference.MODID, "tinyContainer"));
-		GameRegistry.register(smallContainer, new ResourceLocation(Reference.MODID, "smallContainer"));
-		GameRegistry.register(mediumContainer, new ResourceLocation(Reference.MODID, "mediumContainer"));
-		GameRegistry.register(largeContainer, new ResourceLocation(Reference.MODID, "largeContainer"));
-		GameRegistry.register(hugeContainer, new ResourceLocation(Reference.MODID, "hugeContainer"));
-		GameRegistry.register(flintExtractorTip, new ResourceLocation(Reference.MODID, "flintExtractorTip"));
-		GameRegistry.register(ironExtractorTip, new ResourceLocation(Reference.MODID, "ironExtractorTip"));
-		GameRegistry.register(quartzExtractorTip, new ResourceLocation(Reference.MODID, "quartzExtractorTip"));
-		GameRegistry.register(diamondExtractorTip, new ResourceLocation(Reference.MODID, "diamondExtractorTip"));
-		GameRegistry.register(malgrumExtractorTip, new ResourceLocation(Reference.MODID, "malgrumExtractorTip"));
-		GameRegistry.register(liquidMalgraBucket, new ResourceLocation(Reference.MODID, "liquidMalgraBucket"));
-		GameRegistry.register(dimensionTool, new ResourceLocation(Reference.MODID, "dimensionTool"));
-		GameRegistry.register(malgraPickaxe, new ResourceLocation(Reference.MODID, "malgraPickaxe"));
-		GameRegistry.register(malgraSword, new ResourceLocation(Reference.MODID, "malgraSword"));
+		GameRegistry.register(magicDust);
+		GameRegistry.register(manaInjector);
+		GameRegistry.register(manaInjectorEmpty);
+		GameRegistry.register(extractor);
+		GameRegistry.register(tinyContainer);
+		GameRegistry.register(smallContainer);
+		GameRegistry.register(mediumContainer);
+		GameRegistry.register(largeContainer);
+		GameRegistry.register(hugeContainer);
+		GameRegistry.register(flintExtractorTip);
+		GameRegistry.register(ironExtractorTip);
+		GameRegistry.register(quartzExtractorTip);
+		GameRegistry.register(diamondExtractorTip);
+		GameRegistry.register(malgrumExtractorTip);
+		GameRegistry.register(liquidMalgraBucket);
+		GameRegistry.register(dimensionTool);
+		GameRegistry.register(malgraPickaxe);
+		GameRegistry.register(malgraSword);
 	}
 	
 	public static void RegisterRenders(){

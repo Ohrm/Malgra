@@ -20,24 +20,24 @@ public class Blocks {
 
 	public static void InitBlocks(){
 		
-		manaCraftingTable = new ManaCraftingTable().setUnlocalizedName("manaCraftingTable").setCreativeTab(MalgraMain.magicTab);
-		liquidMalgraBlock = new LiquidMalgra(Fluids.liquidMalgra, Material.WATER).setUnlocalizedName("liquidMalgraBlock");
-		specialBlock = new SpecialBlock().setUnlocalizedName("specialBlock").setCreativeTab(MalgraMain.magicTab);
-		researchStoneBrick = new ResearchStoneBrick().setUnlocalizedName("researchStoneBrick");
+		manaCraftingTable = new ManaCraftingTable().setRegistryName(Reference.MODID, "manacraftingtable").setUnlocalizedName("manacraftingtable").setCreativeTab(MalgraMain.magicTab);
+		liquidMalgraBlock = new LiquidMalgra(Fluids.liquidMalgra, Material.WATER).setRegistryName(Reference.MODID, "liquidMalgraBlock").setUnlocalizedName("liquidMalgraBlock");
+		specialBlock = new SpecialBlock().setRegistryName(Reference.MODID, "specialblock").setUnlocalizedName("specialblock").setCreativeTab(MalgraMain.magicTab);
+		researchStoneBrick = new ResearchStoneBrick().setRegistryName(Reference.MODID, "researchstonebrick").setUnlocalizedName("researchstonebrick");
 		RegisterBlocks();
 		
 	}
 	
 	public static void RegisterBlocks(){
 
-		GameRegistry.register(manaCraftingTable, new ResourceLocation(Reference.MODID, "manaCraftingTable"));
-		GameRegistry.register(new ItemBlock(manaCraftingTable), new ResourceLocation(Reference.MODID, "manaCraftingTable"));
-		GameRegistry.register(specialBlock, new ResourceLocation(Reference.MODID, "specialBlock"));
-		GameRegistry.register(new ItemBlock(specialBlock), new ResourceLocation(Reference.MODID, "specialBlock"));
-		GameRegistry.register(liquidMalgraBlock, new ResourceLocation(Reference.MODID, "liquidMalgraBlock"));
+		GameRegistry.register(manaCraftingTable);
+		GameRegistry.register(new ItemBlock(manaCraftingTable), new ResourceLocation(Reference.MODID, "manacraftingtable"));
+		GameRegistry.register(specialBlock);
+		GameRegistry.register(new ItemBlock(specialBlock), new ResourceLocation(Reference.MODID, "specialblock"));
+		GameRegistry.register(liquidMalgraBlock);
 		GameRegistry.register(new ItemBlock(liquidMalgraBlock), new ResourceLocation(Reference.MODID, "liquidMalgraBlock"));
-		GameRegistry.register(researchStoneBrick, new ResourceLocation(Reference.MODID, "researchStoneBrick"));
-		GameRegistry.register(new ItemBlock(researchStoneBrick), new ResourceLocation(Reference.MODID, "researchStoneBrick"));
+		GameRegistry.register(researchStoneBrick);
+		GameRegistry.register(new ItemBlock(researchStoneBrick), new ResourceLocation(Reference.MODID, "researchstonebrick"));
 	
 	}
 	

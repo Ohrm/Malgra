@@ -1,9 +1,9 @@
 itemGroup.malgraTab=Malgra
 
-item.magicDust.name=Malgrum Dust
-item.manaInjector.name=Malgra Injector
-item.manaInjectorEmpty.name=Malgra Injector
-item.manaExtractor.name=Malgra Extractor
+item.magicdust.name=Malgrum Dust
+item.manainjector.name=Malgra Injector
+item.manainjectorempty.name=Malgra Injector
+item.manaextractor.name=Malgra Extractor
 item.manaExtractor.malgraStored=Malgra Stored
 item.tinyContainer.name=Tiny Malgra Container
 item.smallContainer.name=Small Malgra Container
@@ -15,8 +15,8 @@ item.ironExtractorTip.name=Iron Malgra Extractor Tip
 item.quartzExtractorTip.name=Quartz Malgra Extractor Tip
 item.diamondExtractorTip.name=Diamond Malgra Extractor Tip
 item.malgrumExtractorTip.name=Malgrum Malgra Extractor Tip
-item.dimensionTool.name=Super Ultra Dimensional Travel and Structure Creation 'How Does This Even Work?' Device
-item.malgraPickaxe.name=Malgra Pickaxe
+item.dimensiontool.name=Super Ultra Dimensional Travel and Structure Creation 'How Does This Even Work?' Device
+item.malgrapickaxe.name=Malgra Pickaxe
 
 extractor.prefix.tiny=Tiny
 extractor.prefix.small=Small
@@ -29,7 +29,7 @@ extractor.prefix.quartz=Quartz
 extractor.prefix.diamond=Diamond
 extractor.prefix.malgrum=Malgrum
 
-tile.manaCraftingTable.name=Malgra Crafting Table
+tile.manacraftingtable.name=Malgra Crafting Table
 
 gui.manaBar.mana=Malgra
 

@@ -1,9 +1,9 @@
 {
     "variants": {
-        "normal": { "model": "malgra:specialBlock" },
-        "facing=north": { "model": "malgra:specialBlock", "y": 180 },
-        "facing=south": { "model": "malgra:specialBlock" },
-        "facing=west":  { "model": "malgra:specialBlock", "y": -270 },
-        "facing=east":  { "model": "malgra:specialBlock", "y": -90 }
+        "normal": { "model": "malgra:specialblock" },
+        "facing=north": { "model": "malgra:specialblock", "y": 180 },
+        "facing=south": { "model": "malgra:specialblock" },
+        "facing=west":  { "model": "malgra:specialblock", "y": -270 },
+        "facing=east":  { "model": "malgra:specialblock", "y": -90 }
     }
 }
