@@ -43,7 +43,7 @@ public class ManaCraftingRecipe {
 		
 		int count = 0;
 		for (ItemStack itemStack : itemStacks) {
-			if(itemStack != null){
+			if(!itemStack.isEmpty()){
 				
 				count++;
 				
@@ -54,7 +54,7 @@ public class ManaCraftingRecipe {
 		
 		int index = 0;
 		for (ItemStack itemStack : itemStacks) {
-			if(itemStack != null){
+			if(!itemStack.isEmpty()){
 				
 				temp[index++] = itemStack;
 				

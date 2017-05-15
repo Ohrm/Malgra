@@ -20,7 +20,7 @@ public class GuiManaCraftingTable extends GuiContainer{
 
 	/** ResourceLocation takes 2 parameters: ModId, path to texture at the location:
 	 *  "src/minecraft/assets/modid/" */
-	private static final ResourceLocation iconLocation = new ResourceLocation("malgra", "textures/gui/manaCraftingTable.png");
+	private static final ResourceLocation iconLocation = new ResourceLocation("malgra", "textures/gui/manacraftingtable.png");
 
 	/** The inventory to render on screen */
 	private TileEntityManaCraftingTable tileEntity;

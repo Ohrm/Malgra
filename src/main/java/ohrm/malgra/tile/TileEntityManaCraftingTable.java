@@ -1,10 +1,7 @@
 package ohrm.malgra.tile;
 
-import java.util.Arrays;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +12,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import ohrm.malgra.crafting.ManaCraftingRecipe;
 import ohrm.malgra.crafting.ManaRecipes;
+
+import java.util.Arrays;
 
 public class TileEntityManaCraftingTable extends TileEntity implements IInventory, ITickable{
 
@@ -30,7 +29,10 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	public TileEntityManaCraftingTable(World world) {
 		
 		setWorld(world);
-		
+
+		for(int i = 0; i < NUM_SLOT; i++)
+			itemStacks[i] = ItemStack.EMPTY;
+
 	}
 
 	@Override
@@ -64,12 +66,12 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 		// Inventories
 		NBTTagList tagList = new NBTTagList();		
 		for(int i = 0; i < itemStacks.length; i++) {
-			if((itemStacks[i]) != null) {
+
 				NBTTagCompound itemTag = new NBTTagCompound();
 				itemTag.setByte("Slot", (byte)i);
 				itemStacks[i].writeToNBT(itemTag);
 				tagList.appendTag(itemTag);
-			}
+
 		}
 				
 		if(tagList.tagCount() > 0) {
@@ -111,15 +113,15 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	@Override
 	public ItemStack decrStackSize(int index, int count) {
 		ItemStack itemStackInSlot = getStackInSlot(index);
-		if (itemStackInSlot == null) return null;
+		if (itemStackInSlot.isEmpty()) return ItemStack.EMPTY;
 
 		ItemStack itemStackRemoved;
 		if (itemStackInSlot.getCount() <= count) {
 			itemStackRemoved = itemStackInSlot;
-			setInventorySlotContents(index, null);
+			setInventorySlotContents(index, ItemStack.EMPTY);
 		} else {
 			itemStackRemoved = itemStackInSlot.splitStack(count);
-			if (itemStackInSlot.getCount() == 0) setInventorySlotContents(index, null);
+			if (itemStackInSlot.getCount() == 0) setInventorySlotContents(index, ItemStack.EMPTY);
 		}
 		markDirty();
 		return itemStackRemoved;
@@ -128,14 +130,14 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
 		ItemStack itemStack = getStackInSlot(index);
-		if (itemStack != null) setInventorySlotContents(index, null);
+		if (!itemStack.isEmpty()) setInventorySlotContents(index, ItemStack.EMPTY);
 		return itemStack;
 	}
 
 	@Override
 	public void setInventorySlotContents(int index, ItemStack stack) {
 		itemStacks[index] = stack;
-		if (stack != null && stack.getCount() > getInventoryStackLimit()) stack.setCount(getInventoryStackLimit());
+		if ((!stack.isEmpty()) && stack.getCount() > getInventoryStackLimit()) stack.setCount(getInventoryStackLimit());
 		markDirty();
 	}
 
@@ -193,7 +195,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 
 	@Override
 	public void clear() {
-		Arrays.fill(itemStacks, null);
+		Arrays.fill(itemStacks, ItemStack.EMPTY);
 		
 	}	
 	
@@ -227,7 +229,11 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 	public void checkForResult(){
 		
 		ItemStack[] temp = new ItemStack[9];
-		
+
+		for(int i = 0; i < temp.length; i++){
+			temp[i] = ItemStack.EMPTY;
+		}
+
 		for(int i = 0; i < temp.length; i++){
 			
 			temp[i] = itemStacks[i+2];
@@ -237,7 +243,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 		int empty = 0;
 		for(int i = 0; i < temp.length; i++){
 			
-			if(temp[i] == null)
+			if(temp[i].isEmpty())
 				empty++;
 			
 		}
@@ -245,13 +251,13 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 		if(empty == temp.length)
 			return;
 		
-		if(itemStacks[1] != null && itemStacks[1].hasTagCompound()){
+		if((!itemStacks[1].isEmpty()) && itemStacks[1].hasTagCompound()){
 			
 			recipe = ManaRecipes.GetResult(itemStacks[1].getTagCompound().getInteger("malgra"), temp);
 			Item item = ManaRecipes.recipes.get(recipe);
 			if(item == null){
 				
-				this.itemStacks[0] = null;
+				this.itemStacks[0] = ItemStack.EMPTY;
 				
 			}else{
 				
@@ -265,7 +271,7 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 		Item item = ManaRecipes.recipes.get(recipe);
 		if(item == null){
 			
-			this.itemStacks[0] = null;
+			this.itemStacks[0] = ItemStack.EMPTY;
 			
 		}else{
 			this.itemStacks[0] = new ItemStack(item);

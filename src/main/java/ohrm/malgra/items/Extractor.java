@@ -351,7 +351,7 @@ public class Extractor extends Item {
         int firstEmptySlot = -1;
         if (playerIn.isSneaking()) {
             for (int i = 0; i < playerIn.inventory.getSizeInventory(); i++) {
-                if (playerIn.inventory.getStackInSlot(i) == null) {
+                if (playerIn.inventory.getStackInSlot(i).isEmpty()) {
                     firstEmptySlot = i;
                     break;
                 }
@@ -373,7 +373,7 @@ public class Extractor extends Item {
 
     @SubscribeEvent
     public void onBlockHarvested(BlockEvent.HarvestDropsEvent event) {
-        if (event.getHarvester() != null && event.getHarvester().getHeldItemMainhand() != null) {
+        if (event.getHarvester() != null && (!event.getHarvester().getHeldItemMainhand().isEmpty())) {
             if (event.getHarvester().getHeldItemMainhand().getItem().equals(Items.extractor)) {
                 event.getDrops().clear();
             }
