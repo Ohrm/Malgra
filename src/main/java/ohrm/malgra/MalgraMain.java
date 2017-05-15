@@ -1,13 +1,8 @@
 package ohrm.malgra;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -15,8 +10,6 @@ import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 import ohrm.malgra.api.MalgraAPI;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.capabilities.CapabilityMana;
@@ -24,8 +17,6 @@ import ohrm.malgra.capabilities.CapabilityResearchActivites;
 import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.client.sounds.Sounds;
 import ohrm.malgra.crafting.CraftingRecipes;
-import ohrm.malgra.crafting.ManaRecipes;
-import ohrm.malgra.fluid.BucketHandler;
 import ohrm.malgra.fluid.Fluids;
 import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
@@ -54,7 +45,11 @@ public class MalgraMain {
 	public static CreativeTabs magicTab;
 
     public static MalgraEventHandler eventHandler;
-	
+
+    static{
+		FluidRegistry.enableUniversalBucket();
+	}
+
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent e){
 		
@@ -73,8 +68,6 @@ public class MalgraMain {
         MinecraftForge.EVENT_BUS.register(eventHandler);
 
 		MinecraftForge.EVENT_BUS.register(Items.malgraPickaxe);
-		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-		BucketHandler.INSTANCE.buckets.put(Blocks.liquidMalgraBlock, Items.liquidMalgraBucket);
 
 		proxy.PreInit(e);
 		PacketDispatcher.registerPackets();

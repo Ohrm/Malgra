@@ -13,8 +13,9 @@ public class Fluids {
     public static Fluid liquidMalgra;
 
     public static void init() {
-        liquidMalgra = new Fluid("liquidMalgra", new ResourceLocation("blocks/water_still"), new ResourceLocation("blocks/water_flow")).setUnlocalizedName("liquidMalgra");
+        liquidMalgra = new Fluid("liquidmalgra", new ResourceLocation("blocks/water_still"), new ResourceLocation("blocks/water_flow")).setUnlocalizedName("liquidMalgra");
         register(liquidMalgra);
+        FluidRegistry.addBucketForFluid(liquidMalgra);
     }
 
     public static void register(Fluid fluid) {

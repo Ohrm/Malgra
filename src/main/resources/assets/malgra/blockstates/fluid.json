@@ -7,7 +7,7 @@
         "liquidmalgra": {
             "model": "forge:fluid",
             "custom": {
-                "fluid": "liquidMalgra"
+                "fluid": "liquidmalgra"
             }
         }
     }
