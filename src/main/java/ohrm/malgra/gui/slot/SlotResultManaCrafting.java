@@ -29,7 +29,7 @@ public class SlotResultManaCrafting extends Slot {
 	@Override
 	public ItemStack onTake(EntityPlayer thePlayer, ItemStack stack) {
 
-		if (tileEntityManaCraftingTable.itemStacks[1] != null && tileEntityManaCraftingTable.itemStacks[1].hasTagCompound()) {
+		if ((!tileEntityManaCraftingTable.itemStacks[1].isEmpty()) && tileEntityManaCraftingTable.itemStacks[1].hasTagCompound()) {
 
 			tileEntityManaCraftingTable.itemStacks[1].getTagCompound().setInteger("malgra", tileEntityManaCraftingTable.itemStacks[1].getTagCompound().getInteger("malgra") - tileEntityManaCraftingTable.GetRecipeMalgraCost());
 		}
