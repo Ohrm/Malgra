@@ -10,7 +10,7 @@ public class Sounds {
 	public static SoundEvent soundSpecial;
 
 	public static void registerSounds() {
-		soundSpecial = registerSound("specialSound");
+		soundSpecial = registerSound("specialsound");
 	}
 
 	private static SoundEvent registerSound(String soundName) {
