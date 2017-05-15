@@ -51,8 +51,8 @@ public class Items {
 		extractor = new Extractor().setRegistryName(Reference.MODID, "manaExtractor").setUnlocalizedName("manaExtractor");
 		liquidMalgraBucket = new ItemBucket(Blocks.liquidMalgraBlock).setRegistryName(Reference.MODID, "liquidMalgraBucket").setUnlocalizedName("liquidMalgraBucket");
 		dimensionTool = new DimensionTool().setRegistryName(Reference.MODID, "dimensionTool").setUnlocalizedName("dimensionTool").setCreativeTab(MalgraMain.magicTab);
-		malgraPickaxe = new MalgraPickaxe(1, 1.2F, MALGRA, 500).setRegistryName(Reference.MODID, "malgraPickaxe").setUnlocalizedName("malgraPickaxe").setCreativeTab(MalgraMain.magicTab);
-		malgraSword = new MalgraSword(5, 1.6F, MALGRA, 500).setRegistryName(Reference.MODID, "malgraSword").setUnlocalizedName("malgraSword").setCreativeTab(MalgraMain.magicTab);
+		malgraPickaxe = new MalgraPickaxe(1, 1.2F, MALGRA, 500).setRegistryName(Reference.MODID, "malgrapickaxe").setUnlocalizedName("malgrapickaxe").setCreativeTab(MalgraMain.magicTab);
+		malgraSword = new MalgraSword(5, 1.6F, MALGRA, 500).setRegistryName(Reference.MODID, "malgrasword").setUnlocalizedName("malgrasword").setCreativeTab(MalgraMain.magicTab);
 		RegisterItems();
 	}
 	
@@ -107,6 +107,7 @@ public class Items {
 		RegisterRender(liquidMalgraBucket);
 		RegisterRender(dimensionTool);
 		RegisterRender(malgraPickaxe);
+		RegisterRender(malgraSword);
 	}
 	
 	private static void RegisterRender(Item item){
