@@ -14,11 +14,9 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
 import ohrm.malgra.capabilities.CapabilityMana;
 import ohrm.malgra.capabilities.CapabilityResearchActivites;
 import ohrm.malgra.capabilities.CapabilityResearchPoints;
@@ -30,14 +28,11 @@ import ohrm.malgra.packets.client.SyncManaData;
 import ohrm.malgra.packets.client.SyncResearchDimensions;
 import ohrm.malgra.packets.client.SyncResearchActivites;
 import ohrm.malgra.packets.client.SyncResearchPoints;
-import ohrm.malgra.world.Dimensions;
+import ohrm.malgra.world.ResearchDimensions;
 import ohrm.malgra.world.WorldProviderResearch;
 
 import java.util.Iterator;
 import java.util.Map;
-
-import static ohrm.malgra.world.Dimensions.addDim;
-import static ohrm.malgra.world.Dimensions.researchDimIDs;
 
 public class MalgraEventHandler {
 
@@ -141,22 +136,26 @@ public class MalgraEventHandler {
 			PacketDispatcher.sendTo(new SyncManaData(event.getEntity().getCapability(CapabilityMana.MANA, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchPoints(event.getEntity().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchActivites(event.getEntity().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES,  null)), (EntityPlayerMP) event.getEntity());
-
-            if(researchDimIDs.get(event.getEntity().getName()) == null) {
+            if(ResearchDimensions.get(event.getWorld()).researchDimIDs.get(event.getEntity().getName()) == null) {
                 int researchDimID = DimensionManager.getNextFreeDimId();
 
                 DimensionType researchDim = DimensionType.register("research" + event.getEntity().getName(), "", researchDimID, WorldProviderResearch.class, false);
                 DimensionManager.registerDimension(researchDimID, researchDim);
 
                 //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
-                addDim(event.getEntity().getName(), researchDimID, true);
-                Dimensions.researchDimTypes.put(researchDimID, researchDim);
+                //addDim(event.getEntity().getName(), researchDimID, true);
+				ResearchDimensions.get(event.getWorld()).researchDimIDs.put(event.getEntity().getName(), researchDimID);
+                //Dimensions.researchDimTypes.put(researchDimID, researchDim);
+				ResearchDimensions.get(event.getWorld()).researchDimTypes.put(researchDimID, researchDim);
 
-                Iterator it = Dimensions.researchDimIDs.entrySet().iterator();
+                Iterator it = ResearchDimensions.get(event.getWorld()).researchDimIDs.entrySet().iterator();
                 while (it.hasNext()) {
                     Map.Entry pair = (Map.Entry)it.next();
+                    if(FMLCommonHandler.instance().getSide() == Side.SERVER)
                     PacketDispatcher.sendTo(new SyncResearchDimensions((String)pair.getKey(), (Integer)pair.getValue()), (EntityPlayerMP) event.getEntity());
                 }
+
+				ResearchDimensions.get(event.getWorld()).markDirty();
 
             }
 		}

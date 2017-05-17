@@ -25,7 +25,6 @@ import ohrm.malgra.proxies.CommonProxy;
 import ohrm.malgra.tab.MalgraTab;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
 
-import ohrm.malgra.world.Dimensions;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,7 +56,6 @@ public class MalgraMain {
 		Fluids.init();
 		Blocks.InitBlocks();
 		Items.InitItems();
-		Dimensions.init();
 
 		CapabilityMana.register();
 		CapabilityResearchPoints.register();
@@ -95,14 +93,14 @@ public class MalgraMain {
     @EventHandler
     public void onServerStarted(FMLServerStartedEvent event){
 
-            Dimensions.loadDims();
+
 
     }
 
     @EventHandler
     public void onServerStopping(FMLServerStoppingEvent event){
        
-            Dimensions.saveDims();
+
 
     }
 	
