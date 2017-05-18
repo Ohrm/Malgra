@@ -28,6 +28,8 @@ public class ResearchDimensions extends WorldSavedData{
         super(DATA_NAME);
     }
 
+    public ResearchDimensions(String s){ super(s); }
+
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         NBTTagList list = nbt.getTagList("researchDimensions", Constants.NBT.TAG_COMPOUND);
