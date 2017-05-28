@@ -20,9 +20,5 @@ public class ResearchWaterPlacer extends Research {
     public void onUnlock() {
 
     }
-
-    @Override
-    public void onEnterResearchRoom() {
-
-    }
+    
 }

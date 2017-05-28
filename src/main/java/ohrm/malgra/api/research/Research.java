@@ -43,6 +43,5 @@ public abstract class Research {
 	}
 	
 	public abstract void onUnlock();
-	public abstract void onEnterResearchRoom();
 	
 }

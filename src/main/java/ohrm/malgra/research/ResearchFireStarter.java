@@ -24,8 +24,4 @@ public class ResearchFireStarter extends Research {
 
     }
 
-    @Override
-    public void onEnterResearchRoom() {
-
-    }
 }
