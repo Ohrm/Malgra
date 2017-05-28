@@ -53,9 +53,8 @@ public class ManaCraftingTable extends Block implements ITileEntityProvider {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		this.setDefaultState(this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()));
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override

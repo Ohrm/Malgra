@@ -18,6 +18,7 @@ item.malgrumExtractorTip.name=Malgrum Malgra Extractor Tip
 item.dimensiontool.name=Super Ultra Dimensional Travel and Structure Creation 'How Does This Even Work?' Device
 item.malgrapickaxe.name=Malgra Pickaxe
 item.malgrasword.name=Malgra Sword
+item.dimensionTool.name=Dimension Tool
 
 extractor.prefix.tiny=Tiny
 extractor.prefix.small=Small
@@ -31,6 +32,7 @@ extractor.prefix.diamond=Diamond
 extractor.prefix.malgrum=Malgrum
 
 tile.manacraftingtable.name=Malgra Crafting Table
+tile.researchstonebrick.name=Stone Brick
 
 gui.manaBar.mana=Malgra
 

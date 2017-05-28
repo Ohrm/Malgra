@@ -22,7 +22,7 @@ public class Items {
 	public static Item
 			magicDust, manaInjector, manaInjectorEmpty, extractor, tinyContainer, smallContainer,
 			mediumContainer, largeContainer, hugeContainer, flintExtractorTip, ironExtractorTip, quartzExtractorTip,
-			diamondExtractorTip, malgrumExtractorTip, liquidMalgraBucket, dimensionTool, malgraPickaxe, malgraSword,
+			diamondExtractorTip, malgrumExtractorTip, dimensionTool, malgraPickaxe, malgraSword,
 			malgraAxe, malgraShovel, malgraHoe
 			;
 
@@ -49,7 +49,6 @@ public class Items {
 		diamondExtractorTip = new ExtractorTip(TIP_DIAMOND, "diamond").setRegistryName(Reference.MODID, "diamondExtractorTip").setUnlocalizedName("diamondExtractorTip");
 		malgrumExtractorTip = new ExtractorTip(TIP_MALGRUM, "malgrum").setRegistryName(Reference.MODID, "malgrumExtractorTip").setUnlocalizedName("malgrumExtractorTip");
 		extractor = new Extractor().setRegistryName(Reference.MODID, "manaExtractor").setUnlocalizedName("manaExtractor");
-		liquidMalgraBucket = new ItemBucket(Blocks.liquidMalgraBlock).setRegistryName(Reference.MODID, "liquidMalgraBucket").setUnlocalizedName("liquidMalgraBucket");
 		dimensionTool = new DimensionTool().setRegistryName(Reference.MODID, "dimensionTool").setUnlocalizedName("dimensionTool").setCreativeTab(MalgraMain.magicTab);
 		malgraPickaxe = new MalgraPickaxe(1, 1.2F, MALGRA, 500).setRegistryName(Reference.MODID, "malgrapickaxe").setUnlocalizedName("malgrapickaxe").setCreativeTab(MalgraMain.magicTab);
 		malgraSword = new MalgraSword(5, 1.6F, MALGRA, 500).setRegistryName(Reference.MODID, "malgrasword").setUnlocalizedName("malgrasword").setCreativeTab(MalgraMain.magicTab);
@@ -72,7 +71,6 @@ public class Items {
 		GameRegistry.register(quartzExtractorTip);
 		GameRegistry.register(diamondExtractorTip);
 		GameRegistry.register(malgrumExtractorTip);
-		GameRegistry.register(liquidMalgraBucket);
 		GameRegistry.register(dimensionTool);
 		GameRegistry.register(malgraPickaxe);
 		GameRegistry.register(malgraSword);
@@ -104,7 +102,6 @@ public class Items {
 		RegisterRender(quartzExtractorTip, 0, "extractor_tip_quartz");
 		RegisterRender(diamondExtractorTip, 0, "extractor_tip_diamond");
 		RegisterRender(malgrumExtractorTip, 0, "extractor_tip_malgrum");
-		RegisterRender(liquidMalgraBucket);
 		RegisterRender(dimensionTool);
 		RegisterRender(malgraPickaxe);
 		RegisterRender(malgraSword);
@@ -112,7 +109,7 @@ public class Items {
 	
 	private static void RegisterRender(Item item){
 		
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(Reference.MODID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 				
 	}
 
