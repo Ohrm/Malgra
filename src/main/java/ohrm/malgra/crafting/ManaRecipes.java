@@ -1,6 +1,8 @@
 package ohrm.malgra.crafting;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.Level;
@@ -13,6 +15,7 @@ import ohrm.malgra.items.Items;
 public class ManaRecipes {
 
 	public static Map<ManaCraftingRecipe, Item> recipes = new HashMap<ManaCraftingRecipe, Item>();
+	public static List<ManaCraftingRecipe> recipesList = new ArrayList<ManaCraftingRecipe>();
 	
 	static{
 		
@@ -24,8 +27,11 @@ public class ManaRecipes {
 	public static void AddRecipe(Item output, int malgra, ItemStack...itemStacks){
 
 		try{
-			
-			recipes.put(new ManaCraftingRecipe(malgra, itemStacks), output);
+
+			ManaCraftingRecipe recipe = new ManaCraftingRecipe(malgra, new ItemStack(output), itemStacks);
+
+			recipes.put(recipe, output);
+			recipesList.add(recipe);
 			
 		}catch(IllegalArgumentException e){
 			

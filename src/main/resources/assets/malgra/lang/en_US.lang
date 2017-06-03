@@ -39,5 +39,6 @@ gui.manaBar.mana=Malgra
 tooltip.malgraProvider=Provides %1$s Malgra
 
 container.malgra.manaCraftingTable=Malgra Crafting Table
+malgra.jei.ManaCraftingTable=Malgra Crafting Table
 
 fluid.liquidMalgra=Liquid Malgra
