@@ -12,6 +12,9 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import ohrm.malgra.crafting.ManaCraftingRecipe;
+import ohrm.malgra.crafting.ManaRecipes;
+import ohrm.malgra.util.Utils;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -25,10 +28,8 @@ public class ManaCraftingCategory implements IRecipeCategory {
     public static final String UID = "ManaCraftingTable";
     private final IDrawable background;
     private final String localizedName;
-    //private final IDrawable overlay;
 
     public ManaCraftingCategory(IGuiHelper guiHelper){
-        //background = guiHelper.createBlankDrawable(256, 256);
         localizedName = I18n.format("malgra.jei.ManaCraftingTable");
         background = guiHelper.createDrawable(new ResourceLocation("malgra", "textures/gui/manacraftingtable.png"), 6, 11 , 140, 64);
     }
@@ -56,11 +57,7 @@ public class ManaCraftingCategory implements IRecipeCategory {
 
     @Override
     public void drawExtras(Minecraft minecraft) {
-        GlStateManager.enableAlpha();
-        GlStateManager.enableBlend();
-        //overlay.draw(minecraft, 48, 0);
-        GlStateManager.disableBlend();
-        GlStateManager.disableAlpha();
+
     }
 
     @Override

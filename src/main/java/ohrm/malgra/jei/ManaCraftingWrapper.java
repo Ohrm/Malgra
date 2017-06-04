@@ -6,6 +6,7 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import ohrm.malgra.crafting.ManaCraftingRecipe;
+import ohrm.malgra.util.Utils;
 import scala.actors.threadpool.Arrays;
 
 import java.util.List;
@@ -36,6 +37,8 @@ public class ManaCraftingWrapper implements IRecipeWrapper{
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 
+        minecraft.fontRenderer.drawString(Utils.translateToLocal("malgra.jei.manacraftingtable.required") + " " + mana, 0, 60, 0x808080, false);
+
     }
 
     @Override
@@ -47,4 +50,5 @@ public class ManaCraftingWrapper implements IRecipeWrapper{
     public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
         return false;
     }
+
 }

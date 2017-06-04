@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import ohrm.malgra.MalgraMain;
 import ohrm.malgra.items.Items;
+import ohrm.malgra.blocks.Blocks;
 
 public class ManaRecipes {
 
@@ -21,6 +22,7 @@ public class ManaRecipes {
 		
 		AddRecipe(Items.magicDust, 0, new ItemStack(net.minecraft.init.Blocks.DIRT));
 		AddRecipe(Items.manaInjector, 1, new ItemStack(net.minecraft.init.Blocks.WOODEN_BUTTON));
+		AddRecipe(Items.dimensionTool, 5, new ItemStack(Items.magicDust), new ItemStack(Items.magicDust), new ItemStack(Items.magicDust), new ItemStack(net.minecraft.init.Blocks.COAL_BLOCK));
 
 	}
 	

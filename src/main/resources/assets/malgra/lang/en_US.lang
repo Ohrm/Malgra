@@ -40,5 +40,6 @@ tooltip.malgraProvider=Provides %1$s Malgra
 
 container.malgra.manaCraftingTable=Malgra Crafting Table
 malgra.jei.ManaCraftingTable=Malgra Crafting Table
+malgra.jei.manacraftingtable.required=Malgra:
 
 fluid.liquidMalgra=Liquid Malgra
