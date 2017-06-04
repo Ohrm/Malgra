@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.crafting.ManaCraftingRecipe;
 import ohrm.malgra.crafting.ManaRecipes;
+import ohrm.malgra.gui.GuiManaCraftingTable;
 import ohrm.malgra.items.Items;
 
 /**
@@ -39,6 +40,8 @@ public class JEIPlugin extends BlankModPlugin {
         }, ManaCraftingCategory.UID);
 
         registry.addRecipeCategoryCraftingItem(new ItemStack(Blocks.manaCraftingTable), ManaCraftingCategory.UID);
+
+        registry.addRecipeClickArea(GuiManaCraftingTable.class, 90, 35, 21, 14, ManaCraftingCategory.UID);
 
         IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
         blacklist.addIngredientToBlacklist(new ItemStack(Blocks.researchStoneBrick));

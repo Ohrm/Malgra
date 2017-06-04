@@ -30,7 +30,7 @@ public class ManaCraftingCategory implements IRecipeCategory {
     public ManaCraftingCategory(IGuiHelper guiHelper){
         //background = guiHelper.createBlankDrawable(256, 256);
         localizedName = I18n.format("malgra.jei.ManaCraftingTable");
-        background = guiHelper.createDrawable(new ResourceLocation("malgra", "textures/gui/manacraftingtable.png"), 5, 11 , 141, 64);
+        background = guiHelper.createDrawable(new ResourceLocation("malgra", "textures/gui/manacraftingtable.png"), 6, 11 , 140, 64);
     }
 
     @Override
@@ -67,16 +67,16 @@ public class ManaCraftingCategory implements IRecipeCategory {
     public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
-        guiItemStacks.init(0, true, 0, 0);
-        guiItemStacks.init(1, true, 16, 0);
-        guiItemStacks.init(2, true, 32, 0);
-        guiItemStacks.init(3, true, 0, 16);
-        guiItemStacks.init(4, true, 16, 16);
-        guiItemStacks.init(5, true, 32, 16);
-        guiItemStacks.init(6, true, 0, 0);
-        guiItemStacks.init(7, true, 16, 32);
-        guiItemStacks.init(8, true, 32, 32);
-        guiItemStacks.init(9, false, 100, 100);
+        guiItemStacks.init(0, true, 23, 5);
+        guiItemStacks.init(1, true, 41, 5);
+        guiItemStacks.init(2, true, 59, 5);
+        guiItemStacks.init(3, true, 23, 23);
+        guiItemStacks.init(4, true, 41, 23);
+        guiItemStacks.init(5, true, 59, 23);
+        guiItemStacks.init(6, true, 23, 41);
+        guiItemStacks.init(7, true, 41, 41);
+        guiItemStacks.init(8, true, 59, 41);
+        guiItemStacks.init(9, false, 117, 23);
 
         List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
 
