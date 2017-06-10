@@ -85,14 +85,13 @@ public class ChunkProviderResearch implements IChunkGenerator {
         return new ArrayList<Biome.SpawnListEntry>();
     }
 
-    @Nullable
-    @Override
-    public BlockPos getStrongholdGen(World worldIn, String structureName, BlockPos position, boolean p_180513_4_) {
-        return null;
-    }
-
     public void recreateStructures(Chunk chunkIn, int x, int z)
     {
     }
 
+    @Nullable
+    @Override
+    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+        return null;
+    }
 }
