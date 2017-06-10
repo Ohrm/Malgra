@@ -254,27 +254,27 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 		if((!itemStacks[1].isEmpty()) && itemStacks[1].hasTagCompound()){
 			
 			recipe = ManaRecipes.GetResult(itemStacks[1].getTagCompound().getInteger("malgra"), temp);
-			Item item = ManaRecipes.recipes.get(recipe);
-			if(item == null){
+			ItemStack stack = recipe.getOutput();
+			if(stack.isEmpty()){
 				
 				this.itemStacks[0] = ItemStack.EMPTY;
 				
 			}else{
 				
-				this.itemStacks[0] = new ItemStack(item);
+				this.itemStacks[0] = stack;
 				//markDirty();
 			}
 			return;
 		}
 		
 		recipe = ManaRecipes.GetResult(0, temp);
-		Item item = ManaRecipes.recipes.get(recipe);
-		if(item == null){
+		ItemStack stack = recipe.getOutput();
+		if(stack.isEmpty()){
 			
 			this.itemStacks[0] = ItemStack.EMPTY;
 			
 		}else{
-			this.itemStacks[0] = new ItemStack(item);
+			this.itemStacks[0] = stack;
 			//markDirty();
 		}
 		
