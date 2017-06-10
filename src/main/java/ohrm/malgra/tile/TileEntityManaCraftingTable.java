@@ -232,52 +232,51 @@ public class TileEntityManaCraftingTable extends TileEntity implements IInventor
 
 		for(int i = 0; i < temp.length; i++){
 			temp[i] = ItemStack.EMPTY;
-		}
-
-		for(int i = 0; i < temp.length; i++){
-			
-			temp[i] = itemStacks[i+2];
+			if(itemStacks[i+2] != ItemStack.EMPTY)
+				temp[i] = itemStacks[i+2];
 			
 		}
 		
-		int empty = 0;
-		for(int i = 0; i < temp.length; i++){
-			
-			if(temp[i].isEmpty())
-				empty++;
-			
-		}
-		
-		if(empty == temp.length)
+		if(temp.length == 0){
+			itemStacks[0] = ItemStack.EMPTY;
 			return;
+		}
 		
 		if((!itemStacks[1].isEmpty()) && itemStacks[1].hasTagCompound()){
 			
 			recipe = ManaRecipes.GetResult(itemStacks[1].getTagCompound().getInteger("malgra"), temp);
+			if(recipe != null) {
+				ItemStack stack = recipe.getOutput();
+				if (stack.isEmpty()) {
+
+					this.itemStacks[0] = ItemStack.EMPTY;
+
+				} else {
+
+					this.itemStacks[0] = stack;
+					//markDirty();
+				}
+				return;
+			}
+		}
+		
+		recipe = ManaRecipes.GetResult(0, temp);
+		if(recipe != null) {
 			ItemStack stack = recipe.getOutput();
-			if(stack.isEmpty()){
-				
+
+			if (stack.isEmpty()) {
+
 				this.itemStacks[0] = ItemStack.EMPTY;
-				
-			}else{
-				
+
+			} else {
 				this.itemStacks[0] = stack;
 				//markDirty();
 			}
 			return;
 		}
-		
-		recipe = ManaRecipes.GetResult(0, temp);
-		ItemStack stack = recipe.getOutput();
-		if(stack.isEmpty()){
-			
-			this.itemStacks[0] = ItemStack.EMPTY;
-			
-		}else{
-			this.itemStacks[0] = stack;
-			//markDirty();
-		}
-		
+
+		this.itemStacks[0] = ItemStack.EMPTY;
+
 	}
-	
+
 }

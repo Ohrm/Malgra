@@ -5,9 +5,9 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import ohrm.malgra.crafting.ManaCraftingRecipe;
 import ohrm.malgra.util.Utils;
-import scala.actors.threadpool.Arrays;
 
 import java.util.List;
 
@@ -16,13 +16,24 @@ import java.util.List;
  */
 public class ManaCraftingWrapper implements IRecipeWrapper{
 
-    private final List<ItemStack> input;
+    private final List<List<ItemStack>> input;
     private final ItemStack output;
     private final int mana;
 
     public ManaCraftingWrapper(ManaCraftingRecipe recipe){
 
-        input = Arrays.asList(recipe.getInput());
+        ImmutableList.Builder<List<ItemStack>> builder = ImmutableList.builder();
+
+        for(Object obj : recipe.getInputs()){
+            if(obj instanceof ItemStack){
+                builder.add(ImmutableList.of((ItemStack)obj));
+            }
+            if(obj instanceof String){
+                builder.add(OreDictionary.getOres((String)obj));
+            }
+        }
+
+        input = builder.build();
         output = recipe.getOutput();
         mana = recipe.malgra;
 
@@ -30,7 +41,7 @@ public class ManaCraftingWrapper implements IRecipeWrapper{
 
     @Override
     public void getIngredients(IIngredients ingredients) {
-        ingredients.setInputs(ItemStack.class, input);
+        ingredients.setInputLists(ItemStack.class, input);
         ingredients.setOutput(ItemStack.class, output);
     }
 
