@@ -119,13 +119,13 @@ public class MalgraEventHandler {
 	public void onJoinWorld(EntityJoinWorldEvent event) {
 		if (event.getEntity() instanceof EntityItem && !(event.getEntity() instanceof EntityItemMalgraTool)) {
 			EntityItem entityItem = (EntityItem) event.getEntity();
-			if (entityItem.getEntityItem().getItem() == net.minecraft.init.Items.DIAMOND_PICKAXE) {
+			if (entityItem.getItem().getItem() == net.minecraft.init.Items.DIAMOND_PICKAXE) {
 				event.setCanceled(true);
 				ItemStack malgraPickaxe = new ItemStack(Items.malgraPickaxe);
 				malgraPickaxe.setTagCompound(new NBTTagCompound());
 				malgraPickaxe.getTagCompound().setInteger("malgra", ((MalgraTool)malgraPickaxe.getItem()).getMaxMalgra());
 
-				EntityItemMalgraTool newEntity = new EntityItemMalgraTool(event.getWorld(), event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, ((EntityItem) event.getEntity()).getEntityItem(), malgraPickaxe);
+				EntityItemMalgraTool newEntity = new EntityItemMalgraTool(event.getWorld(), event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, ((EntityItem) event.getEntity()).getItem(), malgraPickaxe);
 				event.getWorld().spawnEntity(newEntity);
 				NBTTagCompound nbt = new NBTTagCompound();
 				event.getEntity().writeToNBTOptional(nbt);

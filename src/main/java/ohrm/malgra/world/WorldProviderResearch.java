@@ -1,21 +1,15 @@
 package ohrm.malgra.world;
 
 import net.minecraft.init.Biomes;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeProviderSingle;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.end.DragonFightManager;
-import net.minecraft.world.gen.ChunkProviderEnd;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import javax.annotation.Nullable;
 
 /**
  * Created by Toby on 29/07/2016.

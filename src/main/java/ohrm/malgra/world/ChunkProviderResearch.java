@@ -1,28 +1,15 @@
 package ohrm.malgra.world;
 
-import net.minecraft.block.BlockChorusFlower;
 import net.minecraft.block.BlockFalling;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.chunk.IChunkGenerator;
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.NoiseGeneratorSimplex;
-import net.minecraft.world.gen.feature.WorldGenEndIsland;
-import net.minecraft.world.gen.structure.MapGenEndCity;
-import scala.Array;
+import net.minecraft.world.gen.IChunkGenerator;
 
 import javax.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -49,7 +36,7 @@ public class ChunkProviderResearch implements IChunkGenerator {
         this.rand = new Random(seed);
     }
 
-    public Chunk provideChunk(int x, int z)
+    public Chunk generateChunk(int x, int z)
     {
         this.chunkX = x; this.chunkZ = z;
         this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
@@ -87,6 +74,11 @@ public class ChunkProviderResearch implements IChunkGenerator {
 
     public void recreateStructures(Chunk chunkIn, int x, int z)
     {
+    }
+
+    @Override
+    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+        return false;
     }
 
     @Nullable

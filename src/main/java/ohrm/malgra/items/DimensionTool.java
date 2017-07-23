@@ -23,7 +23,7 @@ public class DimensionTool extends Item {
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         if (!worldIn.isRemote)
 	        if (entityLiving.dimension != ResearchDimensions.get(worldIn).researchDimIDs.get(entityLiving.getName()))
-				new TeleporterResearch(worldIn.getMinecraftServer().getServer().worldServerForDimension(ResearchDimensions.get(worldIn).researchDimIDs.get(entityLiving.getName()))).teleport(entityLiving, worldIn);
+				new TeleporterResearch(worldIn.getMinecraftServer().getServer().getWorld(ResearchDimensions.get(worldIn).researchDimIDs.get(entityLiving.getName()))).teleport(entityLiving, worldIn);
 		return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
 	}
 

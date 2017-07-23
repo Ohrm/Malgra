@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import ohrm.malgra.Reference;
 import ohrm.malgra.crafting.ManaCraftingRecipe;
 import ohrm.malgra.crafting.ManaRecipes;
 import ohrm.malgra.util.Utils;
@@ -42,6 +43,11 @@ public class ManaCraftingCategory implements IRecipeCategory {
     @Override
     public String getTitle() {
         return localizedName;
+    }
+
+    @Override
+    public String getModName() {
+        return Reference.NAME;
     }
 
     @Override
