@@ -21,7 +21,7 @@ public class WorldProviderResearch extends WorldProvider {
      */
     public void createBiomeProvider() {
         this.biomeProvider = new BiomeProviderSingle(Biomes.SKY);
-        this.hasNoSky = true;
+        this.hasSkyLight = false;
         System.out.println(getDimension());
     }
 
