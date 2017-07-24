@@ -1,5 +1,6 @@
 package ohrm.malgra;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -37,7 +38,7 @@ import java.util.Map;
 public class MalgraEventHandler {
 
 	@SubscribeEvent
-	public void onEntityConstructing(AttachCapabilitiesEvent.Entity event){
+	public void onEntityConstructing(AttachCapabilitiesEvent<Entity> event){
 		event.addCapability(new ResourceLocation(Reference.MODID, "IMana"), new ICapabilitySerializable<NBTTagCompound>() {
 			CapabilityMana.IMana inst = CapabilityMana.MANA.getDefaultInstance();
 

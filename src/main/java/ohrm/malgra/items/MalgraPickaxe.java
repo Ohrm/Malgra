@@ -21,9 +21,9 @@ public class MalgraPickaxe extends MalgraTool {
     public MalgraPickaxe(float attackDamageIn, float attackSpeedIn, ToolMaterial material, int maxMalgra) {
         super(attackDamageIn, attackSpeedIn, material, EFFECTIVE_ON, maxMalgra);
     }
-    
+
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
         ItemStack pickaxe = new ItemStack(Items.malgraPickaxe);
         pickaxe.setTagCompound(new NBTTagCompound());
         pickaxe.getTagCompound().setInteger("malgra", ((MalgraTool)pickaxe.getItem()).getMaxMalgra());
