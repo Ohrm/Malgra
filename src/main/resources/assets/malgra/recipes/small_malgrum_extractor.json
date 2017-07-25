@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "malgra:malgrumExtractorTip" },
+    { "item": "malgra:smallContainer" }
+  ],
+  "result": {
+    "item": "malgra:manaExtractor",
+    "nbt": {
+      "tip": "malgra:malgrumExtractorTip",
+      "container": "malgra:smallContainer"
+    }
+  }
+}
