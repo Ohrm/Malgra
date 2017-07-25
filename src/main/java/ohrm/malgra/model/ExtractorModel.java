@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 import ohrm.malgra.Reference;
 import ohrm.malgra.items.Items;
@@ -22,7 +21,7 @@ import java.util.Map;
 /**
  * Created by Toby on 18/04/2016.
  */
-public class ExtractorModel implements IPerspectiveAwareModel {
+public class ExtractorModel implements IBakedModel {
 
     public static final ModelResourceLocation baseModelResourceLocation = new ModelResourceLocation(Reference.MODID + ":extractor_base", "inventory");
     public static final Map<Item, ModelResourceLocation> containerModelResourceLocations = new HashMap<Item, ModelResourceLocation>() {{

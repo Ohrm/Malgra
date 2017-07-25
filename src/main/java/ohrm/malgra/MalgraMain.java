@@ -54,18 +54,13 @@ public class MalgraMain {
 		
 		magicTab = new MalgraTab(CreativeTabs.getNextID(), "malgraTab");
 		Fluids.init();
-		Blocks.InitBlocks();
-		Items.InitItems();
 
 		CapabilityMana.register();
 		CapabilityResearchPoints.register();
 		CapabilityResearchActivites.register();
-		MinecraftForge.EVENT_BUS.register(Items.extractor);
 
         eventHandler = new MalgraEventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
-
-		MinecraftForge.EVENT_BUS.register(Items.malgraPickaxe);
 
 		proxy.PreInit(e);
 		PacketDispatcher.registerPackets();
@@ -75,8 +70,9 @@ public class MalgraMain {
 	@EventHandler
 	public void Init(FMLInitializationEvent e){
 
+		MinecraftForge.EVENT_BUS.register(Items.extractor);
+		MinecraftForge.EVENT_BUS.register(Items.malgraPickaxe);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
-		CraftingRecipes.init();
 		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, "Mana Crafting Table");
 		Sounds.registerSounds();
 		proxy.Init(e);

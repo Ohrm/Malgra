@@ -27,6 +27,8 @@ public class ModelBakeHandler {
         Iterator containerModelResourceLocations = ExtractorModel.containerModelResourceLocations.entrySet().iterator();
         while (containerModelResourceLocations.hasNext()) {
             Map.Entry<Item, ModelResourceLocation> pair = (Map.Entry<Item, ModelResourceLocation>)containerModelResourceLocations.next();
+            ModelResourceLocation loc = pair.getValue();
+            IBakedModel model = event.getModelRegistry().getObject(pair.getValue());
             containerModels.put(pair.getKey(), event.getModelRegistry().getObject(pair.getValue()));
             containerModelResourceLocations.remove();
         }

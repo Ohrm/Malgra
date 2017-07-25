@@ -79,7 +79,7 @@ public class Extractor extends Item {
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
         Multimap multimap = super.getAttributeModifiers(slot, stack);
         if (stack.hasTagCompound()) {
-            ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip")));
+            ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("tip")));
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)tip.getMaterial().getDamageVsEntity(), 0));
         }
         return multimap;
@@ -103,7 +103,7 @@ public class Extractor extends Item {
     	int extractorLevel = -1;
     	
     	if (stack.hasTagCompound()) {
-            ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip")));
+            ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("tip")));
             extractorLevel = tip.material.getHarvestLevel();
         }
     	
@@ -116,7 +116,7 @@ public class Extractor extends Item {
         
     	if (shouldGiveMalgra(state, stack) && getMalgraProviders().containsKey(state.getBlock())) {
             if (stack.hasTagCompound()) {
-                ExtractorContainer container = (ExtractorContainer) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("container"))));
+                ExtractorContainer container = (ExtractorContainer) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("container"))));
                 if (stack.getTagCompound().getInteger("malgra") + getMalgraProviders().get(state.getBlock()) > container.getStorage()) {
                     stack.getTagCompound().setInteger("buffer", (stack.getTagCompound().getInteger("malgra") + getMalgraProviders().get(state.getBlock())) - container.getStorage());
                     stack.getTagCompound().setInteger("malgra", container.getStorage());
@@ -126,7 +126,7 @@ public class Extractor extends Item {
             } else {
                 stack.setTagCompound(new NBTTagCompound());
                 stack.getTagCompound().setInteger("malgra", getMalgraProviders().get(state.getBlock()));
-                stack.getTagCompound().setString("container", Items.tinyContainer.getUnlocalizedName().substring(5));
+                stack.getTagCompound().setString("container", Items.tinyContainer.getRegistryName().toString());
             }
             if(!worldIn.isRemote){
             	
@@ -144,10 +144,11 @@ public class Extractor extends Item {
         return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
     }
 
-
-
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+        if(tab != MalgraMain.magicTab)
+            return;
+
         ItemStack
                 t_f_extractor, t_i_extractor, t_q_extractor, t_d_extractor, t_m_extractor, s_f_extractor,
                 s_i_extractor, s_q_extractor, s_d_extractor, s_m_extractor, m_f_extractor, m_i_extractor,
@@ -183,84 +184,84 @@ public class Extractor extends Item {
         h_m_extractor = new ItemStack(Items.extractor);
 
         t_f_extractor.setTagCompound(new NBTTagCompound());
-        t_f_extractor.getTagCompound().setString("container", Items.tinyContainer.getUnlocalizedName().substring(5));
-        t_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getUnlocalizedName().substring(5));
+        t_f_extractor.getTagCompound().setString("container", Items.tinyContainer.getRegistryName().toString());
+        t_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getRegistryName().toString());
         t_i_extractor.setTagCompound(new NBTTagCompound());
-        t_i_extractor.getTagCompound().setString("container", Items.tinyContainer.getUnlocalizedName().substring(5));
-        t_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getUnlocalizedName().substring(5));
+        t_i_extractor.getTagCompound().setString("container", Items.tinyContainer.getRegistryName().toString());
+        t_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getRegistryName().toString());
         t_q_extractor.setTagCompound(new NBTTagCompound());
-        t_q_extractor.getTagCompound().setString("container", Items.tinyContainer.getUnlocalizedName().substring(5));
-        t_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getUnlocalizedName().substring(5));
+        t_q_extractor.getTagCompound().setString("container", Items.tinyContainer.getRegistryName().toString());
+        t_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getRegistryName().toString());
         t_d_extractor.setTagCompound(new NBTTagCompound());
-        t_d_extractor.getTagCompound().setString("container", Items.tinyContainer.getUnlocalizedName().substring(5));
-        t_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getUnlocalizedName().substring(5));
+        t_d_extractor.getTagCompound().setString("container", Items.tinyContainer.getRegistryName().toString());
+        t_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getRegistryName().toString());
         t_m_extractor.setTagCompound(new NBTTagCompound());
-        t_m_extractor.getTagCompound().setString("container", Items.tinyContainer.getUnlocalizedName().substring(5));
-        t_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getUnlocalizedName().substring(5));
+        t_m_extractor.getTagCompound().setString("container", Items.tinyContainer.getRegistryName().toString());
+        t_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getRegistryName().toString());
 
         s_f_extractor.setTagCompound(new NBTTagCompound());
-        s_f_extractor.getTagCompound().setString("container", Items.smallContainer.getUnlocalizedName().substring(5));
-        s_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getUnlocalizedName().substring(5));
+        s_f_extractor.getTagCompound().setString("container", Items.smallContainer.getRegistryName().toString());
+        s_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getRegistryName().toString());
         s_i_extractor.setTagCompound(new NBTTagCompound());
-        s_i_extractor.getTagCompound().setString("container", Items.smallContainer.getUnlocalizedName().substring(5));
-        s_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getUnlocalizedName().substring(5));
+        s_i_extractor.getTagCompound().setString("container", Items.smallContainer.getRegistryName().toString());
+        s_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getRegistryName().toString());
         s_q_extractor.setTagCompound(new NBTTagCompound());
-        s_q_extractor.getTagCompound().setString("container", Items.smallContainer.getUnlocalizedName().substring(5));
-        s_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getUnlocalizedName().substring(5));
+        s_q_extractor.getTagCompound().setString("container", Items.smallContainer.getRegistryName().toString());
+        s_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getRegistryName().toString());
         s_d_extractor.setTagCompound(new NBTTagCompound());
-        s_d_extractor.getTagCompound().setString("container", Items.smallContainer.getUnlocalizedName().substring(5));
-        s_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getUnlocalizedName().substring(5));
+        s_d_extractor.getTagCompound().setString("container", Items.smallContainer.getRegistryName().toString());
+        s_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getRegistryName().toString());
         s_m_extractor.setTagCompound(new NBTTagCompound());
-        s_m_extractor.getTagCompound().setString("container", Items.smallContainer.getUnlocalizedName().substring(5));
-        s_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getUnlocalizedName().substring(5));
+        s_m_extractor.getTagCompound().setString("container", Items.smallContainer.getRegistryName().toString());
+        s_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getRegistryName().toString());
 
         m_f_extractor.setTagCompound(new NBTTagCompound());
-        m_f_extractor.getTagCompound().setString("container", Items.mediumContainer.getUnlocalizedName().substring(5));
-        m_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getUnlocalizedName().substring(5));
+        m_f_extractor.getTagCompound().setString("container", Items.mediumContainer.getRegistryName().toString());
+        m_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getRegistryName().toString());
         m_i_extractor.setTagCompound(new NBTTagCompound());
-        m_i_extractor.getTagCompound().setString("container", Items.mediumContainer.getUnlocalizedName().substring(5));
-        m_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getUnlocalizedName().substring(5));
+        m_i_extractor.getTagCompound().setString("container", Items.mediumContainer.getRegistryName().toString());
+        m_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getRegistryName().toString());
         m_q_extractor.setTagCompound(new NBTTagCompound());
-        m_q_extractor.getTagCompound().setString("container", Items.mediumContainer.getUnlocalizedName().substring(5));
-        m_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getUnlocalizedName().substring(5));
+        m_q_extractor.getTagCompound().setString("container", Items.mediumContainer.getRegistryName().toString());
+        m_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getRegistryName().toString());
         m_d_extractor.setTagCompound(new NBTTagCompound());
-        m_d_extractor.getTagCompound().setString("container", Items.mediumContainer.getUnlocalizedName().substring(5));
-        m_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getUnlocalizedName().substring(5));
+        m_d_extractor.getTagCompound().setString("container", Items.mediumContainer.getRegistryName().toString());
+        m_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getRegistryName().toString());
         m_m_extractor.setTagCompound(new NBTTagCompound());
-        m_m_extractor.getTagCompound().setString("container", Items.mediumContainer.getUnlocalizedName().substring(5));
-        m_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getUnlocalizedName().substring(5));
+        m_m_extractor.getTagCompound().setString("container", Items.mediumContainer.getRegistryName().toString());
+        m_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getRegistryName().toString());
 
         l_f_extractor.setTagCompound(new NBTTagCompound());
-        l_f_extractor.getTagCompound().setString("container", Items.largeContainer.getUnlocalizedName().substring(5));
-        l_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getUnlocalizedName().substring(5));
+        l_f_extractor.getTagCompound().setString("container", Items.largeContainer.getRegistryName().toString());
+        l_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getRegistryName().toString());
         l_i_extractor.setTagCompound(new NBTTagCompound());
-        l_i_extractor.getTagCompound().setString("container", Items.largeContainer.getUnlocalizedName().substring(5));
-        l_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getUnlocalizedName().substring(5));
+        l_i_extractor.getTagCompound().setString("container", Items.largeContainer.getRegistryName().toString());
+        l_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getRegistryName().toString());
         l_q_extractor.setTagCompound(new NBTTagCompound());
-        l_q_extractor.getTagCompound().setString("container", Items.largeContainer.getUnlocalizedName().substring(5));
-        l_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getUnlocalizedName().substring(5));
+        l_q_extractor.getTagCompound().setString("container", Items.largeContainer.getRegistryName().toString());
+        l_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getRegistryName().toString());
         l_d_extractor.setTagCompound(new NBTTagCompound());
-        l_d_extractor.getTagCompound().setString("container", Items.largeContainer.getUnlocalizedName().substring(5));
-        l_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getUnlocalizedName().substring(5));
+        l_d_extractor.getTagCompound().setString("container", Items.largeContainer.getRegistryName().toString());
+        l_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getRegistryName().toString());
         l_m_extractor.setTagCompound(new NBTTagCompound());
-        l_m_extractor.getTagCompound().setString("container", Items.largeContainer.getUnlocalizedName().substring(5));
-        l_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getUnlocalizedName().substring(5));
+        l_m_extractor.getTagCompound().setString("container", Items.largeContainer.getRegistryName().toString());
+        l_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getRegistryName().toString());
 
         h_f_extractor.setTagCompound(new NBTTagCompound());
-        h_f_extractor.getTagCompound().setString("container", Items.hugeContainer.getUnlocalizedName().substring(5));
-        h_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getUnlocalizedName().substring(5));
+        h_f_extractor.getTagCompound().setString("container", Items.hugeContainer.getRegistryName().toString());
+        h_f_extractor.getTagCompound().setString("tip", Items.flintExtractorTip.getRegistryName().toString());
         h_i_extractor.setTagCompound(new NBTTagCompound());
-        h_i_extractor.getTagCompound().setString("container", Items.hugeContainer.getUnlocalizedName().substring(5));
-        h_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getUnlocalizedName().substring(5));
+        h_i_extractor.getTagCompound().setString("container", Items.hugeContainer.getRegistryName().toString());
+        h_i_extractor.getTagCompound().setString("tip", Items.ironExtractorTip.getRegistryName().toString());
         h_q_extractor.setTagCompound(new NBTTagCompound());
-        h_q_extractor.getTagCompound().setString("container", Items.hugeContainer.getUnlocalizedName().substring(5));
-        h_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getUnlocalizedName().substring(5));
+        h_q_extractor.getTagCompound().setString("container", Items.hugeContainer.getRegistryName().toString());
+        h_q_extractor.getTagCompound().setString("tip", Items.quartzExtractorTip.getRegistryName().toString());
         h_d_extractor.setTagCompound(new NBTTagCompound());
-        h_d_extractor.getTagCompound().setString("container", Items.hugeContainer.getUnlocalizedName().substring(5));
-        h_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getUnlocalizedName().substring(5));
+        h_d_extractor.getTagCompound().setString("container", Items.hugeContainer.getRegistryName().toString());
+        h_d_extractor.getTagCompound().setString("tip", Items.diamondExtractorTip.getRegistryName().toString());
         h_m_extractor.setTagCompound(new NBTTagCompound());
-        h_m_extractor.getTagCompound().setString("container", Items.hugeContainer.getUnlocalizedName().substring(5));
-        h_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getUnlocalizedName().substring(5));
+        h_m_extractor.getTagCompound().setString("container", Items.hugeContainer.getRegistryName().toString());
+        h_m_extractor.getTagCompound().setString("tip", Items.malgrumExtractorTip.getRegistryName().toString());
 
         subItems.add(t_f_extractor);
         subItems.add(t_i_extractor);
@@ -296,8 +297,8 @@ public class Extractor extends Item {
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
         if (stack.hasTagCompound()) {
-            ExtractorContainer container = (ExtractorContainer) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("container"))));
-            ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip")));
+            ExtractorContainer container = (ExtractorContainer) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("container"))));
+            ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("tip")));
             if (container != null && tip != null) {
                 String containerName = "extractor.prefix." + container.getPrefix();
                 String tipName = "extractor.prefix." + tip.getPrefix();
@@ -318,9 +319,6 @@ public class Extractor extends Item {
         return ImmutableSet.of("pickaxe", "shovel", "axe");
     }
 
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) { /* Replaced by ItemTooltipEvent */ }
-
     @SubscribeEvent
     public void onTooltipEvent(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
@@ -330,7 +328,7 @@ public class Extractor extends Item {
             int maxMalgra = 0;
             if (stack.hasTagCompound()) {
                 malgra = stack.getTagCompound().getInteger("malgra");
-                ExtractorContainer container = (ExtractorContainer) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("container"))));
+                ExtractorContainer container = (ExtractorContainer) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("container"))));
                 maxMalgra = container.getStorage();
             } else {
                 stack.setTagCompound(new NBTTagCompound());
@@ -339,7 +337,7 @@ public class Extractor extends Item {
             }
             event.getToolTip().add(Utils.translateToLocal("item.manaExtractor.malgraStored") + ": " + malgra + "/" + maxMalgra);
             if (stack.hasTagCompound()) {
-                ExtractorTip tip = (ExtractorTip) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip"))));
+                ExtractorTip tip = (ExtractorTip) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("tip"))));
                 if (tip != null)
                     event.getToolTip().add((tip.getMaterial().getDamageVsEntity() + 4) + " " + Utils.translateToLocal("attribute.name.generic.attackDamage"));
             }

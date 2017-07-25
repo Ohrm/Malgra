@@ -25,8 +25,8 @@ public class ExtractorItemOverrides extends ItemOverrideList {
     @Override
     public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
         if (stack.hasTagCompound()) {
-            ((ExtractorModel) originalModel).container = ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("container")));
-            ((ExtractorModel) originalModel).tip = ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip")));
+            ((ExtractorModel) originalModel).container = ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("container")));
+            ((ExtractorModel) originalModel).tip = ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("tip")));
         }
         return originalModel;
     }

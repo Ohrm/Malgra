@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateBase;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,6 +21,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
@@ -101,11 +103,11 @@ public class MalgraTool extends ItemTool {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         if (stack.hasTagCompound()) {
             tooltip.add("Stored Malgra: " + stack.getTagCompound().getInteger("malgra") + "/" + getMaxMalgra());
         }
-        super.addInformation(stack, playerIn, tooltip, advanced);
+        super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 
     @Override

@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import ohrm.malgra.MalgraMain;
 
 import java.util.List;
 import java.util.Set;
@@ -25,7 +26,10 @@ public class MalgraSword extends MalgraTool {
     }
 
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+        if(tab != MalgraMain.magicTab)
+            return;
+
         ItemStack sword = new ItemStack(Items.malgraSword);
         sword.setTagCompound(new NBTTagCompound());
         sword.getTagCompound().setInteger("malgra", ((MalgraTool)sword.getItem()).getMaxMalgra());
