@@ -1,9 +1,5 @@
 package ohrm.malgra.capabilities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -11,7 +7,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import scala.language;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CapabilityResearchActivites {
 	

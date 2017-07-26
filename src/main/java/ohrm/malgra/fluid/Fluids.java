@@ -3,7 +3,6 @@ package ohrm.malgra.fluid;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import ohrm.malgra.Reference;
 
 /**
  * Created by Toby on 18/04/2016.

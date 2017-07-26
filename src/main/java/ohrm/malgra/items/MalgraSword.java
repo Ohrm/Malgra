@@ -2,16 +2,13 @@ package ohrm.malgra.items;
 
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import ohrm.malgra.MalgraMain;
 
-import java.util.List;
 import java.util.Set;
 
 /**

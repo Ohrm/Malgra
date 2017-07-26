@@ -1,19 +1,16 @@
 package ohrm.malgra.gui;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import ohrm.malgra.tile.TileEntityManaCraftingTable;
 import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.gui.slot.SlotExtractor;
 import ohrm.malgra.gui.slot.SlotResultManaCrafting;
+import ohrm.malgra.tile.TileEntityManaCraftingTable;
 
 public class ContainerManaCraftingTable extends Container{
 

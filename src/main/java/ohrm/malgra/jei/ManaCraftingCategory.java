@@ -8,14 +8,10 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import ohrm.malgra.Reference;
-import ohrm.malgra.crafting.ManaCraftingRecipe;
-import ohrm.malgra.crafting.ManaRecipes;
-import ohrm.malgra.util.Utils;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

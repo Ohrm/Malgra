@@ -1,15 +1,11 @@
 package ohrm.malgra.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
+import org.lwjgl.opengl.GL11;
 
 public class GuiManaCraftingTable extends GuiContainer{
 

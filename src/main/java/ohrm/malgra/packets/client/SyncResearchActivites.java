@@ -1,17 +1,15 @@
 package ohrm.malgra.packets.client;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.management.loading.PrivateClassLoader;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import ohrm.malgra.capabilities.CapabilityResearchActivites;
 import ohrm.malgra.packets.AbstractMessage.AbstractClientMessage;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SyncResearchActivites extends AbstractClientMessage<SyncResearchActivites> {
 

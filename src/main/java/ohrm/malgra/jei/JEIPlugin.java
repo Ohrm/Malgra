@@ -12,7 +12,6 @@ import ohrm.malgra.blocks.Blocks;
 import ohrm.malgra.crafting.ManaCraftingRecipe;
 import ohrm.malgra.crafting.ManaRecipes;
 import ohrm.malgra.gui.GuiManaCraftingTable;
-import ohrm.malgra.items.Items;
 
 /**
  * Created by xyz56 on 28/05/2017.

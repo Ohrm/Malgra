@@ -1,10 +1,7 @@
 package ohrm.malgra.research;
 
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import ohrm.malgra.api.research.Research;
-
-import java.util.List;
 
 /**
  * Created by Chris on 13/08/2016.
