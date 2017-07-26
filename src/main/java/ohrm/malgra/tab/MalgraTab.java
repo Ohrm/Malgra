@@ -3,8 +3,8 @@ package ohrm.malgra.tab;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.fluids.UniversalBucket;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import ohrm.malgra.fluid.Fluids;
 import ohrm.malgra.items.Items;
 
@@ -25,6 +25,6 @@ public class MalgraTab extends CreativeTabs{
 	public void displayAllRelevantItems(NonNullList<ItemStack> itemStacks) {
 		super.displayAllRelevantItems(itemStacks);
 		//Add the universal bucket to the creative tab
-		itemStacks.add(UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, Fluids.liquidMalgra));
+		itemStacks.add(FluidUtil.getFilledBucket(new FluidStack(Fluids.liquidMalgra, 1000)));
 	}
 }
