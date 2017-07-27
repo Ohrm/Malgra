@@ -48,6 +48,9 @@ public class Items {
 	@ObjectHolder("malgra:malgrasword")
 	public static Item malgraSword;
 
+	@ObjectHolder("malgra:liquidmalgrablock")
+	public static Item liquidMalgraItem;
+
 	public static final Item.ToolMaterial TIP_FLINT = EnumHelper.addToolMaterial("TIP_FLINT", 0, 40, 1.0F, -2.0F, 0);
 	public static final Item.ToolMaterial TIP_IRON = EnumHelper.addToolMaterial("TIP_IRON", 0, 500, 3.0F, 0.0F, 0);
 	public static final Item.ToolMaterial TIP_QUARTZ = EnumHelper.addToolMaterial("TIP_QUARTZ", 0, 200, 7.0F, 1.0F, 0);

@@ -34,6 +34,10 @@ public class ClientProxy extends CommonProxy {
 
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event) {
+
+		ModelBakery.registerItemVariants(Items.liquidMalgraItem);
+		ModelLoader.setCustomMeshDefinition(Items.liquidMalgraItem, is -> new ModelResourceLocation(Reference.MODID.toLowerCase() + ":liquidmalgrablock", "liquidmalgra"));
+
 		registerRender(Items.magicDust);
 		registerRender(Items.manaInjector);
 		registerRender(Items.manaInjectorEmpty);
@@ -65,8 +69,14 @@ public class ClientProxy extends CommonProxy {
 		//Blocks
 		registerRender(Item.getItemFromBlock(Blocks.manaCraftingTable));
 		registerRender(Item.getItemFromBlock(Blocks.specialBlock));
-		//RegisterRender(liquidMalgraBlock);
 		registerRender(Item.getItemFromBlock(Blocks.researchStoneBrick));
+
+		ModelLoader.setCustomStateMapper(Blocks.liquidMalgraBlock, new StateMapperBase() {
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return new ModelResourceLocation(Reference.MODID.toLowerCase() + ":liquidmalgrablock", "liquidmalgra");
+			}
+		});
 	}
 
 	public static void registerRender(Item item) {

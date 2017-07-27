@@ -26,7 +26,7 @@ public class Blocks {
 		@SubscribeEvent
 		public static void registerBlocks(RegistryEvent.Register<Block> event){
 			event.getRegistry().register(new ManaCraftingTable().setRegistryName(Reference.MODID, "manacraftingtable").setUnlocalizedName("manacraftingtable").setCreativeTab(MalgraMain.magicTab));
-			event.getRegistry().register(new LiquidMalgra(Fluids.liquidMalgra, Material.WATER).setRegistryName(Reference.MODID, "liquidMalgraBlock").setUnlocalizedName("liquidMalgraBlock"));
+			event.getRegistry().register(new LiquidMalgra(Fluids.liquidMalgra, Material.WATER).setRegistryName(Reference.MODID, "liquidmalgrablock").setUnlocalizedName("liquidmalgrablock"));
 			event.getRegistry().register(new SpecialBlock().setRegistryName(Reference.MODID, "specialblock").setUnlocalizedName("specialblock").setCreativeTab(MalgraMain.magicTab));
 			event.getRegistry().register(new ResearchStoneBrick().setRegistryName(Reference.MODID, "researchstonebrick").setUnlocalizedName("researchstonebrick"));
 		}
