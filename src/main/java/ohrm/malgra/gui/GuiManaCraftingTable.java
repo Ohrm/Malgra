@@ -29,9 +29,11 @@ public class GuiManaCraftingTable extends GuiContainer{
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float f) {
+		this.drawDefaultBackground();
 		super.drawScreen(mouseX, mouseY, f);
 		xSize_lo = mouseX;
 		ySize_lo = mouseY;
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 
 	@Override
