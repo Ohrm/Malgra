@@ -20,9 +20,37 @@ plugins {
     id "net.minecraftforge.gradle.forge" version "2.0.2"
 }
 */
-version = "1.0"
-group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+
+def versionPropsFile = file('version.properties')
+def versionBuild
+def modVersion
+
+if (versionPropsFile.canRead()) {
+    def Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(versionPropsFile))
+    versionBuild = versionProps['VERSION_BUILD'].toInteger()
+} else {
+    versionBuild = "homebuilt"
+}
+
+modVersion = "0.0.1"
+
+version = modVersion + "-" + versionBuild
+group= "ohrm.malgra" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "malgra"
+
+task autoIncrementBuildNumber << {
+
+    if (versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+        versionProps.load(new FileInputStream(versionPropsFile))
+        versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
+        versionProps['VERSION_BUILD'] = versionBuild.toString()
+        versionProps.store(versionPropsFile.newWriter(), null)
+    }
+}
+
+jar.dependsOn autoIncrementBuildNumber
 
 minecraft {
     version = "1.12-latest"
