@@ -45,7 +45,7 @@ public class TeleporterResearch extends Teleporter {
         entity.motionX = entity.motionY = entity.motionZ = 0.0D;
         entity.setPosition(width/2, dy+1, depth/2);
 
-        playerMP.mcServer.getPlayerList().transferPlayerToDimension(playerMP, ResearchDimensions.get(world).researchDimIDs.get(playerMP.getName()), this);
+        playerMP.mcServer.getPlayerList().transferPlayerToDimension(playerMP, ResearchDimensions.get(world).researchDimIDs.get(playerMP.getUniqueID().toString()), this);
 
         entity.setPosition(width/2, dy+1, depth/2);
         
@@ -73,7 +73,7 @@ public class TeleporterResearch extends Teleporter {
     @Override
     public void placeInPortal(Entity entityIn, float rotationYaw) {
         
-    	if (worldServerInstance.provider.getDimension() == ResearchDimensions.get(entityIn.world).researchDimIDs.get(entityIn.getName())) {
+    	if (worldServerInstance.provider.getDimension() == ResearchDimensions.get(entityIn.world).researchDimIDs.get(entityIn.getUniqueID().toString())) {
             
             entityIn.setLocationAndAngles(entityIn.posX, entityIn.posY, entityIn.posZ, entityIn.rotationYaw, 0.0F);
 

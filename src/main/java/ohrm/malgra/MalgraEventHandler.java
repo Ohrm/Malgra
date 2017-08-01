@@ -137,16 +137,13 @@ public class MalgraEventHandler {
 			PacketDispatcher.sendTo(new SyncManaData(event.getEntity().getCapability(CapabilityMana.MANA, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchPoints(event.getEntity().getCapability(CapabilityResearchPoints.RESEARCHPOINTS, null)), (EntityPlayerMP) event.getEntity());
 			PacketDispatcher.sendTo(new SyncResearchActivites(event.getEntity().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES,  null)), (EntityPlayerMP) event.getEntity());
-            if(ResearchDimensions.get(event.getWorld()).researchDimIDs.get(event.getEntity().getName()) == null) {
+            if(ResearchDimensions.get(event.getWorld()).researchDimIDs.get(event.getEntity().getUniqueID().toString()) == null) {
                 int researchDimID = DimensionManager.getNextFreeDimId();
 
-                DimensionType researchDim = DimensionType.register("research" + event.getEntity().getName(), "", researchDimID, WorldProviderResearch.class, false);
+                DimensionType researchDim = DimensionType.register("research" + event.getEntity().getUniqueID().toString(), "", researchDimID, WorldProviderResearch.class, false);
                 DimensionManager.registerDimension(researchDimID, researchDim);
 
-                //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
-                //addDim(event.getEntity().getName(), researchDimID, true);
-				ResearchDimensions.get(event.getWorld()).researchDimIDs.put(event.getEntity().getName(), researchDimID);
-                //Dimensions.researchDimTypes.put(researchDimID, researchDim);
+				ResearchDimensions.get(event.getWorld()).researchDimIDs.put(event.getEntity().getUniqueID().toString(), researchDimID);
 				ResearchDimensions.get(event.getWorld()).researchDimTypes.put(researchDimID, researchDim);
 
                 Iterator it = ResearchDimensions.get(event.getWorld()).researchDimIDs.entrySet().iterator();

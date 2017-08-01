@@ -49,12 +49,7 @@ public class SyncResearchDimensions extends AbstractClientMessage<SyncResearchDi
 
             DimensionManager.registerDimension(this.dimID, researchDim);
 
-            //Dimensions.researchDims.put(event.getEntity().getName(), researchDimID);
-            //Dimensions.addDim(this.username, this.dimID, true);
-            //Dimensions.researchDimTypes.put(this.dimID, researchDim);
-
             ResearchDimensions.get(player.world).researchDimIDs.put(this.username, this.dimID);
-            //Dimensions.researchDimTypes.put(researchDimID, researchDim);
             ResearchDimensions.get(player.world).researchDimTypes.put(this.dimID, researchDim);
         }else{
 

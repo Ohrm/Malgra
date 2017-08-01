@@ -22,14 +22,14 @@ public class DimensionTool extends Item {
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
         if (!worldIn.isRemote)
-	        if (entityLiving.dimension != ResearchDimensions.get(worldIn).researchDimIDs.get(entityLiving.getName()))
-				new TeleporterResearch(worldIn.getMinecraftServer().getServer().getWorld(ResearchDimensions.get(worldIn).researchDimIDs.get(entityLiving.getName()))).teleport(entityLiving, worldIn);
+	        if (entityLiving.dimension != ResearchDimensions.get(worldIn).researchDimIDs.get(entityLiving.getUniqueID().toString()))
+				new TeleporterResearch(worldIn.getMinecraftServer().getServer().getWorld(ResearchDimensions.get(worldIn).researchDimIDs.get(entityLiving.getUniqueID().toString()))).teleport(entityLiving, worldIn);
 		return super.onBlockDestroyed(stack, worldIn, state, pos, entityLiving);
 	}
 
 	@Override
 	public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player) {
-		if (player.dimension == ResearchDimensions.get(player.world).researchDimIDs.get(player.getName()))
+		if (player.dimension == ResearchDimensions.get(player.world).researchDimIDs.get(player.getUniqueID().toString()))
 			new WorldGenResearchRoom().generate(player.world, new Random(), player.getPosition().down().offset(player.getHorizontalFacing(), 30));
 		return super.onDroppedByPlayer(item, player);
 	}
