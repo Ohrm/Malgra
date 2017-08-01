@@ -21,36 +21,37 @@ plugins {
 }
 */
 
-def versionPropsFile = file('version.properties')
-def versionBuild
-def modVersion
-
-if (versionPropsFile.canRead()) {
-    def Properties versionProps = new Properties()
-    versionProps.load(new FileInputStream(versionPropsFile))
-    versionBuild = versionProps['VERSION_BUILD'].toInteger()
-} else {
-    versionBuild = "homebuilt"
+ext.configFile = file "gradle.properties"
+configFile.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
 }
 
-modVersion = "0.0.1"
+version = config.mc_version + "-" + config.mod_version + "-" + config.build_number
+group= config.package_group
+archivesBaseName = config.mod_name
 
-version = modVersion + "-" + versionBuild
-group= "ohrm.malgra" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "malgra"
+jar {
+    dependsOn "incrementBuildNumber"
+    classifier = 'universal'
+    manifest.mainAttributes(
+            "Built-By": System.getProperty('user.name'),
+            "Created-By": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
+            "Implementation-Title": project.name,
+            "Implementation-Version": project.version,
+    )
+}
 
-task autoIncrementBuildNumber << {
+task("incrementBuildNumber") {
+    doFirst {
+        config.build_number = (config.build_number.toString().toInteger()) + 1
 
-    if (versionPropsFile.canRead()) {
-        def Properties versionProps = new Properties()
-        versionProps.load(new FileInputStream(versionPropsFile))
-        versionBuild = versionProps['VERSION_BUILD'].toInteger() + 1
-        versionProps['VERSION_BUILD'] = versionBuild.toString()
-        versionProps.store(versionPropsFile.newWriter(), null)
+        configFile.withWriter {
+            config.toProperties().store(it, "")
+        }
     }
 }
-
-jar.dependsOn autoIncrementBuildNumber
 
 minecraft {
     version = "1.12-latest"
@@ -61,7 +62,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20170722" 
+    mappings = "snapshot_20170731"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
