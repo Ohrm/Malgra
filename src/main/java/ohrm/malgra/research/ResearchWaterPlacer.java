@@ -1,6 +1,7 @@
 package ohrm.malgra.research;
 
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import ohrm.malgra.api.research.Research;
 
 /**
@@ -9,10 +10,7 @@ import ohrm.malgra.api.research.Research;
 public class ResearchWaterPlacer extends Research {
 
     public ResearchWaterPlacer(){
-
-        name = "malgraWaterPlacer";
-        researchPoints = 2;
-        requirements.add(Items.IRON_INGOT);
+        super(2, new Item[]{Items.IRON_INGOT}, null);
 
     }
 

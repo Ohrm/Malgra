@@ -4,9 +4,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -20,9 +20,9 @@ import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.proxies.CommonProxy;
+import ohrm.malgra.registries.MalgraRegistryManager;
 import ohrm.malgra.tab.MalgraTab;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
-
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,7 +49,9 @@ public class MalgraMain {
 
 	@EventHandler
 	public void PreInit(FMLPreInitializationEvent e){
-		
+
+		MalgraRegistryManager.CreateRegistries();
+
 		magicTab = new MalgraTab(CreativeTabs.getNextID(), "malgraTab");
 		Fluids.init();
 

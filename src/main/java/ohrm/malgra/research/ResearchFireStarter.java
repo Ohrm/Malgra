@@ -1,6 +1,7 @@
 package ohrm.malgra.research;
 
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import ohrm.malgra.api.research.Research;
 
 /**
@@ -9,11 +10,7 @@ import ohrm.malgra.api.research.Research;
 public class ResearchFireStarter extends Research {
 
     public ResearchFireStarter(){
-
-        name = "malgraFireStarter";
-        researchPoints = 1;
-        requirements.add(Items.STICK);
-
+        super(1, new Item[]{Items.STICK}, null);
     }
 
     @Override
