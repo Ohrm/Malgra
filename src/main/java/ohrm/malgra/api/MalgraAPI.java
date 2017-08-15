@@ -3,7 +3,11 @@ package ohrm.malgra.api;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
+import ohrm.malgra.Reference;
 import ohrm.malgra.api.research.Research;
 import ohrm.malgra.research.ResearchFireStarter;
 
@@ -70,8 +74,6 @@ public class MalgraAPI {
         addMalgraProviderFromOreDict("blockGlass", 4);
         addMalgraProviderFromOreDict("paneGlass", 4);
 
-        addResearch(new ResearchFireStarter());
-        addResearch(new ResearchWaterPlacer());
     }
 
     public static boolean addMalgraProvider(Block block, int amount){
@@ -107,25 +109,14 @@ public class MalgraAPI {
             return true;
         }
     }
-    
-    public static void addResearch(Research research){
-    	
-    	if(research == null){
-			
-			apiLogger.log(Level.WARN, "Cannot register a null research");
-			
-		}
-    	else if (researches.get(research.getName()) != null) {
-			
-    		apiLogger.log(Level.WARN, "A research with the name %s is already registered", research.getName());
-    		
-		}
-    	else {
-			
-    		researches.put(research.getName(), research);
-			
-		}    	
-    	
+
+    @Mod.EventBusSubscriber(modid = Reference.MODID)
+    public static class ResearchEvents{
+        @SubscribeEvent
+        public static void registerEvents(RegistryEvent.Register<Research> event){
+            event.getRegistry().register(new ResearchFireStarter().setRegistryName(Reference.MODID, "researchFireStarter"));
+            event.getRegistry().register(new ResearchWaterPlacer().setRegistryName(Reference.MODID, "researchWaterPlacer"));
+        }
     }
 
 }
