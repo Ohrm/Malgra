@@ -67,6 +67,9 @@ public class TeleporterResearch extends Teleporter {
 	        	
 	        }
         }
+
+        ResearchRoomManager manager = ResearchRoomManager.get(playerMP.world);
+        manager.checkAndUpdateRooms(playerMP.world);
         
     }
 

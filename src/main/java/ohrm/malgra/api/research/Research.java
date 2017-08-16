@@ -13,7 +13,6 @@ import ohrm.malgra.MalgraMain;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
-
 public class Research extends IForgeRegistryEntry.Impl<Research>{
 
     private Research parent;
