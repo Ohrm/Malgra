@@ -40,7 +40,6 @@ public class MalgraAPI {
         addMalgraProvider(Blocks.GRAVEL, 2);
         addMalgraProviderFromOreDict("sand", 1);
         addMalgraProviderFromOreDict("sandstone", 1);
-        addMalgraProvider(Blocks.RED_SANDSTONE, 1);
         addMalgraProvider(Blocks.TALLGRASS, 1);
         addMalgraProvider(Blocks.GRASS_PATH, 1);
         addMalgraProvider(Blocks.NETHERRACK, 2);

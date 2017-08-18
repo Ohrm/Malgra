@@ -1,17 +1,16 @@
 package ohrm.malgra.api.research;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import jline.internal.Nullable;
+import javax.annotation.Nullable;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import ohrm.malgra.MalgraMain;
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Research extends IForgeRegistryEntry.Impl<Research>{
 
@@ -26,8 +25,7 @@ public class Research extends IForgeRegistryEntry.Impl<Research>{
 			if(GameRegistry.findRegistry(Research.class).containsKey(parent)){
 				this.parent = GameRegistry.findRegistry(Research.class).getValue(parent);
 			}else{
-				Logger logger = MalgraMain.logger;
-				logger.log(Level.ERROR, "Parent research %s does not exist. Did you register it before this one?", parent.toString());
+				MalgraMain.logger.log(Level.ERROR, "Parent research %s does not exist. Did you register it before this one?", parent.toString());
 			}
 		}
 	}
