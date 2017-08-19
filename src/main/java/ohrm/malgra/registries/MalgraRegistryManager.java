@@ -11,7 +11,7 @@ public final class MalgraRegistryManager {
     public static IForgeRegistry<Research> researchRegistry;
 
     public static void CreateRegistries(){
-        researchRegistry = new RegistryBuilder().setType(Research.class).setName(new ResourceLocation(Reference.MODID, "malgraResearchRegistry")).setIDRange(0, 4096).addCallback(new MalgraRegistryCallbacks.ResearchAddCallback()).create();
+        researchRegistry = new RegistryBuilder().setType(Research.class).setName(new ResourceLocation(Reference.MODID, "malgraResearchRegistry")).setIDRange(0, 4096).addCallback(new MalgraResearchRegistryCallbacks()).create();
     }
 
 }
