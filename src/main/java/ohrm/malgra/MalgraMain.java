@@ -19,7 +19,7 @@ import ohrm.malgra.fluid.Fluids;
 import ohrm.malgra.gui.GuiHandler;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.packets.PacketDispatcher;
-import ohrm.malgra.proxies.CommonProxy;
+import ohrm.malgra.proxies.IMalgraProxy;
 import ohrm.malgra.registries.MalgraRegistryManager;
 import ohrm.malgra.tab.MalgraTab;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
@@ -36,8 +36,8 @@ public class MalgraMain {
 	@Instance
 	public static MalgraMain instance = new MalgraMain();
 	
-	@SidedProxy(clientSide = "ohrm.malgra.proxies.ClientProxy", serverSide = "ohrm.malgra.proxies.CommonProxy")
-	public static CommonProxy proxy;
+	@SidedProxy(clientSide = "ohrm.malgra.proxies.ClientProxy", serverSide = "ohrm.malgra.proxies.ServerProxy")
+	public static IMalgraProxy proxy;
 	
 	public static CreativeTabs magicTab;
 

@@ -28,7 +28,7 @@ import ohrm.malgra.items.Items;
 import ohrm.malgra.model.ModelBakeHandler;
 
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = Reference.MODID)
-public class ClientProxy extends CommonProxy {
+public class ClientProxy implements IMalgraProxy {
 
 	private final Minecraft mc = Minecraft.getMinecraft();
 
@@ -139,12 +139,12 @@ public class ClientProxy extends CommonProxy {
 		// Sounds absurd, but it's true.
 
 		// Solution is to double-check side before returning the player:
-		return (ctx.side.isClient() ? mc.player : super.getPlayerEntity(ctx));
+		return (ctx.side.isClient() ? mc.player : ctx.getServerHandler().player);
 	}
 
 	@Override
 	public IThreadListener getThreadFromContext(MessageContext ctx) {
-		return (ctx.side.isClient() ? mc : super.getThreadFromContext(ctx));
+		return (ctx.side.isClient() ? mc : ctx.getServerHandler().player.getServer());
 	}
 
 }
