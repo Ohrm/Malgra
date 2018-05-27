@@ -59,13 +59,13 @@ public class Extractor extends Item {
     }
 
     @Override
-    public float getStrVsBlock(ItemStack stack, IBlockState state) {
+    public float getDestroySpeed(ItemStack stack, IBlockState state) {
         if (stack.hasTagCompound()) {
             ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(Reference.MODID, stack.getTagCompound().getString("tip")));
             if (tip != null)
-                return tip.getMaterial().getEfficiencyOnProperMaterial();
+                return tip.getMaterial().getEfficiency();
         }
-        return super.getStrVsBlock(stack, state);
+        return super.getDestroySpeed(stack, state);
     }
 
     public Map<Block, Integer> getMalgraProviders() {
@@ -77,7 +77,7 @@ public class Extractor extends Item {
         Multimap multimap = super.getAttributeModifiers(slot, stack);
         if (stack.hasTagCompound()) {
             ExtractorTip tip = (ExtractorTip) ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("tip")));
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)tip.getMaterial().getDamageVsEntity(), 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double)tip.getMaterial().getAttackDamage(), 0));
         }
         return multimap;
     }
@@ -336,7 +336,7 @@ public class Extractor extends Item {
             if (stack.hasTagCompound()) {
                 ExtractorTip tip = (ExtractorTip) (ForgeRegistries.ITEMS.getValue(new ResourceLocation(stack.getTagCompound().getString("tip"))));
                 if (tip != null)
-                    event.getToolTip().add((tip.getMaterial().getDamageVsEntity() + 4) + " " + Utils.translateToLocal("attribute.name.generic.attackDamage"));
+                    event.getToolTip().add((tip.getMaterial().getAttackDamage() + 4) + " " + Utils.translateToLocal("attribute.name.generic.attackDamage"));
             }
         }
     }
