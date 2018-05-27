@@ -33,6 +33,7 @@ extractor.prefix.malgrum=Malgrum
 
 tile.manacraftingtable.name=Malgra Crafting Table
 tile.researchstonebrick.name=Stone Brick
+tile.malgracore.name=Malgra Core
 
 gui.manaBar.mana=Malgra
 
