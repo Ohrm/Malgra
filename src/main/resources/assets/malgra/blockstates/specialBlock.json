@@ -1,9 +1,0 @@
-{
-    "variants": {
-        "normal": { "model": "malgra:specialblock" },
-        "facing=north": { "model": "malgra:specialblock", "y": 180 },
-        "facing=south": { "model": "malgra:specialblock" },
-        "facing=west":  { "model": "malgra:specialblock", "y": -270 },
-        "facing=east":  { "model": "malgra:specialblock", "y": -90 }
-    }
-}
