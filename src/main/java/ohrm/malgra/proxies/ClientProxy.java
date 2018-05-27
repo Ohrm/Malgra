@@ -71,6 +71,7 @@ public class ClientProxy implements IMalgraProxy {
 		registerRender(Item.getItemFromBlock(Blocks.specialBlock));
 		registerRender(Item.getItemFromBlock(Blocks.researchStoneBrick));
 		registerRender(Item.getItemFromBlock(Blocks.malgraCoreBasic));
+		registerRender(Item.getItemFromBlock(Blocks.malgraStorage));
 
 		ModelLoader.setCustomStateMapper(Blocks.liquidMalgraBlock, new StateMapperBase() {
 			@Override

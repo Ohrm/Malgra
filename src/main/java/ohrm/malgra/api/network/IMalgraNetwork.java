@@ -9,6 +9,15 @@ public interface IMalgraNetwork {
     BlockPos getNetworkPosition();
 
     boolean canAcceptBind();
+
     void setAcceptBind(boolean accept);
+
+    IMalgraNetworkNodeGraph getNetworkNodeGraph();
+
+    void addNodetoNetwork(IMalgraNetworkNode node);
+
+    void removeNodeFromNetwork(IMalgraNetworkNode node);
+
+    void removeAllNodes();
 
 }

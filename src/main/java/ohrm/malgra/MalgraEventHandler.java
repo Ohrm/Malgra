@@ -15,6 +15,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -24,6 +25,7 @@ import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.entities.EntityItemMalgraTool;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.items.MalgraTool;
+import ohrm.malgra.items.base.IItemSpecialRightClick;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
 import ohrm.malgra.packets.client.SyncResearchDimensions;
@@ -176,6 +178,21 @@ public class MalgraEventHandler {
             final CapabilityResearchActivites.IResearchActivities researchActivitesNew = event.getEntityPlayer().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null);
             researchActivitesNew.setMinedBlocks(researchActivitesOriginal.getMinedBlocks());
 
+        }
+    }
+
+    @SubscribeEvent
+	public void onRightClick(PlayerInteractEvent.RightClickBlock event){
+	    ItemStack activeStack = event.getItemStack();
+
+	    if(activeStack.isEmpty())
+	        return;
+
+	    if(activeStack.getItem() instanceof IItemSpecialRightClick){
+            IItemSpecialRightClick item = (IItemSpecialRightClick)activeStack.getItem();
+	        if(item.onRightClick(event.getWorld(), event.getPos(), event.getEntityPlayer(), event.getFace(), event.getHand(), event.getItemStack())){
+	            event.setCanceled(true);
+            }
         }
     }
 

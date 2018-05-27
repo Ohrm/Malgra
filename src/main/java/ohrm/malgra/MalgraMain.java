@@ -1,6 +1,7 @@
 package ohrm.malgra;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +24,8 @@ import ohrm.malgra.proxies.IMalgraProxy;
 import ohrm.malgra.registries.MalgraRegistryManager;
 import ohrm.malgra.tab.MalgraTab;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
+import ohrm.malgra.tile.TileMalgraCore;
+import ohrm.malgra.tile.TileMalgraStorage;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -73,7 +76,9 @@ public class MalgraMain {
 		MinecraftForge.EVENT_BUS.register(Items.extractor);
 		MinecraftForge.EVENT_BUS.register(Items.malgraPickaxe);
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
-		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, "Mana Crafting Table");
+		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, new ResourceLocation(Reference.MODID, "Mana Crafting Table"));
+		GameRegistry.registerTileEntity(TileMalgraCore.class, new ResourceLocation(Reference.MODID, "Malgra Core"));
+		GameRegistry.registerTileEntity(TileMalgraStorage.class, new ResourceLocation(Reference.MODID, "Malgra Storage"));
 		Sounds.registerSounds();
 		proxy.Init(e);
 		
