@@ -1,5 +1,5 @@
 {
-  "parent":"malgra:block/malgracore",
+  "parent":"malgra:block/malgracorebasic",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

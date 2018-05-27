@@ -20,8 +20,8 @@ public class Blocks {
 	public static Block specialBlock;
 	@ObjectHolder("malgra:researchstonebrick")
 	public static Block researchStoneBrick;
-	@ObjectHolder("malgra:malgracore")
-    public static Block malgraCore;
+	@ObjectHolder("malgra:malgracorebasic")
+    public static Block malgraCoreBasic;
 
 	@Mod.EventBusSubscriber(modid = Reference.MODID)
 	public static class BlockEvents{
@@ -30,9 +30,9 @@ public class Blocks {
 			event.getRegistry().register(new ManaCraftingTable().setRegistryName(Reference.MODID, "manacraftingtable").setUnlocalizedName("manacraftingtable").setCreativeTab(MalgraMain.magicTab));
 			event.getRegistry().register(new LiquidMalgra(Fluids.liquidMalgra, Material.WATER).setRegistryName(Reference.MODID, "liquidmalgrablock").setUnlocalizedName("liquidmalgrablock"));
             event.getRegistry().register(new SpecialBlock().setRegistryName(Reference.MODID, "specialblock").setUnlocalizedName("specialblock").setCreativeTab(MalgraMain.magicTab));
-            event.getRegistry().register(new MalgraCore().setRegistryName(Reference.MODID, "malgracore").setUnlocalizedName("malgracore").setCreativeTab(MalgraMain.magicTab));
+            event.getRegistry().register(new MalgraCoreBasic().setRegistryName(Reference.MODID, "malgracorebasic").setUnlocalizedName("malgracorebasic").setCreativeTab(MalgraMain.magicTab));
             event.getRegistry().register(new ResearchStoneBrick().setRegistryName(Reference.MODID, "researchstonebrick").setUnlocalizedName("researchstonebrick"));
 		}
 	}
-	
+
 }
