@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import ohrm.malgra.api.network.IMalgraLinkable;
 import ohrm.malgra.api.network.IMalgraNetwork;
 import ohrm.malgra.api.network.IMalgraNetworkNode;
 import ohrm.malgra.api.network.IMalgraStorage;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class TileMalgraStorage extends TileEntity implements IMalgraNetworkNode, IMalgraStorage {
+public class TileMalgraStorage extends TileEntity implements IMalgraNetworkNode, IMalgraStorage, IMalgraLinkable {
 
     private int uniqueItemCount;
     private int totalItemCount;
@@ -23,10 +24,15 @@ public class TileMalgraStorage extends TileEntity implements IMalgraNetworkNode,
     private IMalgraNetwork network;
     private Map<Item, Integer> items = new HashMap<Item, Integer>();
 
+    public TileMalgraStorage(){
+        super();
+    }
+
     public TileMalgraStorage(int itemCount, int totalItemCount){
         this.uniqueItemCount = itemCount;
         this.totalItemCount = totalItemCount;
         this.currentItemCount = 0;
+        this.network = null;
     }
 
     @Override
@@ -103,5 +109,30 @@ public class TileMalgraStorage extends TileEntity implements IMalgraNetworkNode,
     @Override
     public void onDisconnected(IMalgraNetwork network) {
 
+    }
+
+    @Override
+    public void onLinkedSource(IMalgraLinkable linkedTo) {
+        if(linkedTo instanceof IMalgraNetwork){
+            ((IMalgraNetwork) linkedTo).addNodetoNetwork(this);
+        }else if(linkedTo instanceof  IMalgraNetworkNode){
+            IMalgraNetworkNode node = (IMalgraNetworkNode)linkedTo;
+            if(node.getNetwork() != null){
+                node.getNetwork().addNodetoNetwork(this);
+            }
+        }
+    }
+
+
+    @Override
+    public void onLinkedDestination(IMalgraLinkable linkedTo) {
+        if(linkedTo instanceof IMalgraNetwork){
+            ((IMalgraNetwork) linkedTo).addNodetoNetwork(this);
+        }else if(linkedTo instanceof  IMalgraNetworkNode){
+            IMalgraNetworkNode node = (IMalgraNetworkNode)linkedTo;
+            if(node.getNetwork() != null){
+                node.getNetwork().addNodetoNetwork(this);
+            }
+        }
     }
 }

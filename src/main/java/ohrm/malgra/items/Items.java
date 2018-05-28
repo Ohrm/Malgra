@@ -47,6 +47,8 @@ public class Items {
 	public static Item malgraPickaxe;
 	@ObjectHolder("malgra:malgrasword")
 	public static Item malgraSword;
+    @ObjectHolder("malgra:networklinker")
+    public static Item networkLinker;
 
 	@ObjectHolder("malgra:liquidmalgrablock")
 	public static Item liquidMalgraItem;
@@ -79,6 +81,8 @@ public class Items {
 			event.getRegistry().register(new DimensionTool().setRegistryName(Reference.MODID, "dimensionTool").setUnlocalizedName("dimensionTool").setCreativeTab(MalgraMain.magicTab));
 			event.getRegistry().register(new MalgraPickaxe(1, 1.2F, MALGRA, 500).setRegistryName(Reference.MODID, "malgrapickaxe").setUnlocalizedName("malgrapickaxe").setCreativeTab(MalgraMain.magicTab));
 			event.getRegistry().register(new MalgraSword(5, 1.6F, MALGRA, 500).setRegistryName(Reference.MODID, "malgrasword").setUnlocalizedName("malgrasword").setCreativeTab(MalgraMain.magicTab));
+
+			event.getRegistry().register(new NetworkLinker().setRegistryName(Reference.MODID, "networklinker").setUnlocalizedName("networklinker").setCreativeTab(MalgraMain.magicTab));
 
 			//Blocks
 			event.getRegistry().register(new ItemBlock(Blocks.manaCraftingTable).setRegistryName(Blocks.manaCraftingTable.getRegistryName()));

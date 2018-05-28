@@ -25,7 +25,6 @@ import ohrm.malgra.capabilities.CapabilityResearchPoints;
 import ohrm.malgra.entities.EntityItemMalgraTool;
 import ohrm.malgra.items.Items;
 import ohrm.malgra.items.MalgraTool;
-import ohrm.malgra.items.base.IItemSpecialRightClick;
 import ohrm.malgra.packets.PacketDispatcher;
 import ohrm.malgra.packets.client.SyncManaData;
 import ohrm.malgra.packets.client.SyncResearchDimensions;
@@ -178,21 +177,6 @@ public class MalgraEventHandler {
             final CapabilityResearchActivites.IResearchActivities researchActivitesNew = event.getEntityPlayer().getCapability(CapabilityResearchActivites.RESEARCHACTIVITIES, null);
             researchActivitesNew.setMinedBlocks(researchActivitesOriginal.getMinedBlocks());
 
-        }
-    }
-
-    @SubscribeEvent
-	public void onRightClick(PlayerInteractEvent.RightClickBlock event){
-	    ItemStack activeStack = event.getItemStack();
-
-	    if(activeStack.isEmpty())
-	        return;
-
-	    if(activeStack.getItem() instanceof IItemSpecialRightClick){
-            IItemSpecialRightClick item = (IItemSpecialRightClick)activeStack.getItem();
-	        if(item.onRightClick(event.getWorld(), event.getPos(), event.getEntityPlayer(), event.getFace(), event.getHand(), event.getItemStack())){
-	            event.setCanceled(true);
-            }
         }
     }
 

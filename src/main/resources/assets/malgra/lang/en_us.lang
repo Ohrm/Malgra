@@ -19,6 +19,7 @@ item.dimensiontool.name=Super Ultra Dimensional Travel and Structure Creation 'H
 item.malgrapickaxe.name=Malgra Pickaxe
 item.malgrasword.name=Malgra Sword
 item.dimensionTool.name=Dimension Tool
+item.networklinker.name=Network Linker
 
 extractor.prefix.tiny=Tiny
 extractor.prefix.small=Small
@@ -34,6 +35,7 @@ extractor.prefix.malgrum=Malgrum
 tile.manacraftingtable.name=Malgra Crafting Table
 tile.researchstonebrick.name=Stone Brick
 tile.malgracorebasic.name=Malgra Core Basic
+tile.malgrastorage.name=Malgra Storage
 
 gui.manaBar.mana=Malgra
 
