@@ -26,6 +26,7 @@ import ohrm.malgra.tab.MalgraTab;
 import ohrm.malgra.tile.TileEntityManaCraftingTable;
 import ohrm.malgra.tile.TileMalgraCore;
 import ohrm.malgra.tile.TileMalgraStorage;
+import ohrm.malgra.tile.TileMalgraStorageViewer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -79,6 +80,7 @@ public class MalgraMain {
 		GameRegistry.registerTileEntity(TileEntityManaCraftingTable.class, new ResourceLocation(Reference.MODID, "Mana Crafting Table"));
 		GameRegistry.registerTileEntity(TileMalgraCore.class, new ResourceLocation(Reference.MODID, "Malgra Core"));
 		GameRegistry.registerTileEntity(TileMalgraStorage.class, new ResourceLocation(Reference.MODID, "Malgra Storage"));
+		GameRegistry.registerTileEntity(TileMalgraStorageViewer.class, new ResourceLocation(Reference.MODID, "Malgra Storage Viewer"));
 		Sounds.registerSounds();
 		proxy.Init(e);
 		

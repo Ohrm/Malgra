@@ -91,6 +91,7 @@ public class Items {
 			event.getRegistry().register(new ItemBlock(Blocks.researchStoneBrick).setRegistryName(Blocks.researchStoneBrick.getRegistryName()));
 			event.getRegistry().register(new ItemBlock(Blocks.malgraCoreBasic).setRegistryName(Blocks.malgraCoreBasic.getRegistryName()));
 			event.getRegistry().register(new ItemBlock(Blocks.malgraStorage).setRegistryName(Blocks.malgraStorage.getRegistryName()));
+			event.getRegistry().register(new ItemBlock(Blocks.malgraStorageViewer).setRegistryName(Blocks.malgraStorageViewer.getRegistryName()));
 		}
 	}
 	

@@ -1,16 +1,17 @@
 package ohrm.malgra.tile;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import ohrm.malgra.MalgraMain;
-import ohrm.malgra.api.network.IMalgraLinkable;
-import ohrm.malgra.api.network.IMalgraNetwork;
-import ohrm.malgra.api.network.IMalgraNetworkNode;
-import ohrm.malgra.api.network.IMalgraNetworkNodeGraph;
+import ohrm.malgra.api.network.*;
 import ohrm.malgra.network.MalgraNetworkNodeGraph;
 import org.apache.logging.log4j.Level;
+
+import java.util.Map;
 
 public class TileMalgraCore extends TileEntity implements ITickable, IMalgraNetwork, IMalgraLinkable {
 
@@ -93,6 +94,20 @@ public class TileMalgraCore extends TileEntity implements ITickable, IMalgraNetw
     public void onLinkedSource(IMalgraLinkable linkedTo) {
         if(linkedTo instanceof IMalgraNetworkNode){
             addNodetoNetwork((IMalgraNetworkNode)linkedTo);
+        }
+    }
+
+    @Override
+    public void getAttachedStorage(EntityPlayer player) {
+        for(IMalgraNetworkNode node : networkNodeGraph.getAllNodes()){
+            //TODO: Cache storages
+            if(node instanceof IMalgraStorage){
+                IMalgraStorage storage = (IMalgraStorage)node;
+                MalgraMain.logger.log(Level.INFO, "Listing items for storage: " + ((IMalgraNetworkNode)storage).getPos());
+                for(Map.Entry<Item, Integer> entry : storage.getInventory().entrySet()){
+                    MalgraMain.logger.log(Level.INFO, entry.getKey() + ": " + entry.getValue());
+                }
+            }
         }
     }
 }

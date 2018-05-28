@@ -1,6 +1,7 @@
 package ohrm.malgra.tile;
 
 import com.google.common.collect.Sets;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -41,7 +42,8 @@ public class TileMalgraStorage extends TileEntity implements IMalgraNetworkNode,
     }
 
     @Override
-    public boolean insertItems(Item item, int count) {
+    public boolean insertItems(Item item, int count, boolean simulate) {
+        //TODO: simulate insertitions
         if(items.size() == uniqueItemCount || currentItemCount + count > totalItemCount)
             return false;
 
@@ -59,7 +61,8 @@ public class TileMalgraStorage extends TileEntity implements IMalgraNetworkNode,
 
     @Nullable
     @Override
-    public ItemStack extractItems(Item item, int count) {
+    public ItemStack extractItems(Item item, int count, boolean simulate) {
+        //TODO: simulate insertitions
         if(items.containsKey(item)){
             int total = items.get(item);
             if(total <= count){
@@ -104,6 +107,7 @@ public class TileMalgraStorage extends TileEntity implements IMalgraNetworkNode,
     @Override
     public void onConnected(IMalgraNetwork network) {
         this.network = network;
+        insertItems(Items.APPLE, 1, false);
     }
 
     @Override

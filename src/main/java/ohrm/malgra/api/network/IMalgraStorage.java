@@ -7,9 +7,9 @@ import java.util.Map;
 
 public interface IMalgraStorage {
 
-    boolean insertItems(Item item, int count);
+    boolean insertItems(Item item, int count, boolean simulate);
 
-    ItemStack extractItems(Item item, int count);
+    ItemStack extractItems(Item item, int count, boolean simulate);
 
     int getTotalItemCount();
 

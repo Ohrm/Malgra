@@ -1,5 +1,6 @@
 package ohrm.malgra.api.network;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 
 public interface IMalgraNetwork {
@@ -19,5 +20,7 @@ public interface IMalgraNetwork {
     void removeNodeFromNetwork(IMalgraNetworkNode node);
 
     void removeAllNodes();
+
+    void getAttachedStorage(EntityPlayer player);
 
 }
